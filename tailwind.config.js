@@ -65,7 +65,7 @@ module.exports = {
         // 'purple': '#7C3AED',
       },
       borderWidth: {
-        // '1': '1px'
+        '1': '1px'
       },
       boxShadow: {
         // 'small-card-shadow': '0px 4px 7px rgba(0, 0, 0, 0.25)',

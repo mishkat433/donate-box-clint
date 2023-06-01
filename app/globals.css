@@ -20,3 +20,6 @@ body {
 .nav-link-style{
   @apply font-medium hover:text-primary-red duration-300 text-primary-text 
 }
+.primary-red-button{
+  @apply border-1 border-primary-red hover:bg-primary-red rounded-md text-primary-text hover:text-white-text duration-300 
+}
