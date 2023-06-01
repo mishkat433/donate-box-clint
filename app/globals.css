@@ -16,3 +16,7 @@
 body {
   scroll-behavior: smooth;
 }
+
+.nav-link-style{
+  @apply font-medium hover:text-primary-red duration-300 text-primary-text 
+}
