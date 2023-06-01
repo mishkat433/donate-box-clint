@@ -9,14 +9,14 @@ export const metadata = {
   description: 'Your donation can save the a life',
 }
 
-export default function RootLayout({  children,}: {  children: React.ReactNode}) {
+export default function RootLayout({ children, }: { children: React.ReactNode }) {
 
   return (
     <html lang="en">
       <body className='font-mulish'>
-        <Header/>
+        <Header />
         {children}
-        </body>
+      </body>
     </html>
   )
 }
