@@ -17,6 +17,10 @@ body {
   scroll-behavior: smooth;
 }
 
+.p-default{
+  @apply px-2.5
+}
+
 .nav-link-style{
   @apply font-medium hover:text-primary-red duration-300 text-primary-text 
 }

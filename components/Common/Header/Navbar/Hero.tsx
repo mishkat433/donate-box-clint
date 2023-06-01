@@ -30,10 +30,9 @@ const Hero = () => {
                     <Link href={'/'}> <RiInstagramFill className="hover:scale-110 duration-300" /></Link>
                     <div className=" text-sm relative">
                         <button className="flex items-center " onClick={() => setDropdownHandle(!dropdownHandle)}>{language}<RiArrowDownSFill className="text-xl" /></button>
-
-                        <div className={`flex flex-col gap-[2px] absolute  bg-primary-red rounded-md w-20 overflow-hidden duration-300 z-10 ${dropdownHandle ? "h-[42px]" : "h-0"}`}>
-                            <button onClick={() => { setLanguage('EN'); setDropdownHandle(!dropdownHandle) }} className="hover:bg-white-text hover:text-primary-text duration-300 rounded-t-lg">EN</button>
-                            <button onClick={() => { setLanguage('BN'); setDropdownHandle(!dropdownHandle) }} className="hover:bg-white-text hover:text-primary-text duration-300 rounded-b-md">BN</button>
+                        <div className={`flex flex-col gap-[2px] absolute  bg-primary-red rounded-md w-20 overflow-hidden duration-300 z-10 ${dropdownHandle ? "h-[58px]" : "h-0"}`}>
+                            <button onClick={() => { setLanguage('EN'); setDropdownHandle(!dropdownHandle) }} className="hover:bg-white-text hover:text-primary-text duration-300 rounded-t-lg py-1">EN</button>
+                            <button onClick={() => { setLanguage('BN'); setDropdownHandle(!dropdownHandle) }} className="hover:bg-white-text hover:text-primary-text duration-300 rounded-b-md py-1">BN</button>
                         </div>
                     </div>
                 </div>

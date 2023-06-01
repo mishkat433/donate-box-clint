@@ -67,12 +67,14 @@ module.exports = {
       borderWidth: {
         '1': '1px'
       },
+
       boxShadow: {
         // 'small-card-shadow': '0px 4px 7px rgba(0, 0, 0, 0.25)',
         // 'fev-icon-box-shadow': '0px 4px 4px rgba(0, 0, 0, 0.08)',
       },
       backgroundImage: {
-        'main-bg': "url('/public/donate blood 4.png')",
+        'main-bg': "url('/donate blood 4.png')",
+        'statics-bg': "linear-gradient(to bottom , rgba(3, 1, 10, 0.4), rgba(3, 1, 10, 0.5)), url('/h1_hero2.jpg.webp') ",
       }
     },
   },

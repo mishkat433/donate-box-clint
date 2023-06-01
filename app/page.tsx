@@ -1,9 +1,10 @@
+import Statistics from "@/components/Home/Statistics/Statistics";
 
 
 export default function Home() {
   return (
     <main>
-      <h1>Home page</h1>
+      <Statistics />
     </main>
   )
 }
