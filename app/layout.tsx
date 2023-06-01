@@ -1,5 +1,6 @@
 import Header from '@/components/Common/Header/Header'
 import './globals.css'
+import Footer from '@/components/Common/Footer/Footer'
 // import { Mulish} from 'next/font/google'
 
 // const mulish = Mulish({ subsets: ['latin',] })
@@ -16,6 +17,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
       <body className='font-mulish'>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   )

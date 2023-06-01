@@ -2,33 +2,31 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import logo from "../../../../public/BloodLogo2.png"
 import "./Navbar.css"
 import { RiCloseFill, RiMenu2Fill } from "react-icons/ri";
 // import React, { useState } from 'react';
 import { useState } from "react";
+import Logo from "@/components/ReusableComponent/Logo";
 
 const Navbar = () => {
   const [mobileMenu, setMobileMenu] = useState<boolean>(false)
 
   const menuItems =
     <>
-      <li className="nav-link-style ">  <Link href={"/"} className="hover-underline-animation">Home</Link></li>
+      <li className="nav-link-style  ">  <Link href={"/"} className="hover-underline-animation">Home</Link></li>
       <li className="nav-link-style ">  <Link href={"/"} className="hover-underline-animation">Cases</Link></li>
       <li className="nav-link-style ">  <Link href={"/"} className=" hover-underline-animation">About</Link></li>
       <li className="nav-link-style ">  <Link href={"/"} className=" hover-underline-animation">Contact</Link></li>
       {/* <li className="nav-link-style "> <button className="button-transition primary-red-button py-1 px-2.5">Need Blood</button> </li> */}
-      <li className="nav-link-style"> <button className="button-transition primary-red-button py-1 px-2.5 my-2  ">Donate Now</button> </li>
-      <li className="nav-link-style"> <button className=" button-transition primary-red-button py-1 px-2.5 my-2 ">Login</button> </li>
+      <li className="nav-link-style"> <button className="button-transition primary-red-button py-1 px-2.5 w-full">Donate Now</button> </li>
+      <li className="nav-link-style"> <button className=" button-transition primary-red-button py-1 px-2.5 w-full ">Login</button> </li>
     </>
 
   return (
     <header className="font-mulish bg-[#ffffff] shadow-md" >
       <div className="container flex justify-between items-center mx-auto py-2">
-        <Link href={"/"} className="flex items-center gap-2 pl-2 md:pl-0">
-          <Image src={logo} alt="not found" className=" w-[35px]" />
-          <h1 className="text-primary-red font-bold text-2xl">Donate <span className="text-primary-text">Box</span></h1>
-        </Link>
+
+        <Logo donate={'text-primary-red'} box={'text-primary-text'} />
 
         <ul className="items-center hidden space-x-4 md:flex">
           {menuItems}
@@ -47,11 +45,12 @@ const Navbar = () => {
       </div>
 
 
+      {/* responsive munu  */}
       <div className="drawer drawer-end absolute block md:hidden">
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
         <div className="drawer-side">
           <label htmlFor="my-drawer-4" onClick={() => setMobileMenu(!mobileMenu)} className="drawer-overlay"></label>
-          <ul className="menu p-4 w-52 h-[94vh]  bg-base-200 ">
+          <ul className="space-y-3 p-4 w-52 h-[94vh] text-center  bg-base-200 ">
             {menuItems}
           </ul>
         </div>
