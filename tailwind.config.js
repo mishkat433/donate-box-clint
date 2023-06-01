@@ -5,24 +5,24 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  
+
   plugins: [require('daisyui')],
 
 
   daisyui: {
-    themes: ['cupcake'],
+    // themes: ['cupcake'],
   },
 
 
   theme: {
     screens: {
-      'sm': '576px',
-      'md': '896px',
+      'sm': '640px',
+      'md': '768px',
       'lg': '1024px',
       'xl': '1280px',
-      'xxl': '1440px',
       '2xl': '1920px',
     },
+
     extend: {
       fontFamily: {
         'mulish': ['Mulish', 'sans-serif'],
@@ -30,6 +30,13 @@ module.exports = {
         'roboto-condensed': ['Roboto Condensed', 'sans-serif'],
       },
       colors: {
+        'white-text': "#fff",
+        'primary-text': '#111827',
+        'secondary-text': '#6B7280',
+        'primary-red': '#C30047',
+        'error-color': '#F43F5E',
+        'border-color': '#E5E7EB',
+
         // 'aide-bg': '#FDFBF8',
         // 'aide-secondary-bg': '#F9FAFB',
         // 'aide-gray': '#eee',
@@ -37,9 +44,7 @@ module.exports = {
         // 'aide-primary': '#00AF9E',
         // 'heading-text': '#212121',
         // 'icon-color': '#6F767E',
-        // 'error-color': '#F43F5E',
-        // 'error-bg': 'rgba(255, 0, 0, 0.1)',
-        // 'border-color': '#E5E7EB',
+        'error-bg': 'rgba(255, 0, 0, 0.1)',
         // 'btn-hover-color': '#07B6B6',
         // 'blue-text': '#007ACC',
         // 'blue-light': '#E6EFFB',
@@ -52,8 +57,7 @@ module.exports = {
         // 'light-gray': '#F7F7F9',
 
         // color-adivise-from-sir
-        // 'primary-text': '#111827',
-        // 'secondary-text': '#6B7280',
+        // 
         // 'placeholder-text': '#9CA3AF',
         // 'input-background': '#F9FAFB',
         // 'menu-bg': '#F3F4F6',
@@ -68,10 +72,9 @@ module.exports = {
         // 'fev-icon-box-shadow': '0px 4px 4px rgba(0, 0, 0, 0.08)',
       },
       backgroundImage: {
-        // 'deal_of_the_day_bg': "url('../public/assets/deal_of_the_day_bg.png')",
-       
+        'main-bg': "url('/public/donate blood 4.png')",
       }
     },
   },
-  
+
 }

@@ -1,4 +1,4 @@
-import Header from '@/component/Common/Header/Header'
+import Header from '@/components/Common/Header/Header'
 import './globals.css'
 // import { Mulish} from 'next/font/google'
 
