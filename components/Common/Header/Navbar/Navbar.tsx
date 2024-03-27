@@ -24,7 +24,7 @@ const Navbar = () => {
     </>
 
   return (
-    <header className="font-mulish bg-[#ffffff] drop-shadow-sm  fixed-content" >
+    <header className="font-mulish bg-[#ffffff] drop-shadow-sm  fixed-content z-50" >
       <div className="container flex justify-between items-center mx-auto py-2">
 
         <Logo donate={'text-primary-red'} box={'text-primary-text'} />

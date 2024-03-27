@@ -5,6 +5,7 @@ import FooterCompany from "../../../Data/Footer/FooterCompany.json";
 import FooterDevelopers from "../../../Data/Footer/FooterDevelopers.json";
 
 const Footer = () => {
+
     return (
         <footer className="px-4 divide-y dark:bg-gray-800 dark:text-gray-100 bg-primary-red text-white-text font-mulish">
             <div className="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0">
