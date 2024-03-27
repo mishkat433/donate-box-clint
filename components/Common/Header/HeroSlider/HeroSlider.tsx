@@ -37,8 +37,8 @@ const HeroSlider = () => {
 
     };
 
+    // fake data
     const slicePic = [pic1, pic2, pic3, pic4, pic5]
-
 
     return (
         <div className="slider-container mt-1 mb-default bg-heroSlider-bg bg-bottom bg-[length:100vw_50px] lg:bg-[length:100vw_100px] bg-no-repeat ">
