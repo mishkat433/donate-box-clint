@@ -55,7 +55,9 @@ module.exports = {
     backgroundImage: {
       'main-bg': "url('/assets/donate blood 4.png')",
       'statics-bg': "linear-gradient(to bottom , rgba(3, 1, 10, 0.4), rgba(3, 1, 10, 0.5)), url('/assets/h1_hero2.jpg.webp') ",
+      'needBlood-bg': "linear-gradient(to bottom , rgba(5, 1, 52, 0.2), rgba(5, 52, 15, 0.2)), url('/assets/mainBg.jpg') ",
       'heroSlider-bg': "linear-gradient(to bottom , rgba(240, 20, 0, 0.4), rgba(240, 20, 0, 0.4)), url('/assets/HeroSlider/shape1.jpg') ",
+      // 'needBlood-bg': "linear-gradient(to bottom , rgba(3, 1, 10, 0.4), rgba(3, 1, 10, 0.5)), url('/assets/needBlood.jpg') ",
     }
   }
 

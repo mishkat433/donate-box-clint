@@ -40,7 +40,7 @@ const HeroSlider = () => {
     const slicePic = [pic1, pic2, pic3, pic4, pic5]
 
     return (
-        <div className="slider-container mt-1 mb-default bg-heroSlider-bg bg-bottom bg-[length:100vw_50px] lg:bg-[length:100vw_100px] bg-no-repeat ">
+        <div className="slider-container mt-1  mx-auto bg-heroSlider-bg bg-bottom bg-[length:100vw_50px] lg:bg-[length:100vw_80px] bg-no-repeat ">
             <Slider asNavFor={nav2} ref={slider => (sliderRef1 = slider)} {...settings} className="SliderArrow">
 
                 {slicePic.map((slide, index) => (
@@ -49,22 +49,20 @@ const HeroSlider = () => {
                     </div>
                 ))}
             </Slider>
-            <div className="  ">
-                <div className="w-[50%] lg:w-[40%] h-auto mx-auto ">
-                    <Slider
-                        asNavFor={nav1}
-                        ref={slider => (sliderRef2 = slider)}
-                        slidesToShow={6}
-                        swipeToSlide={true}
-                        focusOnSelect={true}
-                    >
-                        {slicePic.map((slide, index) => (
-                            <div key={index}>
-                                <Image className="w-full h-[4vh] lg:h-[8vh]" src={slide} alt="" width={0} height={0} />
-                            </div>
-                        ))}
-                    </Slider>
-                </div>
+            <div className="w-[50%] lg:w-[40%] h-auto mx-auto ">
+                <Slider
+                    asNavFor={nav1}
+                    ref={slider => (sliderRef2 = slider)}
+                    slidesToShow={6}
+                    swipeToSlide={true}
+                    focusOnSelect={true}
+                >
+                    {slicePic.map((slide, index) => (
+                        <div key={index}>
+                            <Image className="w-full h-[4vh] lg:h-[8vh]" src={slide} alt="" width={0} height={0} />
+                        </div>
+                    ))}
+                </Slider>
             </div>
         </div>
     );
