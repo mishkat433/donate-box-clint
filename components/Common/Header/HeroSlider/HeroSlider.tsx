@@ -6,7 +6,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import React, { useState, useEffect, useRef } from "react";
 import Slider from "react-slick";
-import SliderPicture from "../../../../Data/Hero/sliderPicture.json";
 import pic1 from "../../../../public/assets/HeroSlider/bg_1.jpg.webp"
 import pic2 from "../../../../public/assets/HeroSlider/bg_2.jpg.webp"
 import pic3 from "../../../../public/assets/HeroSlider/bg_3.jpg.webp"
