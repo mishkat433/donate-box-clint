@@ -1,0 +1,43 @@
+.hover-underline-animation {
+  display: inline-block;
+  position: relative;
+}
+
+.hover-underline-animation:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: #C30047;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.hover-underline-animation:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Button Transitin */
+.button-transition {
+  background: linear-gradient(to right, #C30047 50%, white 50%);
+  background-size: 200% 100%;
+  background-position: right;
+  transition: all .3s ease-in-out;
+}
+
+.button-transition:hover {
+  background-position: bottom left;
+
+}
+
+/* Button Transitin */
+
+.fixed-content {
+  position: sticky;
+  top: 0;
+  width: 100%
+}

@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;800;900;1000&family=Oswald:wght@200;400;500;600&family=Roboto+Condensed:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Waiting+for+the+Sunrise&display=swap');
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {}
+
+@media (prefers-color-scheme: dark) {}
+
+body {
+  scroll-behavior: smooth;
+}
+
+.p-default {
+  @apply px-2.5
+}
+
+.mb-default {
+  margin-bottom: 40px;
+}
+
+.nav-link-style {
+  @apply font-medium hover:text-primary-red duration-300 text-primary-text
+}
+
+.primary-red-button {
+  @apply border-1 border-primary-red hover:bg-primary-red rounded-md text-primary-text hover:text-white-text duration-300
+}
+
+.statistics-card {
+  @apply bg-[#9d9d9d4d] flex gap-2.5 flex-col justify-center items-center p-4 rounded-md hover:bg-[#aaaaaa8b] duration-300 hover:border-1 hover:scale-105
+}
