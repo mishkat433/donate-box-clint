@@ -51,7 +51,7 @@ const Navbar = () => {
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
         <div className="drawer-side">
           <label htmlFor="my-drawer-4" onClick={() => setMobileMenu(!mobileMenu)} className="drawer-overlay"></label>
-          <ul className="space-y-3 p-4 w-52 h-[94vh] text-center  bg-base-200 ">
+          <ul className="space-y-3 p-4 w-52 h-[100vh] text-center  bg-base-200 ">
             {menuItems}
           </ul>
         </div>
