@@ -1,3 +1,4 @@
+import { Toaster } from 'react-hot-toast'
 import Footer from '../components/Common/Footer/Footer'
 import Header from '../components/Common/Header/Header'
 import './globals.css'
@@ -15,10 +16,12 @@ export default function RootLayout({ children, }) {
   return (
     <html lang="en">
       <body className='font-mulish'>
+        <Toaster position="top-center" reverseOrder={false} />
         <Header />
         {children}
         <Footer />
       </body>
+
     </html>
   )
 }

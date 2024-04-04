@@ -24,7 +24,7 @@ const Navbar = () => {
     </>
 
   return (
-    <header className="font-mulish bg-[#ffffff] drop-shadow-sm  fixed-content z-50" >
+    <header className="font-mulish bg-[#ffffff] drop-shadow-sm  " >
       <div className="container flex justify-between items-center mx-auto py-2">
 
         <Logo donate={'text-primary-red'} box={'text-primary-text'} />
@@ -46,7 +46,7 @@ const Navbar = () => {
       </div>
 
 
-      {/* responsive munu  */}
+      {/* responsive menu start  */}
       <div className="drawer drawer-end absolute block md:hidden">
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
         <div className="drawer-side">
@@ -56,6 +56,7 @@ const Navbar = () => {
           </ul>
         </div>
       </div>
+      {/* responsive menu end  */}
     </header>
   );
 };
