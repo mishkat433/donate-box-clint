@@ -10,26 +10,16 @@ import "./DonateOrGet.css"
 
 const DonateGetCard = ({ donner }) => {
 
-    const [copySuccess, setCopySuccess] = useState('');
-
     const copyToClipBoard = async copyMe => {
 
         try {
             await navigator.clipboard.writeText(copyMe);
-            setCopySuccess('Copied!');
+            toast.success('Copied!')
         } catch (err) {
-            setCopySuccess('Failed to copy!');
+            toast.error('Failed to copy!')
         }
-    };
 
-    const copySuccessFalse = () => {
-        if (copySuccess === 'Copied!') {
-            toast.success(copySuccess)
-        }
-        else {
-            toast.error(copySuccess)
-        }
-    }
+    };
 
 
     return (
@@ -39,7 +29,7 @@ const DonateGetCard = ({ donner }) => {
                 <strong class="card-title">{donner?.donnerName}</strong>
                 <div className="flex items-center gap-3 text-xl">
                     <p className="">{donner?.phone}</p>
-                    <RiFileCopyLine className="hover:text-primary-red cursor-pointer duration-150" title="copy number" onClick={() => (copyToClipBoard(donner?.phone), copySuccessFalse())} />
+                    <RiFileCopyLine className="hover:text-primary-red text-primary-text cursor-pointer duration-150" title="copy number" onClick={() => copyToClipBoard(donner?.phone)} />
                 </div>
                 <address className="text-center"> {donner?.address}</address>
             </div>
