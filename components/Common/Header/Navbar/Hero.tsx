@@ -7,7 +7,7 @@ import SocialMedia from "../../../ReusableComponent/SocialMedia"
 const Hero = () => {
     const [language, setLanguage] = useState('EN')
     return (
-        <div className=" bg-primary-red text-white-text py-1.5 px-3 font-mulish hidden md:block">
+        <div className=" bg-primary-red text-white-text py-1.5 px-3 font-mulish hidden md:block ">
             <div className="container mx-auto  flex justify-between text-sm">
                 <div className="flex items-center  gap-4 ">
                     <div className="flex items-center gap-2.5">
@@ -22,7 +22,7 @@ const Hero = () => {
                 </div>
                 <div className="text-lg flex items-center gap-2.5">
                     <SocialMedia></SocialMedia>
-                    <div className=" text-sm relative ml-2 group">
+                    <div className=" text-sm relative ml-2 group ">
                         <button className="flex items-center " >{language}<RiArrowDownSFill className="text-xl" /></button>
                         <div className={`flex flex-col gap-[2px] absolute  bg-primary-red rounded-md md:w-14 lg:w-20 overflow-hidden duration-300 z-10 h-0 group-hover:h-[58px] `}>
                             <button onClick={() => { setLanguage('EN') }} className="hover:bg-white-text hover:text-primary-text duration-300 rounded-t-lg py-1">EN</button>

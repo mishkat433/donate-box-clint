@@ -5,7 +5,9 @@ import DonateGetCard from "./DonateGetCard"
 import SearchBar from "../../ReusableComponent/Searchbar"
 
 
+
 const DonateOrGet = () => {
+
 
 
     return (
@@ -18,12 +20,12 @@ const DonateOrGet = () => {
                     </div>
                     <div>
                         {donateOrGetData?.map((el, i) =>
-                            <div className=" border-error-color rounded my-2" key={i}>
+                            <div className=" border-error-color rounded my-2 p-1 " key={i}>
                                 <div key={i} className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3 justify-center items-center">
                                     <div className="col-span-1 flex justify-center items-center">
-                                        <strong className="text-xl font-mono uppercase">{el.location}</strong>
+                                        <strong className="text-xl font-mono uppercase bg-primary-red md:bg-transparent w-full text-center text-white-text md:text-primary-text">{el.location}</strong>
                                     </div>
-                                    <div className={`md:col-span-2 lg:col-span-4 grid grid-cols-1 lg:grid-cols-3 gap-3`}>
+                                    <div className={`md:col-span-2 lg:col-span-4 grid grid-cols-1 lg:grid-cols-3 gap-3 `}>
                                         {el?.donner?.map((dr, i) => <DonateGetCard key={i} donner={dr} />)}
                                     </div>
                                 </div>
