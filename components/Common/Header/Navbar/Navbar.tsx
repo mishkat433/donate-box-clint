@@ -20,7 +20,7 @@ const Navbar = () => {
       <li className="nav-link-style ">  <Link href={"/"} className=" hover-underline-animation">Contact</Link></li>
       {/* <li className="nav-link-style "> <button className="button-transition primary-red-button py-1 px-2.5">Need Blood</button> </li> */}
       <li className="nav-link-style"> <button className="button-transition primary-red-button py-1 px-2.5 w-full">Donate Now</button> </li>
-      <li className="nav-link-style"> <button className=" button-transition primary-red-button py-1 px-2.5 w-full ">Login</button> </li>
+      <li className="nav-link-style"> <Link href={"/authentication/login"} className=" button-transition primary-red-button py-1 px-2.5 w-full ">Login</Link> </li>
     </>
 
   return (
