@@ -14,7 +14,7 @@ const DonateOrGet = () => {
         <div className="py-10 bg-color-bg2 bg-no-repeat bg-cover ">
             <div className="  py-5  bg-no-repeat bg-center bg-cover ">
                 <div className="container mx-auto ">
-                    <h1 className="text-center text-xl md:text2xl lg:text-4xl font-oswald text-primary-red font-bold mb-5">Find a Blood Donner</h1>
+                    <h1 className="text-center text-xl md:text2xl lg:text-4xl font-oswald text-primary-red font-bold mb-5">Find a Blood Donner In Your District</h1>
                     <div className="mb-3 md:mb-5">
                         <SearchBar />
                     </div>
