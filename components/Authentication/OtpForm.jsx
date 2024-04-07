@@ -1,6 +1,6 @@
 "use client"
 
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import "./Authentication.css"
 import { useForm } from "react-hook-form";
 import { AuthContex } from '../../contex.jsx/AuthStorage';
@@ -8,29 +8,35 @@ import { toast } from 'react-hot-toast';
 import { RiErrorWarningFill } from 'react-icons/ri';
 import axios from "axios";
 import { useRouter } from 'next/navigation';
+import DotLoading from '../ReusableComponent/DotLoading';
 
 
 function OTPForm() {
     const { register, handleSubmit, formState: { errors }, } = useForm();
     const { tokenCode, setLoginUser } = useContext(AuthContex)
+    const [verifyLoading, setVerifyLoading] = useState(false)
     const router = useRouter()
 
     const loginHandle = async (data) => {
+        setVerifyLoading(true)
         if (tokenCode?.data?.verifyCode.toString() === data?.verifyCode) {
             const res = await axios.post(`http://localhost:5200/api/v1/users/verifyToken`, { token: tokenCode?.data?.token.toString() })
             if (res?.data?.success) {
                 toast.success(res?.data?.message)
                 localStorage.setItem('authData', res?.data?.data?.id)
                 setLoginUser(res?.data?.data)
+                setVerifyLoading(false)
                 router.push('/')
             }
             else {
+                setVerifyLoading(false)
                 toast.error(res?.data?.message)
                 router.push('/')
             }
         }
         else {
             toast.error("Password cannot match, Please click 'active your account' from the email")
+            setVerifyLoading(false)
         }
     };
 
@@ -43,18 +49,24 @@ function OTPForm() {
             <form onSubmit={handleSubmit(loginHandle)} data-aos="flip-left" data-aos-duration="1000">
                 <div className="form-control mb-3">
                     <div className=" relative">
-                        <input className={`  w-full py-2 md:py-1.5 px-3 rounded-md border-1 border-[#d3d3d3]  ${errors.verifyCode ? "focus:outline-primary-red" : "focus:outline-primary-text"}`}
+                        <input className={` text-center w-full py-2 md:py-1.5 px-3 rounded-md border-1 border-[#d3d3d3]  ${errors.verifyCode ? "focus:outline-primary-red" : "focus:outline-primary-text"}`}
                             type="number"
                             placeholder="verification code"
                             {...register("verifyCode", {
                                 required: "Provide your verification code",
-                                minLength: { value: 6 },
+                                minLength: { value: 6, message: "provide 6 digit code" },
+                                maxLength: { value: 6, message: "provide 6 digit code" },
                             })} />
                         {errors.verifyCode && (<p className="text-primary-red text-start text-xs mt-1"> {errors?.verifyCode.message} </p>)}
                     </div>
                 </div>
+                <div>
+                    {verifyLoading ?
+                        <button type="button" className="py-2 rounded-md bg-primary-red font-bold w-full flex justify-center items-center gap-2 text-white-text">verifying<DotLoading size={'md'} /> </button> :
+                        <button className="button-transition rounded-md py-2 px-2.5 w-full border-1 hover:text-white-text border-[#d3d3d3]">Verify </button>
+                    }
+                </div>
 
-                <button className="button-transition rounded-md py-2 px-2.5 w-full border-1 hover:text-white-text border-[#d3d3d3]">Verify </button>
 
             </form >
         </div >

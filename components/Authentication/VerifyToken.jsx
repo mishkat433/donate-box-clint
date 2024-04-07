@@ -36,7 +36,7 @@ const VerifyToken = () => {
 
     return (
         <div className="mx-auto w-11/12 h-96 flex justify-center items-center ">
-            <button className="bg-primary-text py-2 px-4 rounded-md text-white-text"> <DotLoading size="lg" text="white-text" /> verifying </button>
+            <button className="bg-primary-red py-2 px-4 rounded-md text-white-text"> <DotLoading size="lg" text="white-text" /> verifying </button>
         </div>
     );
 };

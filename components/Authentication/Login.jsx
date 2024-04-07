@@ -43,7 +43,7 @@ const Login = () => {
 
 
     return (
-        <div className="w-full py-4">
+        <div className="w-full py-3 md:py-4">
             <form onSubmit={handleSubmit(loginHandle)} data-aos="flip-left" data-aos-duration="1000">
                 <div className=" flex gap-6 text-sm pb-4 ">
                     <h4 className="text-md font-semibold">Login with :-</h4>
@@ -63,7 +63,7 @@ const Login = () => {
                         :
                         <div className="form-control">
                             <div className=" ">
-                                <input className={` w-full py-3 md:py-2 px-3 rounded-md border-1 border-[#d3d3d3]  ${errors.phone ? "focus:outline-primary-red" : "focus:outline-aide-primary"}`}
+                                <input className={` w-full py-2 md:py-2 px-3 rounded-md border-1 border-[#d3d3d3]  ${errors.phone ? "focus:outline-primary-red" : "focus:outline-aide-primary"}`}
                                     type="number" placeholder="Enter your phone number"
                                     {...register("phone", { required: "phone is required", minLength: { value: 11, message: "phone number is not valid, enter 11 digit" }, maxLength: { value: 11, message: "phone number is not valid, enter 11 digit" } })} />
                                 {errors.phone && (<p className="text-primary-red text-start text-xs mt-1">{errors?.phone.message} </p>)}
@@ -92,7 +92,7 @@ const Login = () => {
                     <div className="form-control  md:mt-2.5">
                         {loginLoading ?
                             <button type="button" className="py-2 rounded-md bg-primary-red font-bold "><DotLoading size={'md'} /> </button> :
-                            <button className="button-transition rounded-md py-1 px-2.5 w-full border-1 border-[#d3d3d3]">LogIn </button>
+                            <button className="button-transition hover:text-white-text rounded-md py-1 px-2.5 w-full border-1 border-[#d3d3d3]">LogIn </button>
                         }
                     </div>
                     <div className="flex items-center pt-4 space-x-1 text-white-text">
