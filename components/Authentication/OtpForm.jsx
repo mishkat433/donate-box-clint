@@ -1,35 +1,63 @@
-import React, { useState } from 'react';
+"use client"
+
+import { useContext } from 'react';
+import "./Authentication.css"
+import { useForm } from "react-hook-form";
+import { AuthContex } from '../../contex.jsx/AuthStorage';
+import { toast } from 'react-hot-toast';
+import { RiErrorWarningFill } from 'react-icons/ri';
+import axios from "axios";
+import { useRouter } from 'next/navigation';
+
 
 function OTPForm() {
-    const [inputs, setInputs] = useState(['', '', '', '']);
+    const { register, handleSubmit, formState: { errors }, } = useForm();
+    const { tokenCode, setLoginUser } = useContext(AuthContex)
+    const router = useRouter()
 
-    // const handleChange = (e, index) => {
-    //     const newInputs = [...inputs];
-    //     newInputs[index] = e.target.value;
-    //     setInputs(newInputs);
-
-    //     if (e.target.value && index < inputs.length - 1) {
-    //         document.getElementById(`otp-input-${index + 1}`).focus();
-    //     }
-    // };
-
+    const loginHandle = async (data) => {
+        if (tokenCode?.data?.verifyCode.toString() === data?.verifyCode) {
+            const res = await axios.post(`http://localhost:5200/api/v1/users/verifyToken`, { token: tokenCode?.data?.token.toString() })
+            if (res?.data?.success) {
+                toast.success(res?.data?.message)
+                localStorage.setItem('authData', res?.data?.data?.id)
+                setLoginUser(res?.data?.data)
+                router.push('/')
+            }
+            else {
+                toast.error(res?.data?.message)
+                router.push('/')
+            }
+        }
+        else {
+            toast.error("Password cannot match, Please click 'active your account' from the email")
+        }
+    };
 
     return (
         <div className="max-w-md mx-auto text-center px-4 sm:px-8 py-10 rounded-xl shadow">
-
-            <form id="otp-form">
-                <div className="flex items-center justify-center gap-3">
-                    <input
-                        type="text"
-                        className="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
-                        maxLength={1} />
-
+            <div className="bg-warning rounded-lg p-2 flex gap-2 items-center mb-4 h-10 ">
+                <RiErrorWarningFill className="text-2xl" />
+                <p className="text-[10px] text-white-text">Warning: Before reload this site, verify code is working properly. Otherwise you can click &apos;active your account&apos; from the email </p>
+            </div>
+            <form onSubmit={handleSubmit(loginHandle)} data-aos="flip-left" data-aos-duration="1000">
+                <div className="form-control mb-3">
+                    <div className=" relative">
+                        <input className={`  w-full py-2 md:py-1.5 px-3 rounded-md border-1 border-[#d3d3d3]  ${errors.verifyCode ? "focus:outline-primary-red" : "focus:outline-primary-text"}`}
+                            type="number"
+                            placeholder="verification code"
+                            {...register("verifyCode", {
+                                required: "Provide your verification code",
+                                minLength: { value: 6 },
+                            })} />
+                        {errors.verifyCode && (<p className="text-primary-red text-start text-xs mt-1"> {errors?.verifyCode.message} </p>)}
+                    </div>
                 </div>
-                <div className="max-w-[260px] mx-auto mt-4">
-                    <button type="submit" className="w-full inline-flex justify-center whitespace-nowrap rounded-lg bg-indigo-500 px-3.5 py-2.5 text-sm font-medium text-white shadow-sm shadow-indigo-950/10 hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors duration-150"> Verify Account</button>
-                </div>
-            </form>
-        </div>
+
+                <button className="button-transition rounded-md py-2 px-2.5 w-full border-1 hover:text-white-text border-[#d3d3d3]">Verify </button>
+
+            </form >
+        </div >
     );
 }
 

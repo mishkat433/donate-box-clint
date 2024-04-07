@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { RiEyeLine, RiEyeOffLine } from "react-icons/ri";
@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation"
 import DotLoading from './../ReusableComponent/DotLoading';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
+import { AuthContex } from "../../contex.jsx/AuthStorage";
 
 
 const SignUp = () => {
@@ -15,6 +16,7 @@ const SignUp = () => {
     const { register, handleSubmit, formState: { errors }, } = useForm();
     const [showPassword, setShowPassword] = useState(false)
     const [conShowPassword, setConShowPassword] = useState(false)
+    const { setTokenCode } = useContext(AuthContex)
     // const [loginWith, setLoginWith] = useState(true)
     const [loginLoading, setLoginLoading] = useState(false)
 
@@ -24,10 +26,10 @@ const SignUp = () => {
             setLoginLoading(true)
             axios.post('http://localhost:5200/api/v1/users/process-createUser', data)
                 .then(res => {
-                    console.log(res);
                     if (res.data.success) {
                         setLoginLoading(false)
-                        toast.success(res.data.message)
+                        setTokenCode(res.data)
+                        toast.success("Please check your email")
                         router.push('/authentication/verifyCode')
                     }
                     else {

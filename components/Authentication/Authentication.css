@@ -18,3 +18,12 @@
     --_p: 100%;
     transition: 0.4s, color 0s .4s, background-color 0s .4s;
 }
+
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
