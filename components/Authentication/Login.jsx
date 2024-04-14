@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { RiEyeLine, RiEyeOffLine } from "react-icons/ri";
 import { useRouter } from "next/navigation"
@@ -8,6 +8,7 @@ import DotLoading from './../ReusableComponent/DotLoading';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import Link from "next/link";
+import { AuthContext } from "../../context/AuthStorage";
 
 const Login = () => {
 
@@ -15,17 +16,20 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false)
     const [loginWith, setLoginWith] = useState(true)
     const [loginLoading, setLoginLoading] = useState(false)
+    const { setToken } = useContext(AuthContext)
 
     const router = useRouter()
     const loginHandle = (data) => {
         setLoginLoading(true)
         loginWith ? data.phone = "" : data.email = ""
 
-        axios.post('http://localhost:5200/api/v1/users/', data)
+        axios.post('http://localhost:5200/api/v1/auth/login', data)
             .then(res => {
                 console.log(res);
                 if (res.data.success) {
-                    setLoginLoading(false)
+                    // setLoginLoading(false)
+                    setToken(res?.data?.data)
+                    localStorage.setItem('authToken', res?.data?.data)
                     toast.success(res.data.message)
                     router.push('/')
                 }

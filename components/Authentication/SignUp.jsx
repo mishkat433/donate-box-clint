@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation"
 import DotLoading from './../ReusableComponent/DotLoading';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
-import { AuthContex } from "../../contex.jsx/AuthStorage";
+import { AuthContext } from "../../context/AuthStorage";
 
 
 const SignUp = () => {
@@ -16,12 +16,12 @@ const SignUp = () => {
     const { register, handleSubmit, formState: { errors }, } = useForm();
     const [showPassword, setShowPassword] = useState(false)
     const [conShowPassword, setConShowPassword] = useState(false)
-    const { setTokenCode } = useContext(AuthContex)
+    const { setTokenCode } = useContext(AuthContext)
     // const [loginWith, setLoginWith] = useState(true)
     const [loginLoading, setLoginLoading] = useState(false)
 
     const router = useRouter()
-    const loginHandle = (data) => {
+    const signUpHandle = (data) => {
         if (data.password === data.confirmPassword) {
             setLoginLoading(true)
             axios.post('http://localhost:5200/api/v1/users/process-createUser', data)
@@ -29,6 +29,7 @@ const SignUp = () => {
                     if (res.data.success) {
                         setLoginLoading(false)
                         setTokenCode(res.data)
+                        console.log(res.data)
                         toast.success("Please check your email")
                         router.push('/authentication/verifyCode')
                     }
@@ -51,7 +52,7 @@ const SignUp = () => {
 
     return (
         <div className="w-full p-4">
-            <form onSubmit={handleSubmit(loginHandle)} data-aos="flip-left" data-aos-duration="1000">
+            <form onSubmit={handleSubmit(signUpHandle)} data-aos="flip-left" data-aos-duration="1000">
                 {/* <div className=" flex gap-6 text-sm pb-4 ">
                     <h4 className="text-md font-semibold">Login with :-</h4>
                     <label className="flex justify-center cursor-pointer items-center gap-2"><input onClick={() => setLoginWith(true)} type="radio" name="radio-8" className="radio h-4 w-4 radio-error" defaultChecked /><span>Gmail</span></label>

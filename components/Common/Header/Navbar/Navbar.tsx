@@ -6,11 +6,12 @@ import "./Navbar.css"
 import { RiCloseFill, RiMenu2Fill } from "react-icons/ri";
 import { useContext, useState } from "react";
 import Logo from "../../../ReusableComponent/Logo";
-import { AuthContex } from "../../../../contex.jsx/AuthStorage";
+import { AuthContext } from "../../../../context/AuthStorage";
+import profile from "../../../../public/assets/profile.png";
 
 const Navbar = () => {
   const [mobileMenu, setMobileMenu] = useState<boolean>(false)
-  const { loginUser }: any = useContext(AuthContex)
+  const { loginUser, logOutHandle }: any = useContext(AuthContext)
 
 
   const menuItems =
@@ -26,12 +27,14 @@ const Navbar = () => {
         <div className=" text-sm relative ml-2 group ">
           <div className="avatar">
             <div className="w-12 mask mask-hexagon">
-              <Image src={loginUser?.image} alt="profile" />
+              {loginUser?.image !== null ? <Image src={loginUser?.image} width={100} height={100} alt="profile" />
+                : <Image src={profile} width={100} height={100} alt="profile" />}
             </div>
           </div>
-          <div className={`flex flex-col gap-[2px] absolute  bg-primary-red rounded-md md:w-14 lg:w-20 overflow-hidden duration-300 z-10 h-0 group-hover:h-[58px] `}>
+          <div className={`flex flex-col gap-[2px] absolute  bg-primary-red rounded-md md:w-14 lg:w-20 overflow-hidden duration-300 z-10 h-0 group-hover:h-[86px] `}>
             <button className="hover:bg-white-text hover:text-primary-text duration-300 rounded-t-lg py-1">{loginUser?.name}</button>
             <button className="hover:bg-white-text hover:text-primary-text duration-300 rounded-b-md py-1">{loginUser?.email}</button>
+            <button onClick={() => logOutHandle()} className="hover:bg-white-text hover:text-primary-text duration-300 rounded-b-md py-1">Log out</button>
           </div>
         </div>
         :

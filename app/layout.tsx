@@ -4,7 +4,7 @@ import Header from '../components/Common/Header/Header'
 import './globals.css'
 import { Suspense } from "react";
 import DotLoading from '../components/ReusableComponent/DotLoading';
-import AuthStorage from "../contex.jsx/AuthStorage"
+import AuthStorage from "../context/AuthStorage"
 // import { Mulish} from 'next/font/google'
 
 // const mulish = Mulish({ subsets: ['latin',] })
