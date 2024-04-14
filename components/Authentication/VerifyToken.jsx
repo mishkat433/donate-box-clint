@@ -4,7 +4,7 @@ import { useState, useEffect, useContext } from "react";
 // import { useRouter } from "next/navigation";
 import DotLoading from "../ReusableComponent/DotLoading";
 import { useRouter, useSearchParams } from 'next/navigation'
-import { AuthContex } from "../../contex.jsx/AuthStorage";
+import { AuthContext } from "../../context/AuthStorage";
 import axios from "axios";
 import { toast } from 'react-hot-toast';
 
@@ -12,7 +12,7 @@ const VerifyToken = () => {
     const router = useRouter()
     const searchParams = useSearchParams()
     const token = searchParams.get("token")
-    const { loginUser, setLoginUser } = useContext(AuthContex)
+    const { setToken } = useContext(AuthContext)
 
     useEffect(() => {
         if (token) {
@@ -24,8 +24,9 @@ const VerifyToken = () => {
         const res = await axios.post(`http://localhost:5200/api/v1/users/verifyToken`, { token: token.toString() })
         if (res?.data?.success) {
             toast.success(res?.data?.message)
-            setLoginUser(res?.data?.data)
-            localStorage.setItem('authData', res?.data?.data?.id)
+            // setLoginUser(res?.data?.data)
+            setToken(res?.data?.data)
+            localStorage.setItem('authToken', res?.data?.data)
             router.push('/')
         }
         else {

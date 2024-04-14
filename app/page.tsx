@@ -7,7 +7,7 @@ import Statistics from "../components/Home/Statistics/Statistics";
 export default function Home() {
   return (
     <main>
-      <HeroSlider />
+      {/* <HeroSlider /> */}
       <DonateOrGet />
       <Statistics />
     </main>

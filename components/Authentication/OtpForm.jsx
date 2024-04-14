@@ -3,7 +3,7 @@
 import { useContext, useState } from 'react';
 import "./Authentication.css"
 import { useForm } from "react-hook-form";
-import { AuthContex } from '../../contex.jsx/AuthStorage';
+import { AuthContext } from '../../context/AuthStorage';
 import { toast } from 'react-hot-toast';
 import { RiErrorWarningFill } from 'react-icons/ri';
 import axios from "axios";
@@ -13,9 +13,11 @@ import DotLoading from '../ReusableComponent/DotLoading';
 
 function OTPForm() {
     const { register, handleSubmit, formState: { errors }, } = useForm();
-    const { tokenCode, setLoginUser } = useContext(AuthContex)
+    const { tokenCode, setToken } = useContext(AuthContext)
     const [verifyLoading, setVerifyLoading] = useState(false)
     const router = useRouter()
+
+
 
     const loginHandle = async (data) => {
         setVerifyLoading(true)
@@ -23,8 +25,8 @@ function OTPForm() {
             const res = await axios.post(`http://localhost:5200/api/v1/users/verifyToken`, { token: tokenCode?.data?.token.toString() })
             if (res?.data?.success) {
                 toast.success(res?.data?.message)
-                localStorage.setItem('authData', res?.data?.data?.id)
-                setLoginUser(res?.data?.data)
+                setToken(res?.data?.data)
+                localStorage.setItem('authToken', res?.data?.data)
                 setVerifyLoading(false)
                 router.push('/')
             }
