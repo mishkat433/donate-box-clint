@@ -5,9 +5,9 @@ import Link from "next/link";
 import "./Navbar.css"
 import { RiCloseFill, RiMenu2Fill } from "react-icons/ri";
 import { useContext, useState } from "react";
-import Logo from "../../../ReusableComponent/Logo";
 import { AuthContext } from "../../../../context/AuthStorage";
 import profile from "../../../../public/assets/profile.png";
+import Logo from "../../../ReusableComponent/Logo";
 
 const Navbar = () => {
   const [mobileMenu, setMobileMenu] = useState<boolean>(false)

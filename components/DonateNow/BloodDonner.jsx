@@ -108,7 +108,7 @@ const BloodDonner = () => {
                                             <option>Barishal</option>
                                             <option>Sylhet</option>
                                             <option>Rangpur</option>
-                                            <option>Maymansingh</option>
+                                            <option>Mymensingh</option>
                                         </select>
                                         {errors.division && (<p className="text-primary-red text-start text-xs mt-1">{errors?.division.message} </p>)}
                                     </label>
