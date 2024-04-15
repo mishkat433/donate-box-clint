@@ -8,6 +8,11 @@
 
 :root {}
 
+.custom-scroll::-webkit-scrollbar {
+  visibility: hidden;
+}
+
+
 @media (prefers-color-scheme: dark) {}
 
 body {
