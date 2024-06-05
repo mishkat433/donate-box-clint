@@ -1,5 +1,5 @@
 
-const Searchbar = () => {
+const Searchbar = ({ searchInput }) => {
     return (
         <div className='w-4/5 mx-auto border-primary-text focus-within:border-primary-red border-opacity-35 rounded-md border-1 duration-200 '>
             <div className="relative flex items-center w-full h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
@@ -10,10 +10,13 @@ const Searchbar = () => {
                 </div>
 
                 <input
+                    onChange={(e) => searchInput(e.target.value)}
                     className="peer h-full w-full outline-none text-sm text-gray-700 px-2"
                     type="text"
                     id="search"
+
                     placeholder="Find donner by District, Name or phone..." />
+
             </div>
         </div>
     );

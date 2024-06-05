@@ -27,3 +27,65 @@ input[type=number]::-webkit-outer-spin-button {
     appearance: none;
     margin: 0;
 }
+
+
+.animToRight {
+    animation: slideMove 1s;
+}
+
+@keyframes slideMove {
+    from {
+        left: 0px;
+    }
+
+    to {
+        left: 250px;
+    }
+}
+
+.animToLeft {
+    animation: slideMove2 1s;
+}
+
+@keyframes slideMove2 {
+    from {
+        left: 250px;
+    }
+
+    to {
+
+        left: 0px;
+    }
+}
+
+
+.userSlide {
+    animation: user 1s;
+}
+
+@keyframes user {
+   
+    from {
+        left: -550px;
+    }
+
+    to {
+
+        left: 0px;
+    }
+}
+
+.adminSlide {
+    animation: admin 1s;
+}
+
+@keyframes admin {
+    from {
+        left: 550px;
+    }
+
+    to {
+
+        left: 0px;
+    }
+}

@@ -1,10 +1,10 @@
 
-const DotLoading = ({ size = "md", text = "white-text" }) => {
+const DotLoading = ({ size = "md", text = "white-text", height = "5" }) => {
     return (
         // flex items-center gap-1.5 capitalize
-        <div className=''>
+        <div className={`flex justify-center items-center h-${height}`}>
             {/* <p>Loading</p> */}
-            <span className={`loading loading-dots text-${text} loading-${size} -mb-1`}></span>
+            <span className={`loading loading-dots text-${text} loading-${size} `}></span>
         </div>
     );
 };

@@ -2,21 +2,22 @@
 
 import React, { useState } from 'react';
 import TabMenu from './TabMenu';
-import BloodDonner from './BloodDonner';
 import FundDonner from './FundDonner';
 import Volunteer from './Volunteer';
+import { isLoggedIn } from '../../services/auth.service';
+import LogInButton from '../ReusableComponent/LogInButton';
+import BloodDonner from './BloodDonner';
 
 const DonateNowMain = () => {
     const [selectType, setSelectType] = useState('blood')
+    const loginCheck = isLoggedIn()
     return (
         <div>
             <TabMenu type={selectType} setType={setSelectType} />
-            <div className="pt-3 container mx-auto">
+            <div className="pt-3 container mx-auto py-2 animate-fade-down animate-once">
                 {selectType === 'blood' && <div><BloodDonner /> </div>}
                 {selectType === 'fund' && <div><FundDonner /> </div>}
-                {selectType === 'Volunteer' && <div><Volunteer /> </div>}
-
-
+                {selectType === 'Volunteer' && <div> {loginCheck ? <Volunteer /> : <LogInButton />} </div>}
             </div>
         </div>
     );
