@@ -1,23 +1,22 @@
 "use client"
 
 import DonateGetCard from "./DonateGetCard"
-import SearchBar from "../../ReusableComponent/Searchbar"
 import { useDonnerQuery } from "../../../redux/api/donnerApi";
 import { useState } from "react";
 import { useDebounced } from "../../../redux/hooks";
 import SkeletonLoading from "../../ReusableComponent/SkeletonLoading";
+import SearchBar from "../../ReusableComponent/Searchbar";
 
 
 const DonateOrGet = () => {
-
     const query: Record<string, any> = {};
+
 
     const [page, setPage] = useState<number>(1);
     const [size, setSize] = useState<number>(100);
     const [sortBy, setSortBy] = useState<string>("");
     const [sortOrder, setSortOrder] = useState<string>("");
     const [searchTerm, setSearchTerm] = useState<string>("");
-
 
     query["limit"] = size;
     query["page"] = page;
@@ -37,7 +36,7 @@ const DonateOrGet = () => {
 
     const groupedData = [];
 
-    data?.donner?.forEach(record => {
+    data?.donner?.data?.forEach(record => {
         const division = record.division;
         let divisionGroup = groupedData.find(group => group.division === division);
 

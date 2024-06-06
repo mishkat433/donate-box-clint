@@ -13,6 +13,7 @@ import { toast } from 'react-hot-toast';
 import UserLogin from "./UserLogin";
 import { useUserLoginMutation } from "../../../redux/api/authApi";
 import { storeUserInfo } from "../../../services/auth.service";
+import { useRouter } from "next/navigation";
 
 
 type FormValues = {
@@ -22,20 +23,25 @@ type FormValues = {
 };
 
 const AdminLogin = () => {
+    const [userLogin] = useUserLoginMutation()
 
-    const [userLogin, { isLoading, isSuccess, isError, error }] = useUserLoginMutation()
+const router=useRouter()
+
 
     const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
         try {
             const res = await userLogin({ ...data }).unwrap();
-
-            if (res?.access_token) {
-                // router.push("/profile");
+            if (res?.success) {
+                router.push("/");
                 toast.success("Admin logged in successfully!");
-                storeUserInfo({ accessToken: res?.access_token })
+                storeUserInfo({ accessToken: res?.data?.access_token })
+            }
+            else{
+                toast.error(res?.message)
             }
         }
         catch (err: any) {
+            toast.error(err?.message)
             console.log(err);
         }
     };

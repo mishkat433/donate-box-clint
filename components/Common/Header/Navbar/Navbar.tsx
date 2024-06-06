@@ -6,40 +6,42 @@ import "./Navbar.css"
 import { RiCloseFill, RiMenu2Fill } from "react-icons/ri";
 import profile from "../../../../public/assets/profile.png";
 import Logo from "../../../ReusableComponent/Logo";
-import { useEffect, useState } from "react";
-import { useUserQuery } from "../../../../redux/api/userApi";
+import {  useEffect, useState } from "react";
 import { getUserInfo, isLoggedIn, removeUserInfo } from "../../../../services/auth.service";
 import { authKey } from "../../../../constants/storageKey";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import { useLogOutMutation, useLoginUserDataQuery } from "../../../../redux/api/authApi";
 
 
 const Navbar = () => {
-  const [logInUserData, setLogInUserData] = useState()
-
+  // const [logInUserData, setLogInUserData] = useState({})
+const [logOut]=useLogOutMutation()
+  const userInfo: any = getUserInfo()
+  const router = useRouter()
   const loginCheck = isLoggedIn()
 
   let id: string
-  const userInfo: any = getUserInfo()
 
-  if (userInfo?.userId) { id = userInfo.userId }
-  else { id = userInfo.adminId }
 
-  const router = useRouter()
+  if (userInfo?.userId) {
+     id = userInfo.userId
+     }else { 
+      id = userInfo.adminId 
+    }
+    const { data, isLoading, isError }: any = useLoginUserDataQuery(id)
 
-  const logOut = (): void => {
+  const logOutHandle = async () => {
+    await logOut({ data: "blank" })
     removeUserInfo(authKey);
+    toast.success("Log out successful")
     router.push("/")
   };
 
-  const { data, isLoading }: any = useUserQuery(id)
+// useEffect(() => {
 
-  useEffect(() => {
-    setLogInUserData(data)
-  }, [data, loginCheck, userInfo])
+// },[])
 
-
-
-  const userData = data?.donner ? data?.donner[0] : {}
 
   const [mobileMenu, setMobileMenu] = useState<boolean>(false)
 
@@ -51,36 +53,35 @@ const Navbar = () => {
       <li className="nav-link-style ">  <Link href={"/contact"} className=" hover-underline-animation">Contact</Link></li>
       {/* <li className="nav-link-style "> <button className="button-transition primary-red-button py-1 px-2.5">Need Blood</button> </li> */}
       <li className="nav-link-style"> <Link href="/donate" className="button-transition primary-red-button py-1 px-2.5 w-full">Donate Now</Link> </li>
-      {isLoggedIn() ?
-        // <li className=" text-sm relative ml-2 group ">
-        //   <div className="avatar">
-        //     <div className="w-12 mask mask-hexagon">
-        //       {/* {userData?.profileImage !== null ? */}
-        //       {/* <Image src={userData?.profileImage} width={100} height={100} alt="profile" /> */}
-        //       <Image src={profile} width={100} height={100} alt="profile" />
-        //     </div>
-        //   </div>
-        //   <div className={`flex flex-col absolute gap-[2px] z-10  -right-3 bg-primary-red text-center rounded-md md:w-14 lg:w-40 px-1 duration-300 overflow-hidden h-0 group-hover:h-[165px] `}>
-        //     <div className="p-[1px] text-white-text duration-300  py-1">
-        //       <strong className="">{userData?.fullName}</strong>
-        //       <p className="text-xs">{userData?.phoneNumber}</p>
-        //       <p className="text-xs">({userData?.role})</p>
-        //       <hr className="mt-1 bg-secondary-text" />
-        //     </div>
-        //     <Link href="/profile" className="hover:bg-white-text  duration-300 rounded-t-md  py-1 text-white-text hover:text-secondary-text">Profile</Link>
-        //     <Link href="/dashboard" className="hover:bg-white-text  duration-300  py-1 text-white-text hover:text-secondary-text">Dashboard</Link>
-        //     <button onClick={() => logOut()} className="hover:bg-white-text duration-300 rounded-b-md py-1 text-white-text hover:text-secondary-text">Log out</button>
-        //   </div>
-        // </li>
-        <li onClick={() => logOut()} className="hover:bg-white-text duration-300 rounded-b-md py-1 cursor-pointer hover:text-secondary-text">Log out</li>
+      {isLoggedIn() && data?.data[0]?.role ?
+        <li className=" text-sm relative ml-2 group ">
+          <div className="avatar">
+            <div className="w-12 mask mask-hexagon">
+              {/* {userData?.profileImage !== null ? */}
+              {/* <Image src={userData?.profileImage} width={100} height={100} alt="profile" /> */}
+              <Image src={profile} width={100} height={100} alt="profile" />
+            </div>
+          </div>
+          <div className={`flex flex-col absolute gap-[2px] z-20  -right-3 bg-primary-red text-center rounded-md md:w-14 lg:w-40 px-1 duration-300 overflow-hidden h-0  group-hover:h-[165px] `}>
+            <div className="p-[1px] text-white-text duration-300  py-1">
+              <strong className="">{data?.data[0]?.fullName}</strong>
+              <p className="text-xs">{data?.data[0]?.phoneNumber}</p>
+              <p className="text-xs">({data?.data[0]?.role})</p>
+
+              <hr className="mt-1 bg-secondary-text" />
+            </div>
+            <Link href="/profile" className="hover:bg-white-text  duration-300 rounded-t-md  py-1 text-white-text hover:text-secondary-text">Profile</Link>
+            <Link href="/dashboard" className="hover:bg-white-text  duration-300  py-1 text-white-text hover:text-secondary-text">Dashboard</Link>
+            <button onClick={() => logOutHandle()} className="hover:bg-white-text duration-300 rounded-b-md py-1 text-white-text hover:text-secondary-text">Log out</button>
+          </div>
+        </li>
         :
         <li className="nav-link-style"> <Link href={"/login"} className=" button-transition primary-red-button py-1 px-2.5 w-full ">Login</Link> </li>
-      }
-
+        } 
     </>
 
   return (
-    <header className="font-mulish bg-[#ffffff] drop-shadow-sm  z-50" >
+    <header className="font-mulish bg-[#ffffff] drop-shadow-sm " >
       <div className="container flex justify-between items-center mx-auto py-2">
 
         <Logo donate={'text-primary-red'} box={'text-primary-text'} />

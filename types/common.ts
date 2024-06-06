@@ -1,6 +1,4 @@
 
-
-
 export interface IMeta {
   limit: number;
   page: number;
@@ -19,7 +17,7 @@ export type IGenericErrorResponse = {
   statusCode: number;
   message: string;
   errorMessages: IGenericErrorMessage[];
-  success:boolean
+  success: boolean
 };
 
 export type IGenericErrorMessage = {

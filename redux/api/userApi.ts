@@ -1,5 +1,4 @@
 
-import { isLoggedIn } from "../../services/auth.service";
 import { IMeta } from "../../types";
 import { tagTypes } from "../tag-types";
 import { baseApi } from "./baseApi";
@@ -30,17 +29,15 @@ export const loginDataApi = baseApi.injectEndpoints({
                 data: userData,
             }),
         }),
-
-
         user: build.query({
             query: (id: string | string[] | undefined) => {
                 return {
-                    url: isLoggedIn() && `${USER_URL}/get-single-user/${id}`,
+                    url: `${USER_URL}/get-single-user/${id}`,
                     method: "GET",
                 };
             },
             transformResponse: (response: any, meta: IMeta) => { return { meta, donner: response, } },
-            // providesTags: [tagTypes.user],
+            providesTags: [tagTypes.user],
         }),
 
     }),
@@ -50,6 +47,7 @@ export const {
     useCreateUserMutation,
     useCheckAlreadyDonnerMutation,
     useUpdateUserPasswordMutation,
-    useUserQuery
+    useUserQuery,
+    useLazyUserQuery,
 
 } = loginDataApi;

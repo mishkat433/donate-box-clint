@@ -1,15 +1,19 @@
+import axios from 'axios';
+import { IGenericErrorResponse, ResponseSuccessType } from '../../types';
+import { authKey } from '../../constants/storageKey';
+import { getFromLocalStorage, setToLocalStorage } from '../../utils/local-storage';
+import { getNewAccessToken, removeUserInfo } from '../../services/auth.service';
 
-
-import axios from "axios";
-import { IGenericErrorResponse, ResponseSuccessType } from "../../types";
-import { authKey } from "../../constants/storageKey";
-import { getFromLocalStorage, setToLocalStorage } from "../../utils/local-storage";
-import { getNewAccessToken } from "../../services/auth.service";
-
-const instance = axios.create();
-instance.defaults.headers.post["Content-Type"] = "application/json";
-instance.defaults.headers["Accept"] = "application/json";
-instance.defaults.timeout = 60000;
+// Create an Axios instance with default settings
+const instance = axios.create({
+  headers: {
+    post: {
+      'Content-Type': 'application/json',
+    },
+    'Accept': 'application/json',
+  },
+  timeout: 60000,
+});
 
 // Add a request interceptor
 instance.interceptors.request.use(
@@ -17,13 +21,13 @@ instance.interceptors.request.use(
     // Do something before request is sent
     const accessToken = getFromLocalStorage(authKey);
     if (accessToken) {
-      config.headers.Authorization = accessToken;
+      config.headers.Authorization = accessToken
     }
     return config;
   },
   function (error) {
-    // Do something with request error
-    console.log(error);
+
+    console.error('Request error:', error);
     return Promise.reject(error);
   }
 );
@@ -33,37 +37,39 @@ instance.interceptors.response.use(
   //@ts-ignore
   function (response) {
     const responseObject: ResponseSuccessType = {
-      data: response?.data?.data,
-      message: response?.data?.message,
+      data: response?.data,
       meta: response?.data?.meta,
       statusCode: response?.data?.statusCode,
-      success: response?.data?.success
+      success: response?.data?.success,
+      message: response?.data?.message,
     };
     return responseObject;
   },
   async function (error) {
-    const config = error?.config
-    if (error?.response?.status === 400 && !config?.sent) {
-      config.sent = true;
-      const response = await getNewAccessToken();
-      const accessToken = response?.data?.access_token;
-      config.headers["Authorization"] = accessToken;
-      setToLocalStorage(authKey, accessToken);
-      return instance(config)
+    const originalRequest = error.config;
+    if (error?.response?.status === 400 && error?.response?.data?.message === "jwt expired") {
+      try {
+        const response = await getNewAccessToken();
+        const accessToken = response?.data?.data?.access_token;
+        instance.defaults.headers.Authorization = accessToken;
+        setToLocalStorage(authKey, accessToken);
+        originalRequest.headers.Authorization = accessToken;
+        return instance(originalRequest);
 
-    }
-    else {
+      } catch (tokenRefreshError) {
+        console.log(tokenRefreshError, "tokenRefreshError");
+        // removeUserInfo(authKey)
+        return Promise.reject(tokenRefreshError);
+      }
+    } else {
       const responseObject: IGenericErrorResponse = {
-        statusCode: error?.response?.statusCode || 500,
-        message: error?.response?.data?.message || "Something went wrong",
+        statusCode: error?.response?.status || 500,
+        message: error?.response?.data?.message || 'Something went wrong',
         errorMessages: error?.response?.data?.errorMessages,
         success: error?.response?.data?.success,
       };
-
-      return responseObject;
+      return Promise.reject(responseObject);
     }
-
-    // return Promise.reject(error);
   }
 );
 

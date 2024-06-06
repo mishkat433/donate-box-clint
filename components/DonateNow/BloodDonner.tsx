@@ -13,6 +13,7 @@ import { bloodGroupOptions, divisionOptions, genderOptions } from '../../constan
 import { useAddDonnerMutation } from '../../redux/api/donnerApi';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import { getNewAccessToken } from '../../services/auth.service';
 
 
 type FormValues = {
@@ -27,21 +28,19 @@ const BloodDonner = () => {
 
     const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
         try {
-
             data.role = USER_ROLE.DONNER
             data.isBloodDonner = true
             const res = await addDonner({ ...data }).unwrap();
-            console.log(res);
-            // console.log(res);
-            if (res === "Donner created successfully") {
-                toast.success('Congratulation! now you are a donner')
+            if (res?.success) {
+                toast.success(res?.message)
                 router.push("/")
-            }
-            else {
-                toast.error('Donner created failed')
             }
         }
         catch (err: any) {
+            if (err.message?.startsWith("E11000 duplicate")) {
+                return toast.error("Already used this phone number")
+            }
+            toast.error(err?.message)
             console.log(err);
         }
     };

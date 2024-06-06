@@ -5,11 +5,14 @@ import Form from '../../ReusableComponent/Form/Form';
 import { SubmitHandler } from 'react-hook-form';
 import FormInput from '../../ReusableComponent/Form/FormInput';
 import Link from 'next/link';
-import { useUserLoginMutation } from '../../../redux/api/authApi';
+import { authApi, useUserLoginMutation } from '../../../redux/api/authApi';
 import { USER_ROLE } from '../../../constants/role';
 import toast from 'react-hot-toast';
 import { storeUserInfo } from '../../../services/auth.service';
 import { useRouter } from 'next/navigation';
+import { getBaseUrl } from '../../../helpers/config/envConfig';
+import axios from 'axios';
+import { useAppSelector } from '../../../redux/hooks';
 
 type FormValues = {
     phoneNumber: string;
@@ -18,28 +21,27 @@ type FormValues = {
 
 
 const UserLogin = () => {
-    const [userLogin, { error, isSuccess }] = useUserLoginMutation()
-
+    const [userLogin, { isError, error }] = useUserLoginMutation()
     const router = useRouter()
-    console.log(error, isSuccess);
 
 
     const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
         try {
             data.role = USER_ROLE.USER
-            const res = await userLogin({ ...data }).unwrap();
-            console.log(res);
-            if (res?.access_token) {
+            const res = await userLogin({ ...data }).unwrap()
+            if (res?.success) {
                 router.push("/");
-                console.log("success")
                 toast.success("User logged in successfully!");
-                storeUserInfo({ accessToken: res?.access_token })
+                storeUserInfo({ accessToken: res?.data?.access_token })
             }
         }
         catch (err) {
-            console.log(err.message);
+            toast.error(err.message)
+            console.log(err);
         }
     };
+
+
 
 
     return (

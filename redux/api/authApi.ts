@@ -14,6 +14,25 @@ export const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.user],
     }),
+    logOut: build.mutation({
+      query: (logoutData) => ({
+        url: `${AUTH_URL}/logout`,
+        method: "POST",
+        data: logoutData,
+      }),
+      invalidatesTags: [tagTypes.user],
+    }),
+
+    loginUserData: build.query({
+      query: (id: string | string[] | undefined) => {
+          return {
+              url:  `${AUTH_URL}/get-single-user/${id}`,
+              method: "GET",
+          };
+      },
+      providesTags: [tagTypes.user],
+  }),
+
     // resetPassword: build.mutation({
     //   query: (resetPasswordPayload) => ({
     //     url: `${AUTH_URL}/reset-password`,
@@ -33,6 +52,8 @@ export const authApi = baseApi.injectEndpoints({
 
 export const {
   useUserLoginMutation,
+  useLogOutMutation,
+  useLoginUserDataQuery,
   // useForgotPasswordMutation,
   // useResetPasswordMutation,
 } = authApi;
