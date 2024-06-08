@@ -6,11 +6,8 @@ import Statistics from "../../components/Home/Statistics/Statistics";
 const page = () => {
   return (
     <main className="font-mulish">
-      <section className="">
-        {/* <HeroSlider /> */}
         <DonateOrGet />
         <Statistics />
-      </section>
     </main>
   );
 };

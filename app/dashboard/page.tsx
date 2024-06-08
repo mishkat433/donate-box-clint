@@ -1,15 +1,11 @@
 
 const page = () => {
     return (
-        <main className="font-mulish">
+        <main className="font-mulish p-2">
 
-            {/* product section start */}
-
-            <section className="p-8 ">
-                under development
+            <section className="">
+              <p>Dashboard home page under developement</p>
             </section>
-
-            {/* product section end */}
         </main>
     );
 };

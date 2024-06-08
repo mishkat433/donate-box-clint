@@ -29,21 +29,20 @@ const AlreadyDonnerRegister = () => {
     const [updateUserPassword, { error }]: any = useUpdateUserPasswordMutation()
 
     const router = useRouter()
-    console.log(error)
+
     const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
         try {
             const res = await checkAlreadyDonner({ ...data }).unwrap();
-
-            if (res.length === 0) {
+            if (res?.data?.length=== 0) {
                 setCheckError(true)
             }
-            else if (res[0].role === USER_ROLE.USER) {
+             if (res?.data[0]?.role === USER_ROLE.USER) {
                 toast.error("Oh Snap! Already you are a registered user");
                 setCheckExist(false)
                 setCheckError(false)
             }
-            else if (res[0].role === USER_ROLE.DONNER) {
-                setStoreUserInfo(res[0])
+            else if (res?.data[0].role === USER_ROLE.DONNER) {
+                setStoreUserInfo(res?.data[0])
                 setCheckExist(true)
                 setCheckError(false)
             }
@@ -63,7 +62,7 @@ const AlreadyDonnerRegister = () => {
             data.userId = storeUserInfo.userId
             delete (data.confirmPassword)
             const res = await updateUserPassword({ ...data }).unwrap();
-            if (res?.id) {
+            if (res?.success) {
                 toast.success("User Created Success")
                 router.push("/login")
             }

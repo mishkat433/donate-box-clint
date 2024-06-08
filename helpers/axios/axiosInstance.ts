@@ -3,6 +3,8 @@ import { IGenericErrorResponse, ResponseSuccessType } from '../../types';
 import { authKey } from '../../constants/storageKey';
 import { getFromLocalStorage, setToLocalStorage } from '../../utils/local-storage';
 import { getNewAccessToken, removeUserInfo } from '../../services/auth.service';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 // Create an Axios instance with default settings
 const instance = axios.create({
@@ -47,6 +49,8 @@ instance.interceptors.response.use(
   },
   async function (error) {
     const originalRequest = error.config;
+
+
     if (error?.response?.status === 400 && error?.response?.data?.message === "jwt expired") {
       try {
         const response = await getNewAccessToken();
@@ -56,12 +60,24 @@ instance.interceptors.response.use(
         originalRequest.headers.Authorization = accessToken;
         return instance(originalRequest);
 
-      } catch (tokenRefreshError) {
-        console.log(tokenRefreshError, "tokenRefreshError");
-        // removeUserInfo(authKey)
+      }
+      catch (tokenRefreshError) {
+        const router = useRouter()
+      removeUserInfo(authKey);
+      toast.success("Log out successful")
+      router.push("/")
+        console.log(tokenRefreshError);
         return Promise.reject(tokenRefreshError);
       }
-    } else {
+    }
+    else if(error?.response?.status===403 && error?.response?.data?.message === 'Invalid refresh token'){
+      // console.log("object");
+      const router = useRouter()
+      removeUserInfo("accessToken");
+      toast.success("Log out successful")
+      router.push("/")
+    }
+    else {
       const responseObject: IGenericErrorResponse = {
         statusCode: error?.response?.status || 500,
         message: error?.response?.data?.message || 'Something went wrong',

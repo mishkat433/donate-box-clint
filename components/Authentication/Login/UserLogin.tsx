@@ -10,9 +10,6 @@ import { USER_ROLE } from '../../../constants/role';
 import toast from 'react-hot-toast';
 import { storeUserInfo } from '../../../services/auth.service';
 import { useRouter } from 'next/navigation';
-import { getBaseUrl } from '../../../helpers/config/envConfig';
-import axios from 'axios';
-import { useAppSelector } from '../../../redux/hooks';
 
 type FormValues = {
     phoneNumber: string;

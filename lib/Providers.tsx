@@ -6,7 +6,7 @@ import { Toaster } from "react-hot-toast";
 const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
     <Provider store={store}>
-      <Toaster position="top-center" reverseOrder={false} />
+      <Toaster position="top-right" reverseOrder={false} />
       {children}
     </Provider>
   );

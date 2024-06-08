@@ -19,6 +19,21 @@ body {
   scroll-behavior: smooth;
 }
 
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgb(248, 225, 225);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #989898;
+  border-radius: 5px;
+}
+
+
 .p-default {
   @apply px-2.5
 }
@@ -41,4 +56,8 @@ body {
 
 .errorBehavior {
   @apply border-primary-red  focus:outline-primary-red focus:border-primary-red
+}
+
+.dashboard-icon-style {
+  @apply table-cell w-6 h-6 text-center top-3 text-lg 
 }

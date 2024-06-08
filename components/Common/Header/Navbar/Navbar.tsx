@@ -6,7 +6,7 @@ import "./Navbar.css"
 import { RiCloseFill, RiMenu2Fill } from "react-icons/ri";
 import profile from "../../../../public/assets/profile.png";
 import Logo from "../../../ReusableComponent/Logo";
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getUserInfo, isLoggedIn, removeUserInfo } from "../../../../services/auth.service";
 import { authKey } from "../../../../constants/storageKey";
 import { useRouter } from "next/navigation";
@@ -16,7 +16,7 @@ import { useLogOutMutation, useLoginUserDataQuery } from "../../../../redux/api/
 
 const Navbar = () => {
   // const [logInUserData, setLogInUserData] = useState({})
-const [logOut]=useLogOutMutation()
+  const [logOut] = useLogOutMutation()
   const userInfo: any = getUserInfo()
   const router = useRouter()
   const loginCheck = isLoggedIn()
@@ -25,11 +25,11 @@ const [logOut]=useLogOutMutation()
 
 
   if (userInfo?.userId) {
-     id = userInfo.userId
-     }else { 
-      id = userInfo.adminId 
-    }
-    const { data, isLoading, isError }: any = useLoginUserDataQuery(id)
+    id = userInfo.userId
+  } else {
+    id = userInfo.adminId
+  }
+  const { data, isLoading, isError }: any = useLoginUserDataQuery(id)
 
   const logOutHandle = async () => {
     await logOut({ data: "blank" })
@@ -37,10 +37,6 @@ const [logOut]=useLogOutMutation()
     toast.success("Log out successful")
     router.push("/")
   };
-
-// useEffect(() => {
-
-// },[])
 
 
   const [mobileMenu, setMobileMenu] = useState<boolean>(false)
@@ -77,7 +73,7 @@ const [logOut]=useLogOutMutation()
         </li>
         :
         <li className="nav-link-style"> <Link href={"/login"} className=" button-transition primary-red-button py-1 px-2.5 w-full ">Login</Link> </li>
-        } 
+      }
     </>
 
   return (

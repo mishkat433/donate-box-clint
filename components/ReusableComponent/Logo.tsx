@@ -10,7 +10,7 @@ type styleType = {
 const Logo = ({ donate, box }: styleType) => {
     return (
         <Link href={"/"} className="flex items-center gap-2 pl-2 md:pl-0">
-            <Image src={logo} alt="not found" className=" w-[35px]" />
+            <Image src={logo} alt="not found" className="w-[35px]" />
             <h1 className={` font-bold text-2xl ${donate}`}>Donate <span className={` ${box}`}>Box</span></h1>
         </Link>
     );

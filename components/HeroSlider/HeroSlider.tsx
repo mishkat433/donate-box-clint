@@ -45,11 +45,11 @@ const HeroSlider = () => {
     }
 
     return (
-        // <div className="slider-container mt-1  mx-auto bg-heroSlider-bg bg-bottom bg-[length:100vw_50px] lg:bg-[length:100vw_80px] bg-no-repeat">
+        <div className="slider-container mt-1  mx-auto bg-heroSlider-bg bg-bottom bg-[length:100vw_50px] lg:bg-[length:100vw_80px] bg-no-repeat">
+          <div  >
+              <Image className="w-full h-[40vh] md:h-[50vh] lg:h-[70vh]" src={data[0]?.path} alt="asdf" width={500} height={500} />
+          </div>
             {/* <Slider asNavFor={nav2} ref={slider => (sliderRef1 = slider)} {...settings} className="SliderArrow">
-                <div  >
-                    <Image className="w-full h-[40vh] md:h-[50vh] lg:h-[70vh]" src={data[0]?.path} alt="asdf" width={500} height={500} />
-                </div>
             </Slider>
              {data?.map((slide, index) => ( 
 
@@ -70,57 +70,7 @@ const HeroSlider = () => {
                 </Slider>
             </div> */}
                     {/* </div> */}
-             <Slider {...settings}>
-             <div className="slider-container">
-      <h2>Slider Syncing (AsNavFor)</h2>
-      <h4>First Slider</h4>
-      <Slider asNavFor={nav2} ref={slider => (sliderRef1 = slider)}>
-        <div>
-          <h3>1</h3>
-        </div>
-        <div>
-          <h3>2</h3>
-        </div>
-        <div>
-          <h3>3</h3>
-        </div>
-        <div>
-          <h3>4</h3>
-        </div>
-        <div>
-          <h3>5</h3>
-        </div>
-        <div>
-          <h3>6</h3>
-        </div>
-      </Slider>
-      <h4>Second Slider</h4>
-      <Slider
-        asNavFor={nav1}
-        ref={slider => (sliderRef2 = slider)}
-        slidesToShow={3}
-        swipeToSlide={true}
-        focusOnSelect={true}
-      >
-        <div>
-          <h3>1</h3>
-        </div>
-        <div>
-          <h3>2</h3>
-        </div>
-        <div>
-          <h3>3</h3>
-        </div>
-        <div>
-          <h3>4</h3>
-        </div>
-        <div>
-          <h3>5</h3>
-        </div>
-        <div>
-          <h3>6</h3>
-        </div>
-      </Slider>
+      
     </div>
   
 

@@ -37,6 +37,7 @@ module.exports = {
     },
     colors: {
       'white-text': "#fff",
+      'redis-text': "#ffeddb",
       'primary-text': '#111827',
       'secondary-text': '#6B7280',
       'primary-red': '#C30047',

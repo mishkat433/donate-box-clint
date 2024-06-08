@@ -39,6 +39,18 @@ export const loginDataApi = baseApi.injectEndpoints({
             transformResponse: (response: any, meta: IMeta) => { return { meta, donner: response, } },
             providesTags: [tagTypes.user],
         }),
+        
+        allUsers: build.query({
+            query: (arg: Record<string, any>) => {
+                return {
+                    url: `${USER_URL}/get-user`,
+                    method: "GET",
+                    params: arg,
+                };
+            },
+            transformResponse: (response: any, meta: IMeta) => { return { meta, donner: response, } },
+            providesTags: [tagTypes.user],
+        }),
 
     }),
 });
@@ -48,6 +60,7 @@ export const {
     useCheckAlreadyDonnerMutation,
     useUpdateUserPasswordMutation,
     useUserQuery,
+    useAllUsersQuery,
     useLazyUserQuery,
 
 } = loginDataApi;

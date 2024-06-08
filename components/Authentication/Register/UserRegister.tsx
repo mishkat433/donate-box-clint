@@ -41,16 +41,15 @@ const UserRegister = () => {
             data.role = USER_ROLE.USER
             data.isBloodDonner = ready
             const res = await createUser({ ...data }).unwrap();
-            console.log(res);
-            if (res === "User created successfully") {
+            if (res?.success) {
                 toast.success("Congratulation! now you are a 'Donate Box' member");
                 router.push("/login")
             }
-            else {
-                toast.error('Donner created failed')
-            }
         }
         catch (err: any) {
+            if (err?.message.startsWith("E11000 duplicate")) {
+                toast.error("user created failed. already have an account with this phone number")
+            }
             console.log(err);
         }
     };

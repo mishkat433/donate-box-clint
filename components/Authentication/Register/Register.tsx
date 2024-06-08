@@ -29,7 +29,7 @@ const Register = () => {
                     </label>
                 </div>}
 
-            <div className=" min-h-[85vh] duration-150 flex justify-center items-center  overflow-hidden py-2 relative">
+            <div className=" min-h-[85vh] overflow-auto duration-150 flex justify-center items-center  my-2 relative ">
 
                 <div className={`w-full min-h-full  rounded-md absolute px-2 ${loginManage && "left-0  adminSlide z-10"}`}>
                     {loginManage && <>{!alreadyDonner ? <UserRegister /> : <AlreadyDonnerRegister />}</>}
