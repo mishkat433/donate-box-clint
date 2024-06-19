@@ -77,7 +77,7 @@ const Navbar = () => {
     </>
 
   return (
-    <header className="font-mulish bg-[#ffffff] drop-shadow-sm " >
+    <header className="font-mulish bg-[#ffffff] shadow-sm  mb-1" >
       <div className="container flex justify-between items-center mx-auto py-2">
 
         <Logo donate={'text-primary-red'} box={'text-primary-text'} />
@@ -100,11 +100,11 @@ const Navbar = () => {
 
 
       {/* responsive menu start  */}
-      <div className="drawer drawer-end absolute block md:hidden z-[999999]">
+      <div className="drawer drawer-start block md:hidden ">
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
         <div className="drawer-side">
           <label htmlFor="my-drawer-4" onClick={() => setMobileMenu(!mobileMenu)} className="drawer-overlay"></label>
-          <ul className="space-y-3 p-4 w-52 h-[100vh] text-center  bg-base-200 ">
+          <ul className="space-y-3 p-4 w-52 h-[100vh] text-center  bg-base-200 !z-[10000]">
             {menuItems}
           </ul>
         </div>

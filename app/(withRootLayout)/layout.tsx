@@ -4,7 +4,7 @@ import Header from "../../components/Common/Header/Header";
 
 export default function HomeLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
     return (
-        <div>
+        <div className="">
             <Header />
             {children}
             <Footer />

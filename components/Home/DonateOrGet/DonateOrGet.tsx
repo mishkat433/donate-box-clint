@@ -15,7 +15,7 @@ const DonateOrGet = () => {
     const [page, setPage] = useState<number>(1);
     const [size, setSize] = useState<number>(100);
     const [sortBy, setSortBy] = useState<string>("");
-    const [sortOrder, setSortOrder] = useState<string>("");
+    const [sortOrder, setSortOrder] = useState<string>("asc");
     const [searchTerm, setSearchTerm] = useState<string>("");
 
     query["limit"] = size;
@@ -52,13 +52,13 @@ const DonateOrGet = () => {
             <div className="  py-5  bg-no-repeat bg-center bg-cover ">
                 <div className="container mx-auto ">
                     <h1 className="text-center text-xl md:text2xl lg:text-4xl font-oswald text-primary-red font-bold mb-5">Find a Blood Donner In Your District</h1>
-                    <div className="mb-3 md:mb-5">
+                   <div className="mb-3 md:mb-5 w-full lg:w-3/5 mx-auto px-1">
                         <SearchBar searchInput={setSearchTerm} />
-                    </div>
+                   </div>
                     <div>
                         {isLoading &&
-                            <div className="flex justify-between items-center gap-2 mt-5">
-                                {[...Array(5)].map((sk, i) => <div key={i} className="bg-[#ef9f43] rounded-md" > <SkeletonLoading /></div>)}
+                            <div className="flex justify-between items-center gap-2 ">
+                                {[...Array(5)].map((sk, i) => <div key={i} className="bg-[#f8cfa0] rounded-md" > <SkeletonLoading /></div>)}
                             </div>}
                         {isError && <div className="">{error?.message}</div>}
                         {groupedData.length === 0 && !isLoading && <p className="text-center text-lg text-primary-red">Donner not found</p>}
@@ -69,10 +69,10 @@ const DonateOrGet = () => {
                                         <strong className="text-xl font-mono uppercase bg-primary-red md:bg-transparent w-full text-center text-white-text md:text-primary-text">{el?.division}</strong>
                                     </div>
                                     <div className={`md:col-span-2 lg:col-span-4 grid grid-cols-1 lg:grid-cols-3 gap-3 `}>
-                                        {el?.donner?.map((dr, i) => (!dr?.isBanned&& <DonateGetCard key={i} donner={dr} />))}
+                                        {el?.donner?.map((dr:any, i:number) => (!dr?.isBanned&& <DonateGetCard key={i} donner={dr} />))}
                                     </div>
                                 </div>
-                                <div className="flex justify-center items-center w-full py-4"><button className="text-center border-1 p-1 rounded-md">See more</button></div>
+                                {/* <div className="flex justify-center items-center w-full py-4"><button className="text-center border-1 p-1 rounded-md">See more</button></div> */}
                                 <hr className="my-2 opacity-20" />
                             </div>
                         )}

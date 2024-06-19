@@ -141,12 +141,6 @@ export const daysOptions = days.map((day: string) => {
 
 export const semesterRegistrationStatus = ["UPCOMING", "ONGOING", "ENDED"];
 
-
-export enum PaymentType {
-  PARTIAL = "PARTIAL",
-  FULL = "FULL",
-}
-
 export enum PaymentStatus {
   PENDING = "PENDING",
   PAID = "PAID",
