@@ -1,21 +1,26 @@
 "use client"
 
 import { useState } from "react";
-import { useAllUsersQuery } from "../../../redux/api/userApi";
-import ReusableTable from "../../ReusableComponent/Table/ReusableTable";
+import { useAllUsersQuery, useUserBannedMutation } from "../../../redux/api/userApi";
 import DotLoading from "../../ReusableComponent/DotLoading";
 import SearchBar from "../../ReusableComponent/Searchbar";
-import { RiAccountCircleFill, RiAddCircleFill, RiAddFill, RiArrowDownSFill, RiUserSmileFill } from "react-icons/ri";
+import { RiAddFill, RiUserSmileFill } from "react-icons/ri";
 import { useDebounced } from "../../../redux/hooks";
-import DropDown from "../../ReusableComponent/DropDown";
+import Dropdown from "../../ReusableComponent/Dropdown/Dropdown";
+import { sortByOptions, sortOrderOptions, dataLimitOptions } from "./Options";
+import CommonTable from "../../ReusableComponent/Table/CommonTable";
+import toast from "react-hot-toast";
 
 
 const AllUsersMain = () => {
+    const columns = ['Image','User Id', 'Name','Phone',"Role",'Division', 'Address','status','action'];
+
+    const [userBanned,{}]=useUserBannedMutation()
+
     const query: Record<string, any> = {};
 
-
     const [page, setPage] = useState<number>(1);
-    const [limit, setLimit] = useState<number>(20);
+    const [limit, setLimit] = useState<number>(10);
     const [sortBy, setSortBy] = useState<string>("");
     const [sortOrder, setSortOrder] = useState<string>("desc");
     const [searchTerm, setSearchTerm] = useState<string>("");
@@ -34,74 +39,62 @@ const AllUsersMain = () => {
         query["searchTerm"] = debouncedTerm;
     }
 
+    const bannedHandle = async (data:any) => {
+        try {
+            const bannedData={userId:data?.userId, isBanned:data?.isBan}
+            const res = await userBanned( bannedData )
+            console.log(res);
+            // if (res?.success) {
+            //     toast.success("User Banned Success")
+            // }
+        }
+        catch (err: any) {
+            console.log(err);
+        }
+    };
+
+
     const { data, isLoading, isError, error }: any = useAllUsersQuery({ ...query })
-
-    const tableHeading = ["image", "name", "Phone", "Role", "Address", "status", "Action"]
-    const sortOrderDropDown = [{ name: "asc", setter: setSortOrder }, { name: "desc", setter: setSortOrder }]
-    const sortByDropDown = [{ name: "fullName", setter: setSortBy }, { name: "phoneNumber", setter: setSortBy }, { name: "district", setter: setSortBy }]
-
-    const limitDropDown = [{ name: "10", setter: setLimit }, { name: "20", setter: setLimit }, { name: "50", setter: setLimit }, { name: "100", setter: setLimit }]
 
 
     if (isLoading) {
         return <DotLoading />
     }
 
-
-const totalPage=Math.ceil( ( Number(data?.donner?.meta?.total)/ Number(data?.donner?.meta?.limit)))
+    const pageCount = Array.from({ length: Math.ceil(data.donner.meta.total / data.donner.meta.limit) }, (_, i) => ({ value: i + 1, label: i + 1 }));
 
 
     return (
         <div className="rounded-md">
             <div className="p-3 flex justify-between items-center gap-4 mb-2">
                 <div className="flex gap-2 items-center text-xl font-bold text-primary-text">
-                    <RiUserSmileFill />
+                    <RiUserSmileFill className="text-primary-red" />
                     <h3>All Users</h3>
                 </div>
                 <button className="p-1.5 primary-red-button flex items-center gap-1"><RiAddFill /> Create New</button>
             </div>
 
-            <div className=" p-2 flex justify-between items-center gap-2 rounded-md bg-primary-red shadow-md mb-5">
-                <SearchBar searchInput={setSearchTerm} />
-                <DropDown
-                    buttons={sortByDropDown} mainBtnName={"Sort By"}
-                    defaultValue={sortBy}
-                    customStyle={"w-28"}
-                    height="80px"
-                />
-                <DropDown
-                    buttons={sortOrderDropDown}
-                    mainBtnName={"Sort Order"}
-                    defaultValue={sortOrder}
-                />
+            <div className=" p-2 flex justify-between items-center gap-2 rounded-md bg-primary-red text-white-text shadow-md mb-5">
+                <div className="w-3/5 text-primary-text"><SearchBar searchInput={setSearchTerm} /></div>
+                <Dropdown options={sortByOptions} onSelect={setSortBy} placeholder="Sort By :" defaultValue={sortBy} hoverHeight={"group-hover:h-[111px]"} />
+                <Dropdown options={sortOrderOptions} onSelect={setSortOrder} placeholder="Sort Order :" defaultValue={sortOrder} hoverHeight={"group-hover:h-[74px]"} />
+               
             </div>
 
             <div className="shadow-md rounded-md">
-                <ReusableTable
-                    tableHeading={tableHeading}
-                    data={data?.donner?.data}
-                    isActionBanned={true}
-                    isActionDelete={true}
-                    isActionEdit={true}
-                />
+                 <CommonTable columns={columns} data={data?.donner?.data} isActionBanned={true} bannedSetter={bannedHandle} isActionDelete={true} />
             </div>
-            <div className="flex justify-between gap-3">
-            <div>
-                    <DropDown
-                        buttons={limitDropDown}
-                        mainBtnName={"Limit"}
-                        defaultValue={limit}
-                        // height={"100px"}
-                        customStyle={"bg-primary-red w-full"}
-                        parentStyle={"text-white-text bg-primary-red pl-4 py-3 "}
-                    />
-                </div>
+            <div className="flex justify-between gap-3 mt-2">
+            <div className="bg-primary-red rounded-md text-white-text">
+                    <Dropdown options={dataLimitOptions} onSelect={setLimit} placeholder={`Limit : ${limit}`} defaultValue={limit}  />
+                    </div>
                 <div className="join ">
-                    <button className="join-item btn">«</button>
-                    <button className="join-item btn">Page : {data?.donner?.meta?.page}</button>
-                    <button className="join-item btn">»</button>
+                    <button onClick={() => setPage(page - 1)} className={`join-item btn hover:bg-primary-red text-white-text bg-primary-red  `} disabled={data?.donner?.meta?.prevPage === null ? true : false}>«</button>
+                    <div className="join-item btn bg-primary-red text-white-text hover:bg-primary-red px-0">
+                        <Dropdown options={pageCount} onSelect={setPage} placeholder={`Page : ${page}`} defaultValue={page} hoverHeight={"group-hover:h-[81px]"} />
+                    </div>
+                    <button onClick={() => setPage(page + 1)} className={`join-item btn hover:bg-primary-red text-white-text bg-primary-red  `} disabled={data?.donner?.meta?.nextPages === null ? true : false}>»</button>
                 </div>
-               
             </div>
         </div>
     );

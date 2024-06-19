@@ -5,7 +5,7 @@ interface setInput{
 
 const SearchBar = ({ searchInput }:setInput) => {
     return (
-        <div className='w-3/5 mx-auto border-primary-text focus-within:border-primary-red border-opacity-35 rounded-md border-1 '>
+        <div className='w-auto mx-auto border-primary-text focus-within:border-primary-red border-opacity-35 rounded-md border-1 '>
             <div className="flex items-center w-full h-10 rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
                 <div className="grid place-items-center h-full w-12 text-gray-300">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

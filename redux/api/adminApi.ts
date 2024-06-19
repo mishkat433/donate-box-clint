@@ -1,5 +1,6 @@
 import { baseApi } from "./baseApi";
 import { tagTypes } from "../tag-types";
+import { IAdmin, IMeta } from "../../types";
 
 const ADMIN_URL = "/admin";
 
@@ -15,22 +16,23 @@ export const adminApi = baseApi.injectEndpoints({
               // invalidatesTags: [tagTypes.admin],
             }),
 
-        //     admins: build.query({
-        //       query: (arg: Record<string, any>) => {
-        //         return {
-        //           url: ADMIN_URL,
-        //           method: "GET",
-        //           params: arg,
-        //         };
-        //       },
-        //       transformResponse: (response: IAdmin[], meta: IMeta) => {
-        //         return {
-        //           admins: response,
-        //           meta,
-        //         };
-        //       },
-        //       // providesTags: [tagTypes.admin],
-        //     }),
+            getAllAdmins: build.query({
+              query: (arg: Record<string, any>) => {
+                return {
+                  url: `${ADMIN_URL}`,
+                  method: "GET",
+                  params: arg,
+                };
+              },
+              transformResponse: (response: IAdmin[], meta: IMeta) => {
+                return {
+                  admins: response,
+                  meta,
+                };
+              },
+              providesTags: [tagTypes.allAdmins],
+            }),
+
         getSingleAdmin: build.query({
             query: (id: string | string[] | undefined) => ({
                 url: `${ADMIN_URL}/${id}`,
@@ -57,7 +59,7 @@ export const adminApi = baseApi.injectEndpoints({
 });
 
 export const {
-    // useGetSingleAdminQuery,
+    useGetAllAdminsQuery,
     useCreateAdminMutation,
    useGetSingleAdminQuery
 } = adminApi;

@@ -71,11 +71,11 @@ instance.interceptors.response.use(
       }
     }
     else if(error?.response?.status===403 && error?.response?.data?.message === 'Invalid refresh token'){
-      // console.log("object");
-      const router = useRouter()
       removeUserInfo("accessToken");
       toast.success("Log out successful")
+      const router = useRouter()
       router.push("/")
+      return Promise.reject("log Out");
     }
     else {
       const responseObject: IGenericErrorResponse = {

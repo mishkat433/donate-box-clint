@@ -14,6 +14,8 @@ import { useLogOutMutation, useLoginUserDataQuery } from "../../redux/api/authAp
 import { authKey } from "../../constants/storageKey";
 import toast from "react-hot-toast";
 import DotLoading from "../ReusableComponent/DotLoading";
+import UserItems from "./SideBarItems/UserItems";
+import SuperAdminItems from "./SideBarItems/SuperAdminItems";
 
 const Sidebar = ({sideView, setSideView}:any) => {
     const [logOut] = useLogOutMutation()
@@ -54,7 +56,7 @@ const Sidebar = ({sideView, setSideView}:any) => {
                                 <h2 className="nav-text-logo text-lg font-bold">DONATE <span className="text-primary-red">BOX</span> </h2>
                             </Link>
                         </li>
-                        <li className="relative right-12 top-1">
+                        <li className="relative right-5 top-1">
                             {sideView ?
                                 <RiArrowRightCircleFill onClick={() => setSideView(false)} className="dashboard-icon-style text-primary-red" />
                                 :
@@ -62,16 +64,11 @@ const Sidebar = ({sideView, setSideView}:any) => {
                             }
                         </li>
                     </ul>
-                       <ul className="text-center text-xs">
-                       <li>
-                           <h4>{data?.data[0]?.role }</h4>
-                           <h4 className="text-lg font-bold"> {data?.data[0]?.fullName }</h4>
-                           <h4> {data?.data[0]?.phoneNumber}</h4>
-                        </li>
-                       </ul>
                 </div>
 
+                {role === USER_ROLE.USER && <UserItems />}
                 {role === USER_ROLE.ADMIN && <AdminItems />}
+                {role === USER_ROLE.SUPER_ADMIN && <SuperAdminItems />}
 
 
             </div>

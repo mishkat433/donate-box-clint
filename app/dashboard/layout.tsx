@@ -29,10 +29,10 @@ export default function DashboardLayout({ children, }: Readonly<{ children: Reac
 
     return (
         <div>
-            <div className='flex'>
-               <div className={` ${sideView? "w-1/5":"w-auto"}`}>
-               <Sidebar sideView={sideView} setSideView={setSideView} />
-               </div>
+            <div className='flex '>
+                <div className={` ${sideView ? "w-1/5" : "w-auto"}`}>
+                    <Sidebar sideView={sideView} setSideView={setSideView} />
+                </div>
                 <div className='p-2 w-full '>
                     <DashboardHeader />
                     {children}

@@ -1,3 +1,4 @@
+import { USER_ROLE } from "../constants/role";
 
 export interface IMeta {
   limit: number;
@@ -27,11 +28,6 @@ export type IGenericErrorMessage = {
 
 
 
-export interface Name {
-  firstName: string;
-  lastName: string;
-  middleName: string;
-}
 
 
 export interface IBanner {
@@ -40,59 +36,27 @@ export interface IBanner {
 }
 
 export interface IAdmin {
+  _id: string;
   id: string;
-  name: Name;
+  adminId:string;
+  fullName: string;
   gender: string;
-  managementDepartment: string;
-  email: string;
-  contactNo: string;
-  emergencyContactNo: string;
-  dateOfBirth: string;
+  division: string;
+  phoneNumber: string;
+  profileImage: any;
+  role: USER_ROLE;
   bloodGroup: string;
   designation: string;
-  presentAddress: string;
-  permanentAddress: string;
+  secretKey: string;
+  status: string;
+  address: string;
   createdAt: string;
   updatedAt: string;
   __v: number;
 }
 
-export interface IFaculty {
-  id: string;
-  name: Name;
-  gender: string;
-  email: string;
-  contactNo: string;
-  emergencyContactNo: string;
-  dateOfBirth: string;
-  bloodGroup: string;
-  academicFaculty: string;
-  academicDepartment: string;
-  designation: string;
-  presentAddress: string;
-  permanentAddress: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
-}
-export interface IStudent {
-  id: string;
-  name: Name & { id: string };
-  dateOfBirth: string;
-  gender: string;
-  bloodGroup: string;
-  email: string;
-  contactNo: string;
-  emergencyContactNo: string;
-  presentAddress: string;
-  permanentAddress: string;
-  guardian: Guardian & { id: string };
-  localGuardian: LocalGuardian & { id: string };
-  department: string;
-  subject: string;
-  createdAt: string;
-  updatedAt: string;
-}
+
+
 
 export interface Guardian {
   fatherName: string;

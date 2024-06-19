@@ -14,6 +14,14 @@ export const loginDataApi = baseApi.injectEndpoints({
                 data: userData,
             }),
         }),
+        userBanned: build.mutation({
+            query: (userData) => ({
+                url: `${USER_URL}/user-banned/${userData.userId}`,
+                method: "PATCH",
+                data:userData
+            }),
+            invalidatesTags: [tagTypes.allUser],
+        }),
         createUser: build.mutation({
             query: (userData) => ({
                 url: `${USER_URL}/create-user`,
@@ -49,7 +57,7 @@ export const loginDataApi = baseApi.injectEndpoints({
                 };
             },
             transformResponse: (response: any, meta: IMeta) => { return { meta, donner: response, } },
-            providesTags: [tagTypes.user],
+            providesTags: [tagTypes.allUser],
         }),
 
     }),
@@ -59,6 +67,7 @@ export const {
     useCreateUserMutation,
     useCheckAlreadyDonnerMutation,
     useUpdateUserPasswordMutation,
+    useUserBannedMutation,
     useUserQuery,
     useAllUsersQuery,
     useLazyUserQuery,
