@@ -40,7 +40,7 @@ const MyProfileMain = () => {
                 <div className="flex flex-col lg:flex-row justify-center items-center my-5">
                     <Image src={profileImage} alt="profile image" height={120} width={120} />
                 </div>
-                <div className="flex justify-center items-baseline p-4 gap-4">
+                <div className="flex flex-col  md:flex-row justify-center items-baseline p-4 gap-4">
                     <div className="w-full p-2 shadow-sm border-1 border-border-color rounded-md">
                         <h4 className=" font-semibold mb-1">Personal Info</h4>
                         <div className="text-sm">
