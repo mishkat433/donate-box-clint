@@ -78,8 +78,8 @@ const UserRegister = () => {
                         required
                     />
                 </div>
-                <div className="flex gap-6 ">
-                    <div className='mb-3 w-full'>
+                <div className="flex flex-col md:flex-row gap-0 md:gap-6 ">
+                    <div className='mb-0 md:mb-3 w-full'>
                         <FormSelectField
                             name="division"
                             className="w-full"
@@ -88,7 +88,7 @@ const UserRegister = () => {
                             required
                         />
                     </div>
-                    <div className='mb-3 w-full'>
+                    <div className='mb-0 md:mb-3 w-full'>
                         <FormInput
                             name="address"
                             type="text"
@@ -99,8 +99,8 @@ const UserRegister = () => {
                     </div>
 
                 </div>
-                <div className="flex gap-6 ">
-                    <div className='mb-3 w-full'>
+                <div className="flex flex-col md:flex-row gap-0 md:gap-6 ">
+                    <div className='mb-0 md:mb-3 w-full'>
                         <FormSelectField
                             name="gender"
                             className="w-full"
@@ -109,7 +109,7 @@ const UserRegister = () => {
                             required
                         />
                     </div>
-                    <div className='mb-3 w-full'>
+                    <div className='mb-0 md:mb-3 w-full'>
                         <FormSelectField
                             name="bloodGroup"
                             className="w-full"
@@ -119,8 +119,8 @@ const UserRegister = () => {
                         />
                     </div>
                 </div>
-                <div className="flex gap-6 ">
-                    <div className='mb-3 w-full'>
+                <div className="flex flex-col md:flex-row gap-0 md:gap-6 ">
+                    <div className='mb-0 md:mb-3 w-full'>
                         <FormInput
                             name="password"
                             type="password"
@@ -130,7 +130,7 @@ const UserRegister = () => {
                             required
                         />
                     </div>
-                    <div className='mb-3 w-full'>
+                    <div className='mb-0 md:mb-3 w-full'>
                         <FormInput
                             name="confirmPassword"
                             type="password"

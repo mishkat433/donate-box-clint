@@ -29,14 +29,18 @@ const Register = () => {
                     </label>
                 </div>}
 
-            <div className=" min-h-[85vh] overflow-auto duration-150 flex justify-center items-center  my-2 relative ">
+            <div className="h-auto md:h-[85vh] overflow-y-auto overflow-x-hidden duration-150 flex justify-center items-center  relative ">
 
-                <div className={`w-full min-h-full  rounded-md absolute px-2 ${loginManage && "left-0  adminSlide z-10"}`}>
-                    {loginManage && <>{!alreadyDonner ? <UserRegister /> : <AlreadyDonnerRegister />}</>}
+                <div className={`h-[85vh]  rounded-md`}>
+                    <div className={`w-full min-h-full  rounded-md absolute px-2 ${loginManage && "left-0  adminSlide z-10"}`}>
+                        {loginManage && <>{!alreadyDonner ? <UserRegister /> : <AlreadyDonnerRegister />}</>}
+
+                    </div>
                 </div>
-
-                <div className={`w-full min-h-full  rounded-md absolute px-2  ${!loginManage && " userSlide left-0 z-10 "}`}>
-                    {!loginManage && <AdminRegister />}
+                <div className={` h-[85vh]  rounded-md`}>
+                    <div className={`w-full min-h-full  rounded-md absolute px-2  ${!loginManage && " userSlide left-0 z-10 "}`}>
+                        {!loginManage && <AdminRegister />}
+                    </div>
                 </div>
             </div>
         </AuthPage >

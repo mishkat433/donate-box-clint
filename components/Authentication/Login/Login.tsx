@@ -21,11 +21,11 @@ const LoginPage = () => {
 
             <div className=" mt-3 min-h-[60vh]   overflow-hidden py-4 relative ">
 
-                <div className={`w-full h-full rounded-md absolute p-2 ${loginManage && "left-0  adminSlide z-10"}`}>
+                <div className={`w-full h-full rounded-md absolute  ${loginManage && "left-0  adminSlide z-10"}`}>
                     {loginManage && <UserLogin />}
                 </div>
 
-                <div className={`w-full h-full absolute rounded-md  p-2  ${!loginManage && " userSlide left-0 z-10 "}`}>
+                <div className={`w-full h-full absolute rounded-md    ${!loginManage && " userSlide left-0 z-10 "}`}>
                     {!loginManage && <AdminLogin />}
                 </div>
 

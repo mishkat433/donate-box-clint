@@ -78,7 +78,7 @@ const router= useRouter()
                         required
                     />
                 </div>
-                <div className="flex gap-6 ">
+                <div className="flex flex-col md:flex-row gap-0 md:gap-6 ">
                     <div className=' w-full'>
                         <FormSelectField
                             name="division"
@@ -100,7 +100,7 @@ const router= useRouter()
                     </div>
 
                 </div>
-                <div className="flex gap-6 ">
+                <div className="flex flex-col md:flex-row gap-0 md:gap-6  ">
                     <div className=' w-full'>
                         <FormSelectField
                             name="gender"
@@ -120,7 +120,7 @@ const router= useRouter()
                         />
                     </div>
                 </div>
-                <div className="flex gap-6 ">
+                <div className="flex flex-col md:flex-row gap-0 md:gap-6 ">
                     <div className=' w-full'>
                         <FormInput
                             name="password"
