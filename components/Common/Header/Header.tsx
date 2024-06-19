@@ -4,7 +4,7 @@ import Hero from './Navbar/Hero';
 import Navbar from './Navbar/Navbar';
 const Header = () => {
     return (
-        <div className="z-20 sticky -top-10 left-0" >
+        <div className="z-20 sticky -top-1 md:-top-10 left-0" >
             <Hero />
             <Navbar />
         </div>

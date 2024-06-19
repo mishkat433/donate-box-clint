@@ -49,10 +49,10 @@ const BloodDonner = () => {
         <div className="">
             <DonateHeader content={"BE A BLOOD DONNER"} />
 
-            <div className="my-6 p-4 w-4/6 rounded-md mx-auto shadow-md ">
+            <div className="my-6 p-4 w-5/6 rounded-md mx-auto shadow-md border-1 border-border-color">
                 <Form submitHandler={onSubmit} resolver={yupResolver(beDonnerSchema)}>
-                    <div className="flex gap-6 ">
-                        <div className='mb-3 w-full'>
+                    <div className="flex flex-col md:flex-row gap-2 md:gap-6 ">
+                        <div className='mb-0 md:mb-3 w-full'>
                             <FormInput
                                 name="fullName"
                                 type="text"
@@ -62,7 +62,7 @@ const BloodDonner = () => {
                                 required
                             />
                         </div>
-                        <div className='mb-3 w-full'>
+                        <div className='mb-0 md:mb-3 w-full'>
                             <FormInput
                                 name="phoneNumber"
                                 type="number"
@@ -73,8 +73,8 @@ const BloodDonner = () => {
                             />
                         </div>
                     </div>
-                    <div className="flex gap-6 ">
-                        <div className='mb-3 w-full'>
+                    <div className="flex flex-col md:flex-row gap-2 md:gap-6">
+                        <div className='mb-0 md:mb-3 w-full'>
                             <FormSelectField
                                 name="division"
                                 className="w-full"
@@ -83,7 +83,7 @@ const BloodDonner = () => {
                                 required
                             />
                         </div>
-                        <div className='mb-3 w-full'>
+                        <div className='mb-0 md:mb-3 w-full'>
                             <FormSelectField
                                 name="gender"
                                 className="w-full"
@@ -93,8 +93,8 @@ const BloodDonner = () => {
                             />
                         </div>
                     </div>
-                    <div className="flex gap-6 ">
-                        <div className='mb-3 w-full'>
+                    <div className="flex flex-col md:flex-row gap-2 md:gap-6">
+                        <div className='mb-0 md:mb-3 w-full'>
                             <FormSelectField
                                 name="bloodGroup"
                                 className="w-full"
@@ -103,7 +103,7 @@ const BloodDonner = () => {
                                 required
                             />
                         </div>
-                        <div className='mb-3 w-full'>
+                        <div className='mb-0 md:mb-3 w-full'>
                             <FormInput
                                 name="address"
                                 type="text"
