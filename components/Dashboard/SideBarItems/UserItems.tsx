@@ -5,8 +5,7 @@ import Link from "next/link";
 const UserItems = () => {
     return (
         <div>
-        <CommonItems />
-        <div className="scrollbar text-secondary-text" id="style-1">
+            <CommonItems />
             <ul>
                 <li className=" hover:bg-primary-red duration-200 hover:text-white-text rounded-md" >
                     <Link href="/dashboard/all-users" className="py-1">
@@ -16,7 +15,6 @@ const UserItems = () => {
                 </li>
             </ul>
         </div>
-    </div>
     );
 };
 

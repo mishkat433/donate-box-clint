@@ -51,9 +51,13 @@
 .main-menu li {
     display: block;
     width: 250px;
-    padding:8px 10px;
+    /* padding:8px 10px; */
 /* border-top: 1px solid #eee; */
 /* box-shadow: 1px 0 15px rgba(0, 0, 0, 0.07); */
+}
+
+.withoutPadding{
+    /* padding:-8px -10px; */
 }
 
 .main-menu li>a {
@@ -70,6 +74,7 @@
     font-family: 'Strait', sans-serif;
     /* padding: 5px 2px; */
 }
+
 .main-menu .nav-text {
     display: table-cell;
     vertical-align: middle;

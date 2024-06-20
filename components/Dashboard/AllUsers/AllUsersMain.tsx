@@ -7,13 +7,13 @@ import SearchBar from "../../ReusableComponent/Searchbar";
 import { RiAddFill, RiUserSmileFill } from "react-icons/ri";
 import { useDebounced } from "../../../redux/hooks";
 import Dropdown from "../../ReusableComponent/Dropdown/Dropdown";
-import { sortByOptions, sortOrderOptions, dataLimitOptions } from "./Options";
+import { sortByOptions, sortOrderOptions, dataLimitOptions } from "../../../lib/Options";
 import CommonTable from "../../ReusableComponent/Table/CommonTable";
 import toast from "react-hot-toast";
 
 
 const AllUsersMain = () => {
-    const columns = ['Image','User Id', 'Name','Phone',"Role",'Division', 'Address','status','action'];
+    const columns = ['Image','User Id', 'Name','Phone',"Role", 'BG','Gender','Division', 'Address','Create Date','action'];
 
     const [userBanned,{}]=useUserBannedMutation()
 
@@ -55,7 +55,7 @@ const AllUsersMain = () => {
 
 
     const { data, isLoading, isError, error }: any = useAllUsersQuery({ ...query })
-
+    console.log(data);
 
     if (isLoading) {
         return <DotLoading />
@@ -78,11 +78,11 @@ const AllUsersMain = () => {
                 <div className="w-3/5 text-primary-text"><SearchBar searchInput={setSearchTerm} /></div>
                 <Dropdown options={sortByOptions} onSelect={setSortBy} placeholder="Sort By :" defaultValue={sortBy} hoverHeight={"group-hover:h-[111px]"} />
                 <Dropdown options={sortOrderOptions} onSelect={setSortOrder} placeholder="Sort Order :" defaultValue={sortOrder} hoverHeight={"group-hover:h-[74px]"} />
-               
             </div>
 
             <div className="shadow-md rounded-md">
-                 <CommonTable columns={columns} data={data?.donner?.data} isActionBanned={true} bannedSetter={bannedHandle} isActionDelete={true} />
+                 {/* <CommonTable columns={columns} data={data?.donner?.data} isActionBanned={true} bannedSetter={bannedHandle} isActionDelete={true} /> */}
+                 <CommonTable columns={columns} data={data?.donner?.data}/>
             </div>
             <div className="flex justify-between gap-3 mt-2">
             <div className="bg-primary-red rounded-md text-white-text">

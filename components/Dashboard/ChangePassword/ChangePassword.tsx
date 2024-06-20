@@ -23,11 +23,10 @@ const ChangePassword = () => {
 
     const onPasswordChange: SubmitHandler<FormValues> = async (data: any) => {
         try {
-                data.userId = userInfo.userId ? userInfo?.userId : userInfo?.adminId
+            data.userId = userInfo.userId ? userInfo?.userId : userInfo?.adminId
             delete (data.confirmPassword)
-
             const res = await changePassword({ ...data }).unwrap();
-            if(res.success) {
+            if (res.success) {
                 toast.success(res.message)
             }
         }
@@ -48,10 +47,10 @@ const ChangePassword = () => {
             </div>
 
             <div className="border-1 border-border-color shadow-md p-2 mt-4 rounded-md flex py-5">
-                <div className="md:w-3/5 hidden md:block">
+                {/* <div className="md:w-3/5 hidden md:block">
                     image is coming
-                </div>
-                <div className="w-full md:w-2/5">
+                </div> */}
+                <div className="w-full md:w-2/5 mx-auto">
                     <div>
                         <Form submitHandler={onPasswordChange} resolver={yupResolver(updatePasswordSchema)}>
                             <div className='mb-0 md:mb-3'>
@@ -79,13 +78,13 @@ const ChangePassword = () => {
                                     name="confirmPassword"
                                     type="password"
                                     className=" w-full"
-                                    label="Confirm Password"
+                                    label="Confirm new password"
                                     placeholder="Retype your new password"
                                     required
                                 />
                             </div>
 
-                            <button className="button-transition primary-red-button py-2 px-2.5 w-full mt-4">Update</button>
+                            <button className="button-transition primary-red-button py-2 px-2.5 w-full mt-4">Submit</button>
                         </Form>
                     </div>
                 </div>

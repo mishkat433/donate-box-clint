@@ -15,7 +15,7 @@ export default function RootLayout({ children, }) {
     <html lang="en">
       <body className='font-mulish'>
         <Providers>
-          <Suspense fallback={<DotLoading size="lg" text="primary-text" />}>
+          <Suspense fallback={<DotLoading size="lg" text="primary-text" height="h-[100vh]" />}>
             {children}
           </Suspense>
         </Providers>

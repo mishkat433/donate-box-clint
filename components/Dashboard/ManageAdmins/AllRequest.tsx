@@ -6,7 +6,7 @@ import DotLoading from "../../ReusableComponent/DotLoading";
 import SearchBar from "../../ReusableComponent/Searchbar";
 import { useState } from "react";
 import { useDebounced } from "../../../redux/hooks";
-import { dataLimitOptions, sortByOptions, sortOrderOptions } from "../AllUsers/Options";
+import { dataLimitOptions, sortByOptions, sortOrderOptions } from "../../../lib/Options";
 import Dropdown from "../../ReusableComponent/Dropdown/Dropdown";
 import CommonTable from "../../ReusableComponent/Table/CommonTable";
 

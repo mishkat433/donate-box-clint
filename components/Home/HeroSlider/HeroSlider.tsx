@@ -27,7 +27,7 @@ const HeroSlider = () => {
 
 
     if (isLoading) {
-        return <DotLoading size="2xl" text="primary-red" height="56" />
+        return <DotLoading size="2xl" text="primary-red" height="h-[50vh]" />
     }
 
     if (isError) {

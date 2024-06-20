@@ -5,7 +5,7 @@ import { useDebounced } from "../../../redux/hooks";
 import DotLoading from "../../ReusableComponent/DotLoading";
 import { RiAddFill, RiUserSmileFill } from "react-icons/ri";
 import Dropdown from "../../ReusableComponent/Dropdown/Dropdown";
-import { dataLimitOptions, sortByOptions, sortOrderOptions } from "../AllUsers/Options";
+import { dataLimitOptions, sortByOptions, sortOrderOptions } from "../../../lib/Options";
 import SearchBar from "../../ReusableComponent/Searchbar";
 import CommonTable from "../../ReusableComponent/Table/CommonTable";
 import { useGetAllAdminsQuery } from "../../../redux/api/adminApi";

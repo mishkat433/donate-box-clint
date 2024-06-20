@@ -47,6 +47,7 @@ const DonateOrGet = () => {
         }
         divisionGroup.donner?.push(record);
     });
+ 
     return (
         <section className="py-10 bg-color-bg2 bg-no-repeat bg-cover ">
             <div className="  py-5  bg-no-repeat bg-center bg-cover ">

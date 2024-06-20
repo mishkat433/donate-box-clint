@@ -8,7 +8,7 @@ const SuperAdminItems = () => {
   
     return (
 
-        <div className="scrollbar text-secondary-text" id="style-1">
+        <div>
             <AdminItems />
             <ul>
                 <li className="  duration-200 text-secondary-text rounded-md">

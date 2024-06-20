@@ -1,7 +1,10 @@
-import { RiArrowDownSFill } from "react-icons/ri";
+import { RiArrowDownSFill, RiVerifiedBadgeLine } from "react-icons/ri";
 import Dropdown from "../Dropdown/Dropdown";
 import { USER_ROLE } from "../../../constants/role";
 import { IAdmin } from "../../../types";
+import Image from "next/image";
+import userAvatar from "../../../public/assets/userAvatar.png";
+import { format } from 'date-fns';
 
 type tableType = {
     columns: string[];
@@ -14,7 +17,8 @@ type tableType = {
 }
 
 
-const CommonTable = ({ columns, data, isActionEdit, isActionBanned, isActionDelete, bannedSetter, deleteSetter }: tableType) => {
+const CommonTable = ({ columns, data }: tableType) => {
+
 
     return (
         <div className="">
@@ -27,19 +31,21 @@ const CommonTable = ({ columns, data, isActionEdit, isActionBanned, isActionDele
                     </tr>
                 </thead>
                 <tbody>
-                    {data?.map((tData:IAdmin | any) =>
+                    {data?.map((tData: IAdmin | any) =>
                         <tr key={tData?.id} className={`text-center `}>
-                            <td>
-                                {tData?.profileImage ? tData?.profileImage : "not set"}
-                            </td>
-                            <td> {tData?.adminId ? tData?.adminId : tData?.userId} </td>
-                            <td> {tData?.fullName} </td>
-                            <td> {tData?.phoneNumber} </td>
-                            <td> {tData?.role} </td>
-                            <td> {tData?.division} </td>
-                            <td> {tData?.address}</td>
-                            {tData?.role === USER_ROLE.USER ? <td>{tData?.verified ? "Verified" : null}</td> : <td className={`${tData?.status==="PENDING"?"text-primary-red":"text-success"}`}>{tData?.status!=="PENDING"&& tData?.status}</td>}
-                            <td className="flex gap-2">
+                            {columns.includes("Image") && <td className={``}> <Image className={`w-9 `} src={tData?.profileImage? tData?.profileImage:userAvatar} alt="User Image" height={40} width={40}/> </td>}
+                            {columns.includes("User Id") && <td  className={`text-nowrap`}>{tData?.userId}</td>}
+                            {columns.includes("Admin Id") && <td  className={`text-nowrap`}>{tData?.adminId}</td>}
+                            {columns.includes("Name") && <td className={`flex justify-center mt-2 items-center gap-2`}>{tData?.fullName} {tData?.verified ? <RiVerifiedBadgeLine className="text-success" /> :null}</td>}
+                            {columns.includes("Phone") && <td  className={`text-nowrap`}>{tData?.phoneNumber}</td>}
+                            {columns.includes("Role") && <td>{tData?.role} </td>}
+                            {columns.includes("BG") && <td>{tData?.bloodGroup} </td>}
+                            {columns.includes("Gender") && <td>{tData?.gender} </td>}
+                            {columns.includes("Division") && <td>{tData?.division} </td>}
+                            {columns.includes("Address") && <td>{tData?.address} </td>}
+                            {columns.includes("Create Date") && <td className={`text-nowrap`}>{format(new Date(tData?.createdAt), 'dd-MMM-yyyy')} </td>}
+
+                            {/* <td className="flex gap-2">
                                 {isActionBanned &&
                                     <div className=" text-sm relative group ">
                                         <button className="flex items-center border-1 border-primary-red p-1 rounded-md" >{tData?.isBanned ? "Banned" : "Un Banned"} <RiArrowDownSFill className="text-xl text-primary-red" /></button>
@@ -59,7 +65,7 @@ const CommonTable = ({ columns, data, isActionEdit, isActionBanned, isActionDele
                                         <button className="flex items-center border-1 border-primary-red p-1 rounded-md" >Edit</button>
                                     </div>
                                 }
-                            </td>
+                            </td> */}
                         </tr>
                     )}
                 </tbody>
