@@ -7,6 +7,8 @@ import { SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
 import { RiAddFill, RiUserSmileFill } from "react-icons/ri";
 import { updatePasswordSchema } from "../../../schemas/user";
+import { getUserInfo } from "../../../services/auth.service";
+import { useChangePasswordMutation } from "../../../redux/api/userApi";
 
 type FormValues = {
     phoneNumber: string;
@@ -16,10 +18,18 @@ type FormValues = {
 
 const ChangePassword = () => {
 
+    const [changePassword] = useChangePasswordMutation()
+    const userInfo: any = getUserInfo()
+
     const onPasswordChange: SubmitHandler<FormValues> = async (data: any) => {
         try {
-            console.log(data)
-            toast.success("password changed functionality under development")
+                data.userId = userInfo.userId ? userInfo?.userId : userInfo?.adminId
+            delete (data.confirmPassword)
+
+            const res = await changePassword({ ...data }).unwrap();
+            if(res.success) {
+                toast.success(res.message)
+            }
         }
         catch (err) {
             toast.error(err.message)
@@ -37,7 +47,7 @@ const ChangePassword = () => {
                 {/* <label htmlFor="openModal" className="btn"><RiAddFill /> Edit Profile</label> */}
             </div>
 
-            <div className="border-1 border-border-color shadow-md p-2 mt-4 rounded-md flex ">
+            <div className="border-1 border-border-color shadow-md p-2 mt-4 rounded-md flex py-5">
                 <div className="md:w-3/5 hidden md:block">
                     image is coming
                 </div>

@@ -1,3 +1,4 @@
+import { JwtPayload } from "jwt-decode";
 import { USER_ROLE } from "../constants/role";
 
 export interface IMeta {
@@ -35,7 +36,7 @@ export interface IBanner {
 export interface IAdmin {
   _id: string;
   id: string;
-  adminId:string;
+  adminId: string;
   fullName: string;
   gender: string;
   division: string;
@@ -52,3 +53,10 @@ export interface IAdmin {
   __v: number;
 }
 
+export interface UserInfoType {
+  exp: number;
+  iat: number;
+  role: USER_ROLE
+  userId?: string;
+  adminId?: string
+}

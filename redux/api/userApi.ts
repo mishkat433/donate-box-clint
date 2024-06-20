@@ -14,6 +14,13 @@ export const loginDataApi = baseApi.injectEndpoints({
                 data: userData,
             }),
         }),
+    changePassword: build.mutation({
+            query: (userData) => ({
+                url: `${USER_URL}/change-password/${userData.userId}`,
+                method: "PATCH",
+                data: userData,
+            }),
+        }),
         userBanned: build.mutation({
             query: (userData) => ({
                 url: `${USER_URL}/user-banned/${userData.userId}`,
@@ -67,9 +74,11 @@ export const {
     useCreateUserMutation,
     useCheckAlreadyDonnerMutation,
     useUpdateUserPasswordMutation,
+    useChangePasswordMutation,
     useUserBannedMutation,
     useUserQuery,
     useAllUsersQuery,
     useLazyUserQuery,
+    
 
 } = loginDataApi;
