@@ -19,8 +19,12 @@ body {
   scroll-behavior: smooth;
 }
 
+.scrollNone::-webkit-scrollbar {
+  display: none;
+}
 ::-webkit-scrollbar {
   width: 5px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -29,7 +33,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #f84420;
+  background: #515151;
   border-radius: 5px;
 }
 

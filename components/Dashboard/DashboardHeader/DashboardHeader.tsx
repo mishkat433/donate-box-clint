@@ -20,7 +20,7 @@ const DashboardHeader = () => {
 
 
   return (
-    <div className="p-2 shadow-md w-full rounded-md   ">
+    <div className="p-2 shadow-md w-full rounded-md  ">
       <div className=" md:container mx-auto flex justify-between items-center gap-2 px-4">
         <div className="text-lg flex items-center gap-4">
         <Link href="/dashboard"> <RiHome3Line />  </Link>

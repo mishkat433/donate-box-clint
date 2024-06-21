@@ -33,7 +33,7 @@ const MyProfileMain = () => {
                     <RiUserSmileFill className="text-primary-red" />
                     <h3>My Profile</h3>
                 </div>
-                <label htmlFor="openModal" className="btn"><RiAddFill /> Edit Profile</label>
+                <label htmlFor="editProfile" className="btn"><RiAddFill /> Edit Profile</label>
             </div>
 
             <div className="shadow-md rounded-md border-1 border-border-color">
@@ -62,14 +62,9 @@ const MyProfileMain = () => {
                         </div>
                     </div>
                 </div>
-
-
             </div>
 
-
-
-
-            <Modal>
+            <Modal id="editProfile" title="Edit Profile">
                 <h1>I am testing modal</h1>
             </Modal>
         </div>

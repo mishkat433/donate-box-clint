@@ -14,7 +14,7 @@ export const loginDataApi = baseApi.injectEndpoints({
                 data: userData,
             }),
         }),
-    changePassword: build.mutation({
+        changePassword: build.mutation({
             query: (userData) => ({
                 url: `${USER_URL}/change-password/${userData.userId}`,
                 method: "PATCH",
@@ -25,7 +25,7 @@ export const loginDataApi = baseApi.injectEndpoints({
             query: (userData) => ({
                 url: `${USER_URL}/user-banned/${userData.userId}`,
                 method: "PATCH",
-                data:userData
+                data: userData
             }),
             invalidatesTags: [tagTypes.allUser],
         }),
@@ -54,7 +54,7 @@ export const loginDataApi = baseApi.injectEndpoints({
             transformResponse: (response: any, meta: IMeta) => { return { meta, donner: response, } },
             providesTags: [tagTypes.user],
         }),
-        
+
         allUsers: build.query({
             query: (arg: Record<string, any>) => {
                 return {
@@ -66,7 +66,13 @@ export const loginDataApi = baseApi.injectEndpoints({
             transformResponse: (response: any, meta: IMeta) => { return { meta, donner: response, } },
             providesTags: [tagTypes.allUser],
         }),
-
+        userDelete: build.mutation({
+            query: (id) => ({
+                url: `${USER_URL}/${id}`,
+                method: "DELETE"
+            }),
+            invalidatesTags: [tagTypes.allUser],
+        }),
     }),
 });
 
@@ -79,6 +85,5 @@ export const {
     useUserQuery,
     useAllUsersQuery,
     useLazyUserQuery,
-    
-
+    useUserDeleteMutation,
 } = loginDataApi;

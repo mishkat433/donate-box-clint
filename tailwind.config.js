@@ -44,6 +44,8 @@ module.exports = {
       'error-color': '#F43F5E',
       'border-color': '#E5E7EB',
       'success': '#1ABCFD',
+      'view': '#349168',
+      'edit': '#4089B4',
       'error-bg': 'rgba(255, 0, 0, 0.1)',
       "warning": "#FFBE00",
     },

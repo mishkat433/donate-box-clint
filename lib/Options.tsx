@@ -1,4 +1,5 @@
 export const  sortByOptions = [
+    { value: 'userId', label: 'User Id' },
     { value: 'fullName', label: 'Name' },
     { value: 'phoneNumber', label: 'Phone' },
     { value: 'division', label: 'Division' }
