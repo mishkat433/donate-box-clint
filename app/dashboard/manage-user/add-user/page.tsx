@@ -1,9 +1,9 @@
-import AddBanner from "../../../../components/Dashboard/ManageBanner/AddBanner";
+import AddUser from "../../../../components/Dashboard/ManageUsers/AddUser/AddUser";
 
 const page = () => {
     return (
         <div className="mt-5 rounded-md">
-        <AddBanner/>     
+        <AddUser/>
         </div>
     );
 };

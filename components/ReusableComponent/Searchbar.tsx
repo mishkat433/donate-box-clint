@@ -1,9 +1,10 @@
 
 interface setInput{
     searchInput: (value: string) => void;
+    placeholderText?:string;
 }
 
-const SearchBar = ({ searchInput }:setInput) => {
+const SearchBar = ({ searchInput,placeholderText='Find donner by District, Name or phone...' }:setInput) => {
     return (
         <div className='w-auto mx-auto border-primary-text focus-within:border-primary-red border-opacity-35 rounded-md border-1 '>
             <div className="flex items-center w-full h-10 rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
@@ -18,7 +19,7 @@ const SearchBar = ({ searchInput }:setInput) => {
                     className="peer h-full w-full outline-none text-sm text-gray-700 px-2"
                     type="text"
                     id="search"
-                    placeholder="Find donner by District, Name or phone..." />
+                    placeholder={placeholderText} />
 
             </div>
         </div>

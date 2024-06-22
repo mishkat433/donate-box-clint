@@ -37,10 +37,18 @@ const HeroSlider = () => {
     return (
         <div className="slider-container SliderArrow ">
             <Slider {...settings}>
-                {data?.data?.map((slide:any, i:number) => (
-                    <div key={i}>
-                        <Image className="w-full h-[40vh] md:h-[60vh] lg:h-[80vh]" src={slide?.path} alt="" width={500} height={500} />
-                    </div>
+                {data?.data?.map((slide: any, i: number) => (
+                    slide.showing && (
+                        <div key={i}>
+                            <Image
+                                className="w-full h-[40vh] md:h-[60vh] lg:h-[80vh]"
+                                src={slide?.path}
+                                alt=""
+                                width={500}
+                                height={500}
+                            />
+                        </div>
+                    )
                 ))}
             </Slider>
         </div>

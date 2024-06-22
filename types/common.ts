@@ -3,6 +3,7 @@ import { USER_ROLE } from "../constants/role";
 import { BLOOD_GROUP_NAME } from "../constants/bloodGroup";
 import { GENDER } from "../constants/gender";
 import { ROUTER_TYPE } from "next/dist/build/utils";
+import { DIVISION_NAME } from "../constants/division";
 
 export interface IMeta {
   limit: number;
@@ -48,12 +49,12 @@ export interface IUser {
   isBloodDonner: boolean
   phoneNumber: string;
   profileImage: any
-  role:string;
-  updatedAt:string;
-  userId:string;
-  verified:boolean
-  __v:number;
-  _id:string;
+  role: string;
+  updatedAt: string;
+  userId: string;
+  verified: boolean
+  __v: number;
+  _id: string;
 }
 
 export interface IAdmin {
@@ -82,4 +83,28 @@ export interface UserInfoType {
   role: USER_ROLE
   userId?: string;
   adminId?: string
+}
+
+
+export interface IBanner {
+
+  admin_Data: {
+    address: string
+    adminId: string
+    bloodGroup: BLOOD_GROUP_NAME;
+    division: DIVISION_NAME
+    fullName: string
+    phoneNumber: string
+    status: string
+    __v: number;
+    _id: string
+  };
+  createdAt: string;
+  creatorId: string;
+  description: string;
+  path: string;
+  showing: boolean
+  updatedAt: string;
+  __v: number;
+  _id: string;
 }

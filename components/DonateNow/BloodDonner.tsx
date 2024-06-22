@@ -12,12 +12,18 @@ import FormSelectField from '../ReusableComponent/Form/FormSelectField';
 import { bloodGroupOptions, divisionOptions, genderOptions } from '../../constants/global';
 import { useAddDonnerMutation } from '../../redux/api/donnerApi';
 import { toast } from 'react-hot-toast';
+import { BLOOD_GROUP_NAME } from '../../constants/bloodGroup';
+import { GENDER } from '../../constants/gender';
 // import { useRouter } from 'next/navigation';
 
 
 type FormValues = {
+    fullName: string;
     phoneNumber: string;
-    password: string;
+    bloodGroup: BLOOD_GROUP_NAME;
+    division: string;
+    gender: GENDER;
+    address: string;
 };
 type propsType={
     heading?: boolean;
@@ -51,7 +57,7 @@ const BloodDonner = ({heading=true}:propsType) => {
         <div className="">
            {heading && <DonateHeader content={"BE A BLOOD DONNER"} />}
 
-            <div className="my-6 p-4 w-5/6 rounded-md mx-auto shadow-md border-1 border-border-color">
+            <div className="my-6 p-4  rounded-md mx-auto shadow-md border-1 border-border-color">
                 <Form submitHandler={onSubmit} resolver={yupResolver(beDonnerSchema)}>
                     <div className="flex flex-col md:flex-row gap-2 md:gap-6 ">
                         <div className='mb-0 md:mb-3 w-full'>
@@ -117,7 +123,7 @@ const BloodDonner = ({heading=true}:propsType) => {
                         </div>
                     </div>
                     <label htmlFor="createUser" ><button className="button-transition primary-red-button py-2 px-2.5 w-full mt-4"> Submit</button></label>
-                   
+                
                 </Form>
             </div>
         </div>

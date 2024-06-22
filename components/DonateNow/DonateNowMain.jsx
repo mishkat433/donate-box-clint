@@ -15,7 +15,7 @@ const DonateNowMain = () => {
         <div>
             <TabMenu type={selectType} setType={setSelectType} />
             <div className="pt-3 container mx-auto py-2 animate-fade-down animate-once ">
-                {selectType === 'blood' && <div><BloodDonner /> </div>}
+                {selectType === 'blood' && <div className="w-4/5 mx-auto"><BloodDonner /> </div>}
                 {selectType === 'fund' && <div><FundDonner /> </div>}
                 {selectType === 'Volunteer' && <div> {loginCheck ? <Volunteer /> : <LogInButton />} </div>}
             </div>

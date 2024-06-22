@@ -16,47 +16,45 @@ export const bannerApi = baseApi.injectEndpoints({
           params: arg,
         };
       },
-
-      // providesTags: [tagTypes.banner],
+      providesTags: [tagTypes.banner],
     }),
-    // // get single room
-    // room: build.query({
-    //   query: (id: string | string[] | undefined) => ({
-    //     url: `${BANNER_URL}/${id}`,
-    //     method: "GET",
-    //   }),
-    //   providesTags: [tagTypes.room],
-    // }),
-    // // create a new room
-    // addRoom: build.mutation({
-    //   query: (data) => ({
-    //     url: BANNER_URL,
-    //     method: "POST",
-    //     data,
-    //   }),
-    //   invalidatesTags: [tagTypes.room],
-    // }),
-    // // update room
-    // updateRoom: build.mutation({
-    //   query: (data) => ({
-    //     url: `${BANNER_URL}/${data.id}`,
-    //     method: "PATCH",
-    //     data: data.body,
-    //   }),
-    //   invalidatesTags: [tagTypes.room],
-    // }),
-    // // delete room
-    // deleteRoom: build.mutation({
-    //   query: (id) => ({
-    //     url: `${BANNER_URL}/${id}`,
-    //     method: "DELETE",
-    //   }),
-    //   invalidatesTags: [tagTypes.room],
-    // }),
+
+    // create a new banner
+    addBanner: build.mutation({
+      query: (data) => ({
+        url: `${BANNER_URL}/create-banner`,
+        method: "POST",
+        data,
+      }),
+      invalidatesTags: [tagTypes.banner],
+    }),
+
+    // banner show controller
+    showControl: build.mutation({
+      query: (data) => ({
+        url: `${BANNER_URL}/${data?.bannerId}`,
+        method: "PATCH",
+        data,
+      }),
+      invalidatesTags: [tagTypes.banner],
+    }),
+
+    // delete Banner
+    bannerDelete: build.mutation({
+      query: (id) => ({
+        url: `${BANNER_URL}/${id}`,
+        method: "DELETE"
+      }),
+      invalidatesTags: [tagTypes.banner],
+    }),
+
   }),
 });
 
 export const {
-  useBannersQuery
+  useBannersQuery,
+  useBannerDeleteMutation,
+  useAddBannerMutation,
+  useShowControlMutation,
 
 } = bannerApi;

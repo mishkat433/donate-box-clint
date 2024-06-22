@@ -1,8 +1,9 @@
+import AllBanners from "../../../../components/Dashboard/ManageBanner/AllBanners";
 
 const page = () => {
     return (
         <div className="mt-5 rounded-md">
-        all banner page under developement      
+            <AllBanners />
         </div>
     );
 };

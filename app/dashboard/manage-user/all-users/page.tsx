@@ -1,4 +1,4 @@
-import AllUsersMain from "../../../components/Dashboard/AllUsers/AllUsersMain";
+import AllUsersMain from "../../../../components/Dashboard/ManageUsers/AllUsers/AllUsersMain";
 
 const page = () => {
     return (

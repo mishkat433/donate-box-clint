@@ -1,4 +1,4 @@
-import { IAdmin, IUser } from "../../../types";
+import { IAdmin, IUser } from "../../../../types";
 import { format } from 'date-fns';
 
 interface ViewUserProps {
