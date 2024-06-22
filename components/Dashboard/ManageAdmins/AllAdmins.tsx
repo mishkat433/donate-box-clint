@@ -78,7 +78,7 @@ const AllAdmins = () => {
             </div>
 
             <div className="shadow-md rounded-md">
-                <CommonTable columns={columns} data={data?.admins?.data} isActionBanned={true} bannedSetter={bannedHandle} isActionDelete={true} />
+                <CommonTable columns={columns} data={data?.admins?.data} />
             </div>
             <div className="flex justify-between gap-3 mt-2">
                 <div className="bg-primary-red rounded-md text-white-text">

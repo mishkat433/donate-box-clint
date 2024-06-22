@@ -1,5 +1,8 @@
 import { JwtPayload } from "jwt-decode";
 import { USER_ROLE } from "../constants/role";
+import { BLOOD_GROUP_NAME } from "../constants/bloodGroup";
+import { GENDER } from "../constants/gender";
+import { ROUTER_TYPE } from "next/dist/build/utils";
 
 export interface IMeta {
   limit: number;
@@ -31,6 +34,26 @@ export type IGenericErrorMessage = {
 export interface IBanner {
   _id: string;
 
+}
+
+export interface IUser {
+  address: string;
+  bloodGroup: BLOOD_GROUP_NAME
+  createdAt: string;
+  division: string;
+  fullName: string;
+  gender: string;
+  id: string;
+  isBanned: boolean
+  isBloodDonner: boolean
+  phoneNumber: string;
+  profileImage: any
+  role:string;
+  updatedAt:string;
+  userId:string;
+  verified:boolean
+  __v:number;
+  _id:string;
 }
 
 export interface IAdmin {

@@ -12,19 +12,21 @@ import FormSelectField from '../ReusableComponent/Form/FormSelectField';
 import { bloodGroupOptions, divisionOptions, genderOptions } from '../../constants/global';
 import { useAddDonnerMutation } from '../../redux/api/donnerApi';
 import { toast } from 'react-hot-toast';
-import { useRouter } from 'next/navigation';
-import { getNewAccessToken } from '../../services/auth.service';
+// import { useRouter } from 'next/navigation';
 
 
 type FormValues = {
     phoneNumber: string;
     password: string;
 };
+type propsType={
+    heading?: boolean;
+}
 
-const BloodDonner = () => {
+const BloodDonner = ({heading=true}:propsType) => {
     const [addDonner] = useAddDonnerMutation()
 
-    const router = useRouter()
+    // const router = useRouter()
 
     const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
         try {
@@ -33,7 +35,7 @@ const BloodDonner = () => {
             const res = await addDonner({ ...data }).unwrap();
             if (res?.success) {
                 toast.success(res?.message)
-                router.push("/")
+                // router.push("/")
             }
         }
         catch (err: any) {
@@ -47,7 +49,7 @@ const BloodDonner = () => {
 
     return (
         <div className="">
-            <DonateHeader content={"BE A BLOOD DONNER"} />
+           {heading && <DonateHeader content={"BE A BLOOD DONNER"} />}
 
             <div className="my-6 p-4 w-5/6 rounded-md mx-auto shadow-md border-1 border-border-color">
                 <Form submitHandler={onSubmit} resolver={yupResolver(beDonnerSchema)}>
@@ -114,7 +116,8 @@ const BloodDonner = () => {
                             />
                         </div>
                     </div>
-                    <button className="button-transition primary-red-button py-2 px-2.5 w-full mt-4">Submit</button>
+                    <label htmlFor="createUser" ><button className="button-transition primary-red-button py-2 px-2.5 w-full mt-4"> Submit</button></label>
+                   
                 </Form>
             </div>
         </div>

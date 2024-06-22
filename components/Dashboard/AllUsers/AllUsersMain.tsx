@@ -1,15 +1,17 @@
 "use client"
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useAllUsersQuery, useUserBannedMutation,useUserDeleteMutation } from "../../../redux/api/userApi";
 import DotLoading from "../../ReusableComponent/DotLoading";
 import SearchBar from "../../ReusableComponent/Searchbar";
-import { RiAddFill, RiUserSmileFill } from "react-icons/ri";
+import { RiUserAddLine, RiUserSmileFill } from "react-icons/ri";
 import { useDebounced } from "../../../redux/hooks";
 import Dropdown from "../../ReusableComponent/Dropdown/Dropdown";
 import { sortByOptions, sortOrderOptions, dataLimitOptions } from "../../../lib/Options";
 import CommonTable from "../../ReusableComponent/Table/CommonTable";
 import Swal from 'sweetalert2';
+import Modal from "../../ReusableComponent/Modal";
+import BloodDonner from "../../DonateNow/BloodDonner";
 
 
 const AllUsersMain = () => {
@@ -17,13 +19,14 @@ const AllUsersMain = () => {
 
     const [userBanned, { }] = useUserBannedMutation()
     const [userDelete, { }] = useUserDeleteMutation()
+    const createUserRef = useRef(null);
 
     const query: Record<string, any> = {};
 
     const [page, setPage] = useState<number>(1);
     const [limit, setLimit] = useState<number>(10);
     const [sortBy, setSortBy] = useState<string>("");
-    const [sortOrder, setSortOrder] = useState<string>("desc");
+    const [sortOrder, setSortOrder] = useState<string>("asc");
     const [searchTerm, setSearchTerm] = useState<string>("");
 
     query["limit"] = limit;
@@ -88,7 +91,7 @@ const AllUsersMain = () => {
                             title: "Delete!",
                             text:`${res?.data?.message}`,
                             icon: "success",
-                            timer: 3000
+                            timer: 1500
                         });
                     }
                 }
@@ -100,7 +103,6 @@ const AllUsersMain = () => {
     }
 
     const { data, isLoading, isError, error }: any = useAllUsersQuery({ ...query })
-    // console.log(data);
 
     if (isLoading) {
         return <DotLoading />
@@ -116,7 +118,7 @@ const AllUsersMain = () => {
                     <RiUserSmileFill className="text-primary-red" />
                     <h3>All Users</h3>
                 </div>
-                <button className="p-1.5 primary-red-button flex items-center gap-1"><RiAddFill /> Create New</button>
+                <label htmlFor="createUser" className="py-1.5 px-2 cursor-pointer primary-red-button flex items-center gap-1"><RiUserAddLine />Create New Donner</label>
             </div>
 
             <div className=" p-2 flex justify-between items-center gap-2 rounded-md bg-primary-red text-white-text shadow-md mb-5">
@@ -141,9 +143,13 @@ const AllUsersMain = () => {
                     <button onClick={() => setPage(page + 1)} className={`join-item btn hover:bg-primary-red text-white-text bg-primary-red  `} disabled={data?.donner?.meta?.nextPages === null ? true : false}>»</button>
                 </div>
             </div>
-            
+            <Modal id="createUser" title="Create User" width="max-w-[60rem]"  >
+               <BloodDonner heading={false}/>
+            </Modal>
+
         </div>
     );
 };
 
 export default AllUsersMain;
+

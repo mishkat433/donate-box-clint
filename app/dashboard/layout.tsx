@@ -35,7 +35,7 @@ export default function DashboardLayout({ children, }: Readonly<{ children: Reac
                         <Sidebar sideView={sideView} setSideView={setSideView} />
                     </div>
                 </div>
-                <div className='p-2  md:w-4/5'>
+                <div className={`p-2   ${sideView ? "md:w-4/5" : "w-full"}`}>
                     <div className={` sticky top-0 left-0 z-10 bg-white-text  border-1 border-border-color`}>
                         <DashboardHeader /> 
                     </div>

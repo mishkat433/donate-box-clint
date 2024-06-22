@@ -8,8 +8,8 @@ export const genderOptions = [
     value: "Female",
   },
   {
-    label: "Others",
-    value: "Others",
+    label: "Other",
+    value: "Other",
   },
 ];
 
