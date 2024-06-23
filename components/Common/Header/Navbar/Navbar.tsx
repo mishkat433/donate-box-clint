@@ -55,14 +55,14 @@ const Navbar = () => {
             <div className="w-12 mask mask-hexagon">
               {/* {userData?.profileImage !== null ? */}
               {/* <Image src={userData?.profileImage} width={100} height={100} alt="profile" /> */}
-              <Image src={profile} width={100} height={100} alt="profile" />
+              <Image src={profile} width={80} height={80} alt="profile" />
             </div>
           </div>
           <div className={`flex flex-col absolute gap-[2px] z-20  -right-3 bg-primary-red text-center rounded-md md:w-14 lg:w-40 px-1 duration-300 overflow-hidden h-0  group-hover:h-[165px] `}>
             <div className="p-[1px] text-white-text duration-300  py-1">
+              <p className="text-xs mt-1">({data?.data[0]?.role})</p>
               <strong className="">{data?.data[0]?.fullName}</strong>
               <p className="text-xs">{data?.data[0]?.phoneNumber}</p>
-              <p className="text-xs">({data?.data[0]?.role})</p>
 
               <hr className="mt-1 bg-secondary-text" />
             </div>
@@ -78,7 +78,7 @@ const Navbar = () => {
 
   return (
     <header className="font-mulish bg-[#ffffff] shadow-sm  mb-1" >
-      <div className="container flex justify-between items-center mx-auto py-2">
+      <div className="container flex justify-between items-center mx-auto py-1">
 
         <Logo donate={'text-primary-red'} box={'text-primary-text'} />
 

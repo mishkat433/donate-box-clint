@@ -61,8 +61,8 @@ const DonateOrGet = () => {
                             <div className="flex justify-between items-center gap-2 ">
                                 {[...Array(5)].map((sk, i) => <div key={i} className="bg-[#f8cfa0] rounded-md" > <SkeletonLoading /></div>)}
                             </div>}
-                        {isError && <div className="">{error?.message}</div>}
-                        {groupedData.length === 0 && !isLoading && <p className="text-center text-lg text-primary-red">Donner not found</p>}
+                        {isError && <div className="text-center text-lg text-primary-red">{error?.message}, server error</div>}
+                        {groupedData.length === 0 && !isLoading  && !error?.message && <p className="text-center text-lg text-primary-red">Donner not found</p>}
                         {groupedData?.map((el, i) =>
                             <div className=" border-error-color rounded my-3 p-1 " key={i}>
                                 <div key={i} className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3 justify-center items-center">

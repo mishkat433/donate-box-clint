@@ -47,7 +47,7 @@ const router=useRouter()
     };
 
     return (
-        <div>
+        <div className="px-1">
             <Form submitHandler={onSubmit} resolver={yupResolver(adminLoginSchema)}>
                 <div className=''>
                     <FormSelectField

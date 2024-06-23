@@ -110,6 +110,7 @@ const AllBanners = () => {
                 <RiSwapBoxLine className="" />
                 <h3>All Banners</h3>
             </div>
+           
             <label htmlFor="createBanner" className="p-1.5 primary-red-button flex items-center gap-1"><RiAddFill /> Create new Banner</label>
         </div>
 

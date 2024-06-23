@@ -19,15 +19,7 @@ export const donnerApi = baseApi.injectEndpoints({
             transformResponse: (response, meta: IMeta, message) => { return { meta, donner: response, message } },
             providesTags: [tagTypes.donner],
         }),
-        // // get single room
-        // room: build.query({
-        //   query: (id: string | string[] | undefined) => ({
-        //     url: `${BANNER_URL}/${id}`,
-        //     method: "GET",
-        //   }),
-        //   providesTags: [tagTypes.room],
-        // }),
-        // // create a new donner
+//  create donner
         addDonner: build.mutation({
             query: (data) => ({
                 url: `${DONNER_URL}/create-donner`,
@@ -36,23 +28,7 @@ export const donnerApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: [tagTypes.donner],
         }),
-        // // update room
-        // updateRoom: build.mutation({
-        //   query: (data) => ({
-        //     url: `${BANNER_URL}/${data.id}`,
-        //     method: "PATCH",
-        //     data: data.body,
-        //   }),
-        //   invalidatesTags: [tagTypes.room],
-        // }),
-        // // delete room
-        // deleteRoom: build.mutation({
-        //   query: (id) => ({
-        //     url: `${BANNER_URL}/${id}`,
-        //     method: "DELETE",
-        //   }),
-        //   invalidatesTags: [tagTypes.room],
-        // }),
+     
     }),
 });
 

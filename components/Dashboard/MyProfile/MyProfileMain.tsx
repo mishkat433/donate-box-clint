@@ -58,14 +58,13 @@ const MyProfileMain = () => {
                         <h4 className=" font-semibold">Additional Info</h4>
                         <div className="text-sm">
                             <p><span className="font-semibold">Id : </span> {id}</p>
-                            
                         </div>
                     </div>
                 </div>
             </div>
 
             <Modal id="editProfile" title="Edit Profile">
-                <h1>I am testing modal</h1>
+                <h1>under development</h1>
             </Modal>
         </div>
     );
