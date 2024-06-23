@@ -45,7 +45,6 @@ const Gallery = () => {
                     ))}
                 </div>
             </div>
-
             <div>
                 {isViewerOpen && (
                     <ImageViewer
