@@ -1,4 +1,5 @@
-import MyProfileMain from "../../../components/Dashboard/MyProfile/MyProfileMain";
+
+import MyProfileMain from './../../../../components/Dashboard/ManageProfile/MyProfile/MyProfileMain';
 
 const page = () => {
     return (

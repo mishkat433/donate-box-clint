@@ -6,7 +6,8 @@ import { RiArrowDownSFill } from 'react-icons/ri';
 
 interface propsTypes{
     options:any;
-    onSelect:(value: string | any) => void;
+    // onSelect:(value: string | any) => void;
+    onSelect:any;
     hoverHeight?:string;
     placeholder:string;
     defaultValue?:string | number;

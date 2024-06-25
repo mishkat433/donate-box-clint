@@ -1,4 +1,4 @@
-import AllRequest from "../../../components/Dashboard/ManageAdmins/AllRequest";
+import AllRequest from "../../../../components/Dashboard/ManageAdmins/AllRequest";
 
 const page = () => {
     return (

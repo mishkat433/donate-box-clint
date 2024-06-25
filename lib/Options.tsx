@@ -22,3 +22,9 @@ export const  dataLimitOptions = [
     { value: '50', label: '50' },
     { value: '100', label: '100' }
 ];
+
+export const  requestHandlerOptions = [
+    { value: 'ACCEPT', label: 'ACCEPT' },
+    { value: 'PENDING', label: 'PENDING' },
+    { value: 'REJECT', label: 'REJECT' }
+];

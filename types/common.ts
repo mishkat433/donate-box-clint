@@ -60,6 +60,7 @@ export interface IUser {
 export interface IAdmin {
   _id: string;
   id: string;
+  userId:string;
   adminId: string;
   fullName: string;
   gender: string;

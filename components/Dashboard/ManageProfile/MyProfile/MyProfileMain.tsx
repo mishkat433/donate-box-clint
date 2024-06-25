@@ -1,12 +1,12 @@
 "use client"
 
 import { RiAddFill, RiUserSmileFill } from "react-icons/ri";
-import Modal from "../../ReusableComponent/Modal";
+import Modal from "../../../ReusableComponent/Modal";
 import Image from "next/image";
-import profileImage from "../../../public/assets/profile.png"
-import { useLoginUserDataQuery } from "../../../redux/api/authApi";
-import { getUserInfo, isLoggedIn } from "../../../services/auth.service";
-import DotLoading from "../../ReusableComponent/DotLoading";
+import profileImage from "../../../../public/assets/profile.png"
+import { useLoginUserDataQuery } from "../../../../redux/api/authApi";
+import { getUserInfo, isLoggedIn } from "../../../../services/auth.service";
+import DotLoading from "../../../ReusableComponent/DotLoading";
 
 const MyProfileMain = () => {
     const userInfo: any = getUserInfo()

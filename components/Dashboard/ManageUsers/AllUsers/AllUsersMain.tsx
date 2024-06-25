@@ -130,7 +130,6 @@ const AllUsersMain = () => {
             </div>
 
             <div className="shadow-md rounded-md">
-                {/* <CommonTable columns={columns} data={data?.donner?.data} isActionBanned={true} bannedSetter={bannedHandle} isActionDelete={true} /> */}
                 <CommonTable columns={columns} data={data?.donner?.data} slCount={{ limit, page }} bannedHandler={bannedHandle} deleteHandler={deleteHandler} />
             </div>
             <div className="flex justify-between gap-3 mt-2">

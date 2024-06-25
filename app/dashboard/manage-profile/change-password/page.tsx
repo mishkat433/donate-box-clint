@@ -1,4 +1,4 @@
-import ChangePassword from "../../../components/Dashboard/ChangePassword/ChangePassword";
+import ChangePassword from "../../../../components/Dashboard/ManageProfile/ChangePassword/ChangePassword";
 
 const page = () => {
     return (

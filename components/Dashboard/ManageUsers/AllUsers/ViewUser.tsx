@@ -8,7 +8,7 @@ interface ViewUserProps {
 const ViewUser = ({ userData }: ViewUserProps) => {
     const headings = [
         { label: "Name", key: "fullName" },
-        { label: "Id", key: `${userData?"userId": "adminId"}` },
+        { label: "Id", key: `${userData?.userId?"userId": "adminId"}` },
         { label: "Role", key: "role" },
         { label: "Phone Number", key: "phoneNumber" },
         { label: "Blood Group", key: "bloodGroup" },

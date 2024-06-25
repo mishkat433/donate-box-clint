@@ -11,9 +11,7 @@ import Dropdown from "../../ReusableComponent/Dropdown/Dropdown";
 import CommonTable from "../../ReusableComponent/Table/CommonTable";
 
 const AllRequest = () => {
-    const columns = ['Image', 'Admin Id', 'Name', 'Phone', "Role", 'Division', 'Address', 'status', 'action'];
-
-    // const [userBanned,{}]=useUserBannedMutation()
+    const columns = ['SL', 'Admin Id', 'Name', 'Phone', "Role", 'Division', 'Status',"Action"];
 
     const query: Record<string, any> = {};
 
@@ -52,11 +50,12 @@ const AllRequest = () => {
     };
 
 
-    // const { data, isLoading, isError, error }: any = useGetAllAdminsQuery({ ...query })
-
-    // if (isLoading) {
-    //     return <DotLoading />
-    // }
+    const { data, isLoading, isError, error }: any = useGetAllAdminsQuery({ ...query })
+const filteringAdminPending= data?.admins?.data?.filter((admin)=> admin?.status==="PENDING")
+console.log(data);
+    if (isLoading) {
+        return <DotLoading />
+    }
 
     // const pageCount = Array.from({ length: Math.ceil(data.admins.meta.total / data.admins.meta.limit) }, (_, i) => ({ value: i + 1, label: i + 1 }));
 
@@ -78,7 +77,7 @@ const AllRequest = () => {
         </div>
 
         <div className="shadow-md rounded-md">
-            {/* <CommonTable columns={columns} data={data?.admins?.data} isActionBanned={true} bannedSetter={bannedHandle} isActionDelete={true} /> */}
+        <CommonTable columns={columns} data={filteringAdminPending} slCount={{ limit, page }} requestHandle={bannedHandle} />
         </div>
         <div className="flex justify-between gap-3 mt-2">
             <div className="bg-primary-red rounded-md text-white-text">

@@ -27,7 +27,7 @@ const Form = ({ children, submitHandler, defaultValues, resolver, }: FormProps) 
     reset();
   };
 
-  useEffect(() => reset(defaultValues),
+  useEffect(() => reset(),
    [defaultValues, reset, methods]);
 
   return (

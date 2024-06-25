@@ -1,14 +1,15 @@
 "use client"
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import Form from "../../ReusableComponent/Form/Form";
-import FormInput from "../../ReusableComponent/Form/FormInput";
+import Form from "../../../ReusableComponent/Form/Form";
+import FormInput from "../../../ReusableComponent/Form/FormInput";
 import { SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
 import { RiAddFill, RiUserSmileFill } from "react-icons/ri";
-import { updatePasswordSchema } from "../../../schemas/user";
-import { getUserInfo } from "../../../services/auth.service";
-import { useChangePasswordMutation } from "../../../redux/api/userApi";
+import { getUserInfo } from "../../../../services/auth.service";
+import { useChangePasswordMutation } from "../../../../redux/api/userApi";
+import { updatePasswordSchema } from "../../../../schemas/user";
+
 
 type FormValues = {
     phoneNumber: string;

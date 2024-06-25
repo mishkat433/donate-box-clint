@@ -8,19 +8,21 @@ import Dropdown from "../../ReusableComponent/Dropdown/Dropdown";
 import { dataLimitOptions, sortByOptions, sortOrderOptions } from "../../../lib/Options";
 import SearchBar from "../../ReusableComponent/Searchbar";
 import CommonTable from "../../ReusableComponent/Table/CommonTable";
-import { useGetAllAdminsQuery } from "../../../redux/api/adminApi";
+import { useAdminBannedMutation, useGetAllAdminsQuery,useDeleteAdminMutation } from "../../../redux/api/adminApi";
+import Swal from "sweetalert2";
 
 const AllAdmins = () => {
-    const columns = ['Image', 'Admin Id', 'Name', 'Phone', "Role", 'Division', 'Address', 'status', 'action'];
+    const columns = ['SL', 'Admin Id', 'Name', 'Phone', "Role", 'Division', 'Banned', 'action'];
 
-    // const [userBanned,{}]=useUserBannedMutation()
+    const [adminBanned,{}]=useAdminBannedMutation()
+    const [deleteAdmin,{}]=useDeleteAdminMutation()
 
     const query: Record<string, any> = {};
 
     const [page, setPage] = useState<number>(1);
     const [limit, setLimit] = useState<number>(10);
     const [sortBy, setSortBy] = useState<string>("");
-    const [sortOrder, setSortOrder] = useState<string>("desc");
+    const [sortOrder, setSortOrder] = useState<string>("asc");
     const [searchTerm, setSearchTerm] = useState<string>("");
 
     query["limit"] = limit;
@@ -36,29 +38,74 @@ const AllAdmins = () => {
     if (!!debouncedTerm) {
         query["searchTerm"] = debouncedTerm;
     }
-
     const bannedHandle = async (data: any) => {
         try {
-            const bannedData = { userId: data?.userId, isBanned: data?.isBan }
-            // const res = await userBanned( bannedData )
-            // console.log(res);
-            // if (res?.success) {
-            //     toast.success("User Banned Success")
-            // }
+            Swal.fire({
+                title: "Are you sure?",
+                text: `${data?.isBan ? "Do you want to Banned this Admin?" : "Do you want to Un-Banned this Admin?"}`,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, Sure!"
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    const bannedData = { adminId: data?.adminId, isBanned: data?.isBan }
+                    const res: any = await adminBanned(bannedData)
+                    if (res?.data?.success) {
+                        Swal.fire({
+                            title: "Banned!",
+                            text: `${!data?.isBan ? "This Admin has been Un-Banned." : "This Admin has been Banned."}`,
+                            icon: "success",
+                            timer: 3000
+                        });
+                    }
+                }
+            });
         }
         catch (err: any) {
             console.log(err);
         }
     };
 
+    const deleteHandler = async (id: string) => {
+        try {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "Do you want to Delete this Admin?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, Delete!"
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    const res: any = await deleteAdmin(id).unwrap()
+                    if (res?.data?.success) {
+                        Swal.fire({
+                            title: "Delete!",
+                            text: `${res?.data?.message}`,
+                            icon: "success",
+                            timer: 1500
+                        });
+                    }
+                }
+            });
+        }
+        catch (err: any) {
+            console.log(err);
+        }
+    }
+
 
     const { data, isLoading, isError, error }: any = useGetAllAdminsQuery({ ...query })
+    const filteringAdmin = data?.admins?.data?.filter((admin) => admin?.status === "ACCEPT")
 
     if (isLoading) {
         return <DotLoading />
     }
 
-    const pageCount = Array.from({ length: Math.ceil(data.admins.meta.total / data.admins.meta.limit) }, (_, i) => ({ value: i + 1, label: i + 1 }));
+    const pageCount = Array.from({ length: Math.ceil(data?.admins?.meta?.total / data?.admins?.meta?.limit) }, (_, i) => ({ value: i + 1, label: i + 1 }));
 
 
     return (
@@ -78,7 +125,7 @@ const AllAdmins = () => {
             </div>
 
             <div className="shadow-md rounded-md">
-                <CommonTable columns={columns} data={data?.admins?.data} />
+                <CommonTable columns={columns} data={filteringAdmin} slCount={{ limit, page }} bannedHandler={bannedHandle} deleteHandler={deleteHandler} />
             </div>
             <div className="flex justify-between gap-3 mt-2">
                 <div className="bg-primary-red rounded-md text-white-text">

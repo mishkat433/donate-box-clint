@@ -1,4 +1,4 @@
-import AllAdmins from "../../../components/Dashboard/ManageAdmins/AllAdmins";
+import AllAdmins from "../../../../components/Dashboard/ManageAdmins/AllAdmins";
 
 const page = () => {
     return (

@@ -1,4 +1,4 @@
-import { RiDeleteBack2Line, RiDeleteBinLine, RiEdit2Line, RiEyeLine, RiVerifiedBadgeLine } from "react-icons/ri";
+import { RiDeleteBack2Line, RiDeleteBinLine, RiEdit2Line, RiEyeLine, RiVerifiedBadgeLine,RiArrowDownSFill } from "react-icons/ri";
 import { IAdmin, IUser } from "../../../types";
 import Image from "next/image";
 import userAvatar from "../../../public/assets/userAvatar.png";
@@ -6,6 +6,8 @@ import { format } from 'date-fns';
 import Modal from "../Modal";
 import { useState } from "react";
 import ViewUser from "../../Dashboard/ManageUsers/AllUsers/ViewUser";
+import { requestHandlerOptions } from "../../../lib/Options";
+import Dropdown from "../Dropdown/Dropdown";
 
 type tableType = {
     columns: string[];
@@ -16,15 +18,18 @@ type tableType = {
         page: any;
         limit: any;
     };
-    BannerTableTd?: any;
+    requestHandle?: Function;
 }
 
-const CommonTable = ({ columns, data, bannedHandler, deleteHandler, slCount, BannerTableTd }: tableType) => {
+const CommonTable = ({ columns, data, bannedHandler = null, deleteHandler = null, slCount, requestHandle = null }: tableType) => {
     const [modalData, setModalData] = useState(null);
 
+
+
+    
     return (
-        <div className="overflow-x-auto">
-            <table className="table">
+        <div className="">
+            <table className="table ">
                 <thead className=" rounded-md">
                     <tr className="bg-primary-red text-white-text rounded-md text-center">
                         {columns.map((column: string, i: number) => (
@@ -47,11 +52,32 @@ const CommonTable = ({ columns, data, bannedHandler, deleteHandler, slCount, Ban
                             {columns.includes("Division") && <td>{tData?.division} </td>}
                             {columns.includes("Address") && <td>{tData?.address} </td>}
                             {columns.includes("Create Date") && <td className={`text-nowrap`}>{format(new Date(tData?.createdAt), 'dd-MMM-yyyy')} </td>}
+                            {columns.includes("Status") && <td className={`text-primary-red`}> {tData?.status} </td>}
                             {columns.includes("Banned") && <td> <input type="checkbox" onChange={() => bannedHandler({ ...tData, isBan: tData?.isBanned ? false : true })} className="toggle toggle-error toggle-sm" checked={tData?.isBanned} /> </td>}
-                            {columns.includes("action") && <td className="flex items-center justify-center gap-2">
+                            {columns.includes("Action") && <td className="flex items-center justify-center gap-2">
+                                {requestHandle &&
+                                    <div className="group relative w-auto" >
+                                        <div className="dropdownHeader flex justify-between items-center cursor-pointer p-2.5 rounded-md">
+                                            {tData?.status}
+                                            <RiArrowDownSFill className={`text-xl text-primary-red group-hover:rotate-180 duration-300 `} />
+                                        </div>
+                                        <ul className={`absolute w-full bg-border-color max-h-[150px]  overflow-y-auto z-[90] rounded-md duration-300 h-0 group-hover:h-[100px] `}>
+                                            {requestHandlerOptions?.map((option) => (
+                                                <li
+                                                    key={option.value}
+                                                    className={`px-2.5 py-1.5 text-white-text cursor-pointer hover:bg-primary-red border-b-1 border-white-text hover:text-white-text duration-200 bg-secondary-text `}
+                                                    onClick={() => requestHandle(option?.value)}
+                                                >
+                                                    {option.label}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                }
                                 <label htmlFor="userDetailsView" className="" onClick={() => setModalData(tData)}> <RiEyeLine className="dashboard-icon-style text-view cursor-pointer" title="View" /></label>
-                                <label htmlFor="editModal" className="" > <RiEdit2Line className="dashboard-icon-style text-edit cursor-pointer" title="Edit" /></label>
-                                <RiDeleteBinLine onClick={() => deleteHandler(tData?.userId ? tData?.userId : tData?.adminId)} className="dashboard-icon-style text-primary-red cursor-pointer" title="Delete" /></td>
+                                {bannedHandler && <label htmlFor="editModal" className="" > <RiEdit2Line className="dashboard-icon-style text-edit cursor-pointer" title="Edit" /></label>}
+                                {deleteHandler && <RiDeleteBinLine onClick={() => deleteHandler(tData?.userId ? tData?.userId : tData?.adminId)} className="dashboard-icon-style text-primary-red cursor-pointer" title="Delete" />}
+                            </td>
                             }
                         </tr>
                     )}

@@ -14,7 +14,7 @@ type tableType = {
 }
 
 
-const BannerTable = ({ columns, data, deleteHandler,visibilityHandle }: tableType) => {
+const BannerTable = ({ columns, data, deleteHandler, visibilityHandle }: tableType) => {
     const [modalData, setModalData] = useState(null);
 
     return (
@@ -36,10 +36,12 @@ const BannerTable = ({ columns, data, deleteHandler,visibilityHandle }: tableTyp
                             <td className={`text-nowrap`}>{format(new Date(banner?.createdAt), 'dd-MMM-yyyy')} </td>
                             <td className={``}>{banner?.showing.toString()}</td>
                             <td>
-                                {columns.includes("action") && <td className="flex items-center justify-center gap-3">
-                                     <input type="checkbox" onChange={() => visibilityHandle({bannerId:banner?._id, showing: !banner?.showing})} className="toggle toggle-error toggle-sm" checked={banner?.showing} title={banner?.showing?"now visible":"now invisible"} /> 
-                                    <label htmlFor="viewBanner" className="" onClick={() => setModalData(banner)}> <RiEyeLine className="dashboard-icon-style text-view cursor-pointer" title="View" /></label>
-                                    <RiDeleteBinLine onClick={() => deleteHandler(banner?._id)} className="dashboard-icon-style text-primary-red cursor-pointer" title="Delete" /></td>
+                                {columns.includes("action") &&
+                                    <div className="flex items-center justify-center gap-3">
+                                        <input type="checkbox" onChange={() => visibilityHandle({ bannerId: banner?._id, showing: !banner?.showing })} className="toggle toggle-error toggle-sm" checked={banner?.showing} title={banner?.showing ? "now visible" : "now invisible"} />
+                                        <label htmlFor="viewBanner" className="" onClick={() => setModalData(banner)}> <RiEyeLine className="dashboard-icon-style text-view cursor-pointer" title="View" /></label>
+                                        <RiDeleteBinLine onClick={() => deleteHandler(banner?._id)} className="dashboard-icon-style text-primary-red cursor-pointer" title="Delete" />
+                                    </div>
                                 }
                             </td>
                         </tr>

@@ -51,9 +51,6 @@
 .main-menu li {
     display: block;
     width: 250px;
-    /* padding:8px 10px; */
-/* border-top: 1px solid #eee; */
-/* box-shadow: 1px 0 15px rgba(0, 0, 0, 0.07); */
 }
 
 .withoutPadding{
@@ -71,8 +68,6 @@
     -webkit-transform: translateZ(0) scale(1, 1);
     -webkit-transition: all .14s linear;
     transition: all .14s linear;
-    font-family: 'Strait', sans-serif;
-    /* padding: 5px 2px; */
 }
 
 .main-menu .nav-text {

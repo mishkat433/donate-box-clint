@@ -1,15 +1,17 @@
 import Link from "next/link";
 import { useLoginUserDataQuery } from "../../../redux/api/authApi";
 import { getUserInfo, isLoggedIn } from "../../../services/auth.service";
-import { RiHome3Line } from "react-icons/ri";
+import { RiArrowDropRightLine, RiHome3Line } from "react-icons/ri";
+import { usePathname } from "next/navigation";
 
 const DashboardHeader = () => {
-
+const path= usePathname()
   const userInfo: any = getUserInfo()
   const loginCheck = isLoggedIn()
 
   let id: string
-
+// && !item.startsWith('manage')
+  const routeSlice= path?.split("/").filter(item => item !== '' && item !=="dashboard" )
 
   if (userInfo?.userId) {
     id = userInfo.userId
@@ -18,13 +20,16 @@ const DashboardHeader = () => {
   }
   const { data, isLoading, isError }: any = useLoginUserDataQuery(id)
 
-
   return (
-    <div className="p-2 shadow-md w-full rounded-md  ">
-      <div className=" md:container mx-auto flex justify-between items-center gap-2 px-4">
-        <div className="text-lg flex items-center gap-4">
-        <Link href="/dashboard"> <RiHome3Line />  </Link>
-        <span>breadcrumb coming</span>
+    <div className="p-2 shadow-md w-full rounded-md">
+      <div className=" flex justify-between items-center gap-2 px-4">
+        <div className="text-lg flex items-center">
+        <Link href="/dashboard"> <RiHome3Line /> </Link>
+        {routeSlice?.map((route:string, i:number) =>(
+          <p key={i} className="capitalize flex items-center text-sm cursor-pointer" >
+            <RiArrowDropRightLine className="text-lg"  />
+            <span className="hover:text-primary-red duration-200">{route}</span>
+            </p>))}
         </div>
         <div className="text-center font-bold">
           <h4 className="text-xs">({data?.data[0]?.role})</h4>
