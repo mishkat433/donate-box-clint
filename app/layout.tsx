@@ -1,17 +1,12 @@
-import { Toaster } from 'react-hot-toast'
-import Footer from '../components/Common/Footer/Footer'
-import Header from '../components/Common/Header/Header'
 import './globals.css'
 import { Suspense } from "react";
-import DotLoading from '../components/ReusableComponent/DotLoading';
-import AuthStorage from "../context/AuthStorage"
-// import { Mulish} from 'next/font/google'
-
-// const mulish = Mulish({ subsets: ['latin',] })
+import Providers from '../lib/Providers';
+import DotLoading from './../components/ReusableComponent/DotLoading';
+import "../components/Authentication/Authentication.css";
 
 export const metadata = {
   title: 'Donate Box',
-  description: 'Your donation can save the a life',
+  description: 'Your donation can save a life',
 }
 
 export default function RootLayout({ children, }) {
@@ -19,16 +14,12 @@ export default function RootLayout({ children, }) {
   return (
     <html lang="en">
       <body className='font-mulish'>
-        <AuthStorage>
-          <Suspense fallback={<DotLoading size="lg" text="black" />}>
-            <Toaster position="top-center" reverseOrder={false} />
-            <Header />
+        <Providers>
+          <Suspense fallback={<DotLoading size="lg" text="primary-text" height="h-[100vh]" />}>
             {children}
-            <Footer />
           </Suspense>
-        </AuthStorage>
+        </Providers>
       </body>
-
     </html>
   )
 }

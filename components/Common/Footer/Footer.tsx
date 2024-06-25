@@ -1,8 +1,8 @@
 import Logo from "../../ReusableComponent/Logo";
-import SocialMedia from "../../ReusableComponent/SocialMedia";
 import FooterProduct from "../../../Data/Footer/FooterProduct.json";
 import FooterCompany from "../../../Data/Footer/FooterCompany.json";
 import FooterDevelopers from "../../../Data/Footer/FooterDevelopers.json";
+import SocialMedia from "../../ReusableComponent/SocialMedia";
 
 const Footer = () => {
 
@@ -35,7 +35,7 @@ const Footer = () => {
                     <div className="space-y-3">
                         <div className="uppercase dark:text-gray-50 font-bold">Social media</div>
                         <div className="text-lg flex items-center gap-2.5">
-                            <SocialMedia></SocialMedia>
+                            <SocialMedia/>
                         </div>
                     </div>
                 </div>

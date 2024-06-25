@@ -14,7 +14,7 @@ module.exports = {
       },
     },
   },
-  plugins: [require('daisyui')],
+  plugins: [require('daisyui'), require('tailwindcss-animated')],
   daisyui: {
     // themes: ['cupcake'],
   },
@@ -37,11 +37,15 @@ module.exports = {
     },
     colors: {
       'white-text': "#fff",
+      'redis-text': "#ffeddb",
       'primary-text': '#111827',
       'secondary-text': '#6B7280',
       'primary-red': '#C30047',
       'error-color': '#F43F5E',
       'border-color': '#E5E7EB',
+      'success': '#1ABCFD',
+      'view': '#349168',
+      'edit': '#4089B4',
       'error-bg': 'rgba(255, 0, 0, 0.1)',
       "warning": "#FFBE00",
     },
@@ -49,10 +53,10 @@ module.exports = {
       '1': '1px'
     },
 
-    boxShadow: {
-      // 'small-card-shadow': '0px 4px 7px rgba(0, 0, 0, 0.25)',
-      // 'fev-icon-box-shadow': '0px 4px 4px rgba(0, 0, 0, 0.08)',
-    },
+    // boxShadow: {
+    //   'small-card-shadow': '0px 4px 7px rgba(0, 0, 0, 0.25)',
+    //   // 'fev-icon-box-shadow': '0px 4px 4px rgba(0, 0, 0, 0.08)',
+    // },
     backgroundImage: {
       'main-bg': "url('/assets/donate blood 4.png')",
       'statics-bg': "linear-gradient(to bottom , rgba(3, 1, 10, 0.4), rgba(3, 1, 10, 0.5)), url('/assets/h1_hero2.jpg.webp') ",

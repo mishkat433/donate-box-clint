@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { RiPhoneFill, RiMailOpenFill, RiFacebookFill, RiTwitterFill, RiYoutubeFill, RiInstagramFill, RiArrowDownSFill, RiLinkedinFill } from "react-icons/ri";
-import SocialMedia from "../../../ReusableComponent/SocialMedia"
+import SocialMedia from "../../../ReusableComponent/SocialMedia";
 
 const Hero = () => {
     const [language, setLanguage] = useState('EN')
@@ -21,7 +21,7 @@ const Hero = () => {
                     </div>
                 </div>
                 <div className="text-lg flex items-center gap-2.5">
-                    <SocialMedia></SocialMedia>
+                    <SocialMedia/>
                     <div className=" text-sm relative ml-2 group ">
                         <button className="flex items-center " >{language}<RiArrowDownSFill className="text-xl" /></button>
                         <div className={`flex flex-col gap-[2px] absolute  bg-primary-red rounded-md md:w-14 lg:w-20 overflow-hidden duration-300 z-10 h-0 group-hover:h-[58px] `}>

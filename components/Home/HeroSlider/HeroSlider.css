@@ -1,0 +1,9 @@
+.SliderArrow .slick-arrow {
+    background: #000;
+    display: none !important;
+    z-index:-100 !important;
+} 
+
+.slick-slide .slick-active .slick-current{
+    z-index: 0 !important;
+}

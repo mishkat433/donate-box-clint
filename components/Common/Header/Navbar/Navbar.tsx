@@ -4,15 +4,42 @@ import Image from "next/image";
 import Link from "next/link";
 import "./Navbar.css"
 import { RiCloseFill, RiMenu2Fill } from "react-icons/ri";
-import { useContext, useState } from "react";
-import { AuthContext } from "../../../../context/AuthStorage";
 import profile from "../../../../public/assets/profile.png";
 import Logo from "../../../ReusableComponent/Logo";
+import { useEffect, useState } from "react";
+import { getUserInfo, isLoggedIn, removeUserInfo } from "../../../../services/auth.service";
+import { authKey } from "../../../../constants/storageKey";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import { useLogOutMutation, useLoginUserDataQuery } from "../../../../redux/api/authApi";
+
 
 const Navbar = () => {
-  const [mobileMenu, setMobileMenu] = useState<boolean>(false)
-  const { loginUser, logOutHandle }: any = useContext(AuthContext)
+  // const [logInUserData, setLogInUserData] = useState({})
+  const [logOut] = useLogOutMutation()
+  const userInfo: any = getUserInfo()
+  const router = useRouter()
+  const loginCheck = isLoggedIn()
 
+  let id: string
+
+
+  if (userInfo?.userId) {
+    id = userInfo.userId
+  } else {
+    id = userInfo.adminId
+  }
+  const { data, isLoading, isError }: any = useLoginUserDataQuery(id)
+
+  const logOutHandle = async () => {
+    await logOut({ data: "blank" })
+    removeUserInfo(authKey);
+    toast.success("Log out successful")
+    router.push("/")
+  };
+
+
+  const [mobileMenu, setMobileMenu] = useState<boolean>(false)
 
   const menuItems =
     <>
@@ -22,35 +49,36 @@ const Navbar = () => {
       <li className="nav-link-style ">  <Link href={"/contact"} className=" hover-underline-animation">Contact</Link></li>
       {/* <li className="nav-link-style "> <button className="button-transition primary-red-button py-1 px-2.5">Need Blood</button> </li> */}
       <li className="nav-link-style"> <Link href="/donate" className="button-transition primary-red-button py-1 px-2.5 w-full">Donate Now</Link> </li>
-      {loginUser?.id ?
-
-        <div className=" text-sm relative ml-2 group ">
+      {isLoggedIn() && data?.data[0]?.role ?
+        <li className=" text-sm relative ml-2 group ">
           <div className="avatar">
             <div className="w-12 mask mask-hexagon">
-              {loginUser?.image !== null ? <Image src={loginUser?.image} width={100} height={100} alt="profile" />
-                : <Image src={profile} width={100} height={100} alt="profile" />}
+              {/* {userData?.profileImage !== null ? */}
+              {/* <Image src={userData?.profileImage} width={100} height={100} alt="profile" /> */}
+              <Image src={profile} width={80} height={80} alt="profile" />
             </div>
           </div>
-          <div className={`flex flex-col gap-[2px] absolute -right-3 bg-primary-red text-center  rounded-md md:w-14 lg:w-fit px-1 overflow-hidden duration-300  h-0 group-hover:h-[150px] `}>
+          <div className={`flex flex-col absolute gap-[2px] z-20  -right-3 bg-primary-red text-center rounded-md md:w-14 lg:w-40 px-1 duration-300 overflow-hidden h-0  group-hover:h-[165px] `}>
             <div className="p-[1px] text-white-text duration-300  py-1">
-              <strong className="">{loginUser?.name}</strong>
-              <p className="text-xs">{loginUser?.email}</p>
+              <p className="text-xs mt-1">({data?.data[0]?.role})</p>
+              <strong className="">{data?.data[0]?.fullName}</strong>
+              <p className="text-xs">{data?.data[0]?.phoneNumber}</p>
+
               <hr className="mt-1 bg-secondary-text" />
             </div>
-            <Link href="/profile" className="hover:bg-white-text  duration-300 rounded-t-md  py-1 text-white-text hover:text-secondary-text">Profile</Link>
+            <Link href="/dashboard/my-profile" className="hover:bg-white-text  duration-300 rounded-t-md  py-1 text-white-text hover:text-secondary-text">Profile</Link>
             <Link href="/dashboard" className="hover:bg-white-text  duration-300  py-1 text-white-text hover:text-secondary-text">Dashboard</Link>
             <button onClick={() => logOutHandle()} className="hover:bg-white-text duration-300 rounded-b-md py-1 text-white-text hover:text-secondary-text">Log out</button>
           </div>
-        </div>
+        </li>
         :
-        <li className="nav-link-style"> <Link href={"/authentication/login"} className=" button-transition primary-red-button py-1 px-2.5 w-full ">Login</Link> </li>
+        <li className="nav-link-style"> <Link href={"/login"} className=" button-transition primary-red-button py-1 px-2.5 w-full ">Login</Link> </li>
       }
-
     </>
 
   return (
-    <header className="font-mulish bg-[#ffffff] drop-shadow-sm  z-50" >
-      <div className="container flex justify-between items-center mx-auto py-2">
+    <header className="font-mulish bg-[#ffffff] shadow-sm  mb-1" >
+      <div className="container flex justify-between items-center mx-auto py-1">
 
         <Logo donate={'text-primary-red'} box={'text-primary-text'} />
 
@@ -72,17 +100,19 @@ const Navbar = () => {
 
 
       {/* responsive menu start  */}
-      <div className="drawer drawer-end absolute block md:hidden z-[999999]">
+      <div className="drawer drawer-start block md:hidden ">
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
         <div className="drawer-side">
           <label htmlFor="my-drawer-4" onClick={() => setMobileMenu(!mobileMenu)} className="drawer-overlay"></label>
-          <ul className="space-y-3 p-4 w-52 h-[100vh] text-center  bg-base-200 ">
+          <ul className="space-y-3 p-4 w-52 h-[100vh] text-center  bg-base-200 !z-[10000]">
             {menuItems}
           </ul>
         </div>
       </div>
       {/* responsive menu end  */}
     </header>
+
+
   );
 };
 
