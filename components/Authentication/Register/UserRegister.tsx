@@ -6,7 +6,7 @@ import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import Form from '../../ReusableComponent/Form/Form';
 import FormInput from '../../ReusableComponent/Form/FormInput';
-import { userRegisterSchema } from '../../../schemas/registerSchems';
+import { userRegisterSchema } from '../../../schemas/registerSchemas';
 import FormSelectField from '../../ReusableComponent/Form/FormSelectField';
 import { bloodGroupOptions, divisionOptions, genderOptions } from '../../../constants/global';
 import Link from 'next/link';
@@ -16,6 +16,9 @@ import { useCreateUserMutation } from '../../../redux/api/userApi';
 import { DIVISION_NAME } from '../../../constants/division';
 import { GENDER } from '../../../constants/gender';
 import { BLOOD_GROUP_NAME } from '../../../constants/bloodGroup';
+import DistrictField from '../../ReusableComponent/Form/DistrictField';
+import AreaField from '../../ReusableComponent/Form/AreaField';
+import { locationApi } from '../../../redux/api/getLocation/getLocation';
 
 
 type FormValues = {
@@ -33,7 +36,7 @@ type FormValues = {
 const UserRegister = () => {
     const [ready, setReady] = useState<boolean>(true)
     const [createUser, { error }] = useCreateUserMutation()
-
+    const [divisionOptions, setDivisionOptions] = useState<any[]>([]);
     const router = useRouter()
 
     const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
@@ -79,7 +82,7 @@ const UserRegister = () => {
                     />
                 </div>
                 <div className="flex flex-col md:flex-row gap-0 md:gap-6 ">
-                    <div className='mb-0 md:mb-3 w-full'>
+                    <div className='mb-0 md:mb-3 w-full' onClick={async () => setDivisionOptions(await locationApi.getDivision())}>
                         <FormSelectField
                             name="division"
                             className="w-full"
@@ -89,15 +92,24 @@ const UserRegister = () => {
                         />
                     </div>
                     <div className='mb-0 md:mb-3 w-full'>
+                        <DistrictField />
+                    </div>
+                </div>
+
+                <div className="flex flex-col md:flex-row gap-0 md:gap-6 ">
+                    <div className='mb-0 md:mb-3 w-full'>
+                        <AreaField />
+                    </div>
+                    <div className='mb-0 md:mb-3 w-full'>
                         <FormInput
                             name="address"
                             type="text"
                             className=" w-full"
                             label="Address"
                             placeholder="Enter your address without division"
+                            required
                         />
                     </div>
-
                 </div>
                 <div className="flex flex-col md:flex-row gap-0 md:gap-6 ">
                     <div className='mb-0 md:mb-3 w-full'>

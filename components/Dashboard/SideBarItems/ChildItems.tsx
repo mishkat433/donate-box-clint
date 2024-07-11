@@ -20,3 +20,7 @@ export const manageBannerChild = [
     { label: "All Banners", link: "all-banners" },
     { label: "Add Banner", link: "add-banner" },
 ]
+
+export const manageRequestChild = [
+    { label: "All Request", link: "all-Request" },
+]

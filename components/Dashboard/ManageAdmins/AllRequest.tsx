@@ -1,7 +1,7 @@
 "use client"
 
 import { RiAddFill, RiUserSmileFill } from "react-icons/ri";
-import { useGetAllAdminsQuery } from "../../../redux/api/adminApi";
+import { useDeleteAdminMutation, useGetAllAdminsQuery, useRequestHandlerMutation } from "../../../redux/api/adminApi";
 import DotLoading from "../../ReusableComponent/DotLoading";
 import SearchBar from "../../ReusableComponent/Searchbar";
 import { useState } from "react";
@@ -9,8 +9,14 @@ import { useDebounced } from "../../../redux/hooks";
 import { dataLimitOptions, sortByOptions, sortOrderOptions } from "../../../lib/Options";
 import Dropdown from "../../ReusableComponent/Dropdown/Dropdown";
 import CommonTable from "../../ReusableComponent/Table/CommonTable";
+import { IAdmin } from "../../../types";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const AllRequest = () => {
+const [requestHandler]=useRequestHandlerMutation()
+const [deleteAdmin,{}]=useDeleteAdminMutation()
+
     const columns = ['SL', 'Admin Id', 'Name', 'Phone', "Role", 'Division', 'Status',"Action"];
 
     const query: Record<string, any> = {};
@@ -35,24 +41,50 @@ const AllRequest = () => {
         query["searchTerm"] = debouncedTerm;
     }
 
-    const bannedHandle = async (data: any) => {
+    const requestHandle = async (status: string, adminId:string) => {
         try {
-            const bannedData = { userId: data?.userId, isBanned: data?.isBan }
-            // const res = await userBanned( bannedData )
-            // console.log(res);
-            // if (res?.success) {
-            //     toast.success("User Banned Success")
-            // }
+        const reqData={status,adminId}
+            const res:any = await requestHandler(reqData)
+            if (res?.success) {
+                toast.success(`Admin request ${res?.data?.data?.status}`)
+            }
         }
         catch (err: any) {
             console.log(err);
         }
     };
-
+    const deleteHandler = async (id: string) => {
+        try {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "Do you want to Delete this Admin?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, Delete!"
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    const res: any = await deleteAdmin(id).unwrap()
+                    if (res?.data?.success) {
+                        Swal.fire({
+                            title: "Delete!",
+                            text: `${res?.data?.message}`,
+                            icon: "success",
+                            timer: 1500
+                        });
+                    }
+                }
+            });
+        }
+        catch (err: any) {
+            console.log(err);
+        }
+    }
 
     const { data, isLoading, isError, error }: any = useGetAllAdminsQuery({ ...query })
-const filteringAdminPending= data?.admins?.data?.filter((admin)=> admin?.status==="PENDING")
-console.log(data);
+const filteringAdminPending= data?.admins?.data?.filter((admin:IAdmin)=> admin?.status!=="ACCEPT")
+
     if (isLoading) {
         return <DotLoading />
     }
@@ -77,7 +109,7 @@ console.log(data);
         </div>
 
         <div className="shadow-md rounded-md">
-        <CommonTable columns={columns} data={filteringAdminPending} slCount={{ limit, page }} requestHandle={bannedHandle} />
+        <CommonTable columns={columns} data={filteringAdminPending} slCount={{ limit, page }} requestHandle={requestHandle} deleteHandler={deleteHandler}  />
         </div>
         <div className="flex justify-between gap-3 mt-2">
             <div className="bg-primary-red rounded-md text-white-text">

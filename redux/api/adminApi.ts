@@ -13,7 +13,7 @@ export const adminApi = baseApi.injectEndpoints({
         data,
         // contentType: "multipart/form-data",
       }),
-      invalidatesTags: [tagTypes.admin],
+      invalidatesTags: [tagTypes.allAdmins],
     }),
 
     getAllAdmins: build.query({
@@ -40,13 +40,14 @@ export const adminApi = baseApi.injectEndpoints({
       }),
       providesTags: [tagTypes.admin],
     }),
+
     adminBanned: build.mutation({
       query: (adminData) => ({
           url: `${ADMIN_URL}/admin-banned/${adminData.adminId}`,
           method: "PATCH",
           data: adminData
       }),
-      invalidatesTags: [tagTypes.allUser],
+      invalidatesTags: [tagTypes.allAdmins],
   }),
     //     updateAdmin: build.mutation({
     //       query: (data) => ({
@@ -61,7 +62,16 @@ export const adminApi = baseApi.injectEndpoints({
             url: `${ADMIN_URL}/${id}`,
             method: "DELETE",
           }),
-          invalidatesTags: [tagTypes.admin],
+          invalidatesTags: [tagTypes.allAdmins],
+        }),
+
+        requestHandler: build.mutation({
+          query: ({status, adminId}) => ({
+            url: `${ADMIN_URL}/admin-request/${adminId}`,
+            method: "PATCH",
+            data: {status},
+          }),
+          invalidatesTags: [tagTypes.allAdmins],
         }),
   }),
 });
@@ -72,4 +82,5 @@ export const {
   useGetSingleAdminQuery,
   useAdminBannedMutation,
   useDeleteAdminMutation,
+  useRequestHandlerMutation
 } = adminApi;

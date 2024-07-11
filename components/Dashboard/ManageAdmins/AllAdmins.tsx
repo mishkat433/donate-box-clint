@@ -12,7 +12,7 @@ import { useAdminBannedMutation, useGetAllAdminsQuery,useDeleteAdminMutation } f
 import Swal from "sweetalert2";
 
 const AllAdmins = () => {
-    const columns = ['SL', 'Admin Id', 'Name', 'Phone', "Role", 'Division', 'Banned', 'action'];
+    const columns = ['SL', 'Admin Id', 'Name', 'Phone', "Role", 'Division', 'Banned', 'Action'];
 
     const [adminBanned,{}]=useAdminBannedMutation()
     const [deleteAdmin,{}]=useDeleteAdminMutation()

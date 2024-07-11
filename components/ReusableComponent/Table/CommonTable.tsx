@@ -7,7 +7,6 @@ import Modal from "../Modal";
 import { useState } from "react";
 import ViewUser from "../../Dashboard/ManageUsers/AllUsers/ViewUser";
 import { requestHandlerOptions } from "../../../lib/Options";
-import Dropdown from "../Dropdown/Dropdown";
 
 type tableType = {
     columns: string[];
@@ -25,8 +24,6 @@ const CommonTable = ({ columns, data, bannedHandler = null, deleteHandler = null
     const [modalData, setModalData] = useState(null);
 
 
-
-    
     return (
         <div className="">
             <table className="table ">
@@ -55,7 +52,7 @@ const CommonTable = ({ columns, data, bannedHandler = null, deleteHandler = null
                             {columns.includes("Status") && <td className={`text-primary-red`}> {tData?.status} </td>}
                             {columns.includes("Banned") && <td> <input type="checkbox" onChange={() => bannedHandler({ ...tData, isBan: tData?.isBanned ? false : true })} className="toggle toggle-error toggle-sm" checked={tData?.isBanned} /> </td>}
                             {columns.includes("Action") && <td className="flex items-center justify-center gap-2">
-                                {requestHandle &&
+                                {requestHandle && tData?.status ==="PENDING" &&
                                     <div className="group relative w-auto" >
                                         <div className="dropdownHeader flex justify-between items-center cursor-pointer p-2.5 rounded-md">
                                             {tData?.status}
@@ -65,8 +62,8 @@ const CommonTable = ({ columns, data, bannedHandler = null, deleteHandler = null
                                             {requestHandlerOptions?.map((option) => (
                                                 <li
                                                     key={option.value}
-                                                    className={`px-2.5 py-1.5 text-white-text cursor-pointer hover:bg-primary-red border-b-1 border-white-text hover:text-white-text duration-200 bg-secondary-text `}
-                                                    onClick={() => requestHandle(option?.value)}
+                                                    className={`px-2.5 py-1.5 text-white-text cursor-pointer hover:bg-primary-red border-b-1 border-white-text hover:text-white-text duration-200 bg-secondary-text`}
+                                                    onClick={() => requestHandle(option?.value,tData?.adminId)}
                                                 >
                                                     {option.label}
                                                 </li>
@@ -76,7 +73,7 @@ const CommonTable = ({ columns, data, bannedHandler = null, deleteHandler = null
                                 }
                                 <label htmlFor="userDetailsView" className="" onClick={() => setModalData(tData)}> <RiEyeLine className="dashboard-icon-style text-view cursor-pointer" title="View" /></label>
                                 {bannedHandler && <label htmlFor="editModal" className="" > <RiEdit2Line className="dashboard-icon-style text-edit cursor-pointer" title="Edit" /></label>}
-                                {deleteHandler && <RiDeleteBinLine onClick={() => deleteHandler(tData?.userId ? tData?.userId : tData?.adminId)} className="dashboard-icon-style text-primary-red cursor-pointer" title="Delete" />}
+                                {deleteHandler && tData?.status !=="PENDING" && <RiDeleteBinLine onClick={() => deleteHandler(tData?.userId ? tData?.userId : tData?.adminId)} className="dashboard-icon-style text-primary-red cursor-pointer" title="Delete" />}
                             </td>
                             }
                         </tr>

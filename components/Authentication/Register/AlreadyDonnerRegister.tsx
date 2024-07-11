@@ -6,7 +6,7 @@ import { useState } from "react";
 import Form from "../../ReusableComponent/Form/Form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FormInput from "../../ReusableComponent/Form/FormInput";
-import { alreadyUserRegisterPasswordSchema, alreadyUserRegisterSchema } from "../../../schemas/registerSchems";
+import { alreadyUserRegisterPasswordSchema, alreadyUserRegisterSchema } from "../../../schemas/registerSchemas";
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
 import { useCheckAlreadyDonnerMutation, useUpdateUserPasswordMutation } from '../../../redux/api/userApi';

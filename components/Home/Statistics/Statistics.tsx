@@ -1,11 +1,14 @@
-// "use client"
+"use client"
+
 import React from 'react';
 import { RiHandHeartFill } from "react-icons/ri";
 import { GiMoneyStack } from "react-icons/gi";
 import { MdWavingHand } from "react-icons/md";
 import { ImManWoman } from "react-icons/im";
+import { BiSolidDonateBlood } from "react-icons/bi";
 
 import Counter from './Counter';
+import { useStatisticsInfoQuery } from '../../../redux/api/statisticsApi';
 
 
 
@@ -25,28 +28,41 @@ const icons = [
 ]
 
 const Statistics = () => {
+
+    const { data, isLoading, isError, error }: any = useStatisticsInfoQuery(undefined)
+
     return (
         <section className='bg-statics-bg bg-left md:bg-top  bg-cover bg-fixed font-mulish p-default' >
-            <div className='grid grid-cols-1 md:grid-cols-4 gap-4 items-center text-white-text container mx-auto py-2 md:py-0 lg:h-[70vh] ' >
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-x-5 items-center text-white-text px-5 mx-auto container md:py-0 lg:min-h-[75vh] ' >
                 <div className='statistics-card  group '>
-                    <p className='text-5xl group-hover:text-primary-red duration-300 group-hover:-scale-x-100'><RiHandHeartFill /></p>
-                    <Counter havePrefix={true} />
-                    <h4 className='font-semibold text-xl'>Total Donation</h4>
+                    <p className='text-5xl group-hover:text-primary-red duration-300 group-hover:-scale-x-100'><BiSolidDonateBlood /></p>
+                    <Counter endValue={data?.data?.totalBloodDonation} havePrefix={false} />
+                    <h4 className='font-semibold text-xl'>Total Blood Receivers</h4>
                 </div>
                 <div className='statistics-card group'>
                     <p className='text-5xl group-hover:text-primary-red duration-300 group-hover:-scale-x-100'><GiMoneyStack /></p>
-                    <Counter havePrefix={true} />
-                    <h4 className='font-semibold text-xl'>Fund Raised</h4>
+                    <Counter havePrefix={true} endValue={data?.data?.totalAmountDonation} />
+                    <h4 className='font-semibold text-xl'>Total Amount Donation</h4>
                 </div>
                 <div className='statistics-card group'>
-                    <p className='text-5xl group-hover:text-primary-red duration-300 group-hover:-scale-x-100'><ImManWoman /></p>
-                    <Counter havePrefix={false} />
-                    <h4 className='font-semibold text-xl'>Total Receivers</h4>
+                    <p className='text-5xl group-hover:text-primary-red duration-300 group-hover:-scale-x-100'><RiHandHeartFill /></p>
+                    <Counter havePrefix={false} endValue={100} />
+                    <h4 className='font-semibold text-xl'>Total Helping</h4>
                 </div>
                 <div className='statistics-card group'>
                     <p className='text-5xl group-hover:text-primary-red duration-300 group-hover:-scale-x-100'><MdWavingHand /></p>
-                    <Counter havePrefix={false} />
+                    <Counter havePrefix={false} endValue={data?.data?.totalDonner} />
                     <h4 className='font-semibold text-xl'>Total Donner</h4>
+                </div>
+                <div className='statistics-card group'>
+                    <p className='text-5xl group-hover:text-primary-red duration-300 group-hover:-scale-x-100'><MdWavingHand /></p>
+                    <Counter havePrefix={false} endValue={data?.data?.totalTodaysRequest} />
+                    <h4 className='font-semibold text-xl'>Todays Blood Request</h4>
+                </div>
+                <div className='statistics-card group'>
+                    <p className='text-5xl group-hover:text-primary-red duration-300 group-hover:-scale-x-100'><ImManWoman /></p>
+                    <Counter havePrefix={false} endValue={100} />
+                    <h4 className='font-semibold text-xl'>Total Volunteers</h4>
                 </div>
             </div>
         </section>

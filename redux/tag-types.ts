@@ -1,10 +1,11 @@
 export enum tagTypes {
   user = "user",
-  allUser="allUser",
-  admin="admin",
+  allUser = "allUser",
+  admin = "admin",
   banner = "banner",
   donner = "donner",
   allAdmins = "allAdmins",
+  bloodRequest = "bloodRequest",
 
 }
 
@@ -15,6 +16,7 @@ export const tagTypesList = [
   tagTypes.banner,
   tagTypes.donner,
   tagTypes.allAdmins,
+  tagTypes.bloodRequest,
 
 
 ];

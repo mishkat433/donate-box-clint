@@ -12,7 +12,7 @@ import Modal from "../../ReusableComponent/Modal";
 import AddBannerFrom from "./AddBannerForm"
 
 const AllBanners = () => {
-    const columns = ['SL','Banner','Creator Name', 'Create Date','Showing', 'action'];
+    const columns = ['SL','Banner Image','Creator Name', 'Create Date','Showing', 'Action'];
 
     const query: Record<string, any> = {};
 

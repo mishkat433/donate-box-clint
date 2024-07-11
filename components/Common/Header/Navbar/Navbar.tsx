@@ -47,7 +47,9 @@ const Navbar = () => {
       <li className="nav-link-style ">  <Link href={"/cases"} className="hover-underline-animation">Cases</Link></li>
       <li className="nav-link-style ">  <Link href={"/about"} className=" hover-underline-animation">About</Link></li>
       <li className="nav-link-style ">  <Link href={"/contact"} className=" hover-underline-animation">Contact</Link></li>
+      <li className="nav-link-style ">  <Link href={"/request/myRequests"} className=" hover-underline-animation">My Requests</Link></li>
       {/* <li className="nav-link-style "> <button className="button-transition primary-red-button py-1 px-2.5">Need Blood</button> </li> */}
+      <li className="nav-link-style"> <Link href="/request" className="button-transition primary-red-button py-1 px-2.5 w-full">Need A Donner</Link> </li>
       <li className="nav-link-style"> <Link href="/donate" className="button-transition primary-red-button py-1 px-2.5 w-full">Donate Now</Link> </li>
       {isLoggedIn() && data?.data[0]?.role ?
         <li className=" text-sm relative ml-2 group ">
@@ -72,7 +74,8 @@ const Navbar = () => {
           </div>
         </li>
         :
-        <li className="nav-link-style"> <Link href={"/login"} className=" button-transition primary-red-button py-1 px-2.5 w-full ">Login</Link> </li>
+        <li className="nav-link-style"> <Link href={"/login"} className=" button-transition primary-red-button py-1 px-2.5 w-full ">Login/ Register</Link> </li>
+
       }
     </>
 

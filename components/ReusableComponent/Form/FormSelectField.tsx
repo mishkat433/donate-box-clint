@@ -15,20 +15,19 @@ type SelectFieldProps = {
   value?: string | string[] | undefined;
   placeholder?: string;
   label?: string;
-  defaultValue?: SelectOptions;
-  required?:boolean;
+  defaultValue?: any;
+  required?: boolean;
   handleChange?: (el: string) => void;
 };
 
-const FormSelectField = ({  name,  value,  placeholder = "select", required,  options,  label,  defaultValue,  handleChange,}: SelectFieldProps) => {
+const FormSelectField = ({ name, value, placeholder = "select", required, options, label, defaultValue, handleChange, }: SelectFieldProps) => {
   const { control, formState: { errors }, } = useFormContext();
-
 
   const errorMessage = getErrorMessageByPropertyName(errors, name);
 
   return (
     <>
-       {label ?
+      {label ?
         <label className="label">
           <span className="label-text">{label} {required ? (<span className="text-error-color">* </span>) : null}</span>
         </label>
@@ -39,12 +38,14 @@ const FormSelectField = ({  name,  value,  placeholder = "select", required,  op
         name={name}
         render={({ field: { value, onChange } }) => (
           <select className={`select select-bordered w-full ${errorMessage && "errorBehavior"}`} onChange={handleChange ? handleChange : onChange}>
-          <option>SELECT</option>
-            {options.map((opt, i)=> <option value={opt.value} key={i}>{opt.label}</option>)}
+            {defaultValue && <option defaultValue={defaultValue}>{defaultValue}</option>}
+            <option>SELECT</option>
+            {name === 'division' && options?.length === 0 && <option>Loading...</option>}
+            {options?.map((opt, i) => <option value={opt.value} key={i}>{opt.label}</option>)}
           </select>
         )}
       />
-            <small className="text-error-color text-xs">{errorMessage}</small>
+      <small className="text-error-color text-xs">{errorMessage}</small>
     </>
   );
 };

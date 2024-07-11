@@ -20,15 +20,21 @@ const Form = ({ children, submitHandler, defaultValues, resolver, }: FormProps) 
   if (!!resolver) formConfig["resolver"] = resolver;
   const methods = useForm<FormProps>(formConfig);
 
-  const { handleSubmit, reset } = methods;
+  const { handleSubmit, reset, watch } = methods;
 
   const onSubmit = (data: any) => {
     submitHandler(data);
-    reset();
+    // reset();
   };
 
   useEffect(() => reset(),
-   [defaultValues, reset, methods]);
+    [defaultValues, reset, methods]);
+
+  // const watchedFields = watch();
+
+  // useEffect(() => {
+  //   console.log("Watched fields values:", watchedFields);
+  // }, [watchedFields]);
 
   return (
     <FormProvider {...methods}>

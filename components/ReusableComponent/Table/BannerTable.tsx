@@ -20,7 +20,7 @@ const BannerTable = ({ columns, data, deleteHandler, visibilityHandle }: tableTy
     return (
         <div className="overflow-x-auto">
             <table className="table">
-                <thead className=" rounded-md">
+                <thead className=" rounded-md text-center">
                     <tr className="bg-primary-red text-white-text rounded-md ">
                         {columns.map((column: string, i: number) => (
                             <th key={i} className="">{column}</th>
@@ -36,7 +36,7 @@ const BannerTable = ({ columns, data, deleteHandler, visibilityHandle }: tableTy
                             <td className={`text-nowrap`}>{format(new Date(banner?.createdAt), 'dd-MMM-yyyy')} </td>
                             <td className={``}>{banner?.showing.toString()}</td>
                             <td>
-                                {columns.includes("action") &&
+                                {columns.includes("Action") &&
                                     <div className="flex items-center justify-center gap-3">
                                         <input type="checkbox" onChange={() => visibilityHandle({ bannerId: banner?._id, showing: !banner?.showing })} className="toggle toggle-error toggle-sm" checked={banner?.showing} title={banner?.showing ? "now visible" : "now invisible"} />
                                         <label htmlFor="viewBanner" className="" onClick={() => setModalData(banner)}> <RiEyeLine className="dashboard-icon-style text-view cursor-pointer" title="View" /></label>

@@ -14,6 +14,10 @@ import { useAddDonnerMutation } from '../../redux/api/donnerApi';
 import { toast } from 'react-hot-toast';
 import { BLOOD_GROUP_NAME } from '../../constants/bloodGroup';
 import { GENDER } from '../../constants/gender';
+import { useState } from 'react';
+import DistrictField from '../ReusableComponent/Form/DistrictField';
+import AreaField from '../ReusableComponent/Form/AreaField';
+import { locationApi } from '../../redux/api/getLocation/getLocation';
 // import { useRouter } from 'next/navigation';
 
 
@@ -22,16 +26,18 @@ type FormValues = {
     phoneNumber: string;
     bloodGroup: BLOOD_GROUP_NAME;
     division: string;
+    district: string;
+    area: string;
     gender: GENDER;
     address: string;
 };
-type propsType={
+type propsType = {
     heading?: boolean;
 }
 
-const BloodDonner = ({heading=true}:propsType) => {
+const BloodDonner = ({ heading = true }: propsType) => {
     const [addDonner] = useAddDonnerMutation()
-
+    const [divisionOptions, setDivisionOptions] = useState<any[]>([]);
     // const router = useRouter()
 
     const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
@@ -55,7 +61,7 @@ const BloodDonner = ({heading=true}:propsType) => {
 
     return (
         <div className="">
-           {heading && <DonateHeader content={"BE A BLOOD DONNER"} />}
+            {heading && <DonateHeader content={"BE A BLOOD DONNER"} />}
 
             <div className="my-6 p-4  rounded-md mx-auto shadow-md border-1 border-border-color">
                 <Form submitHandler={onSubmit} resolver={yupResolver(beDonnerSchema)}>
@@ -84,10 +90,10 @@ const BloodDonner = ({heading=true}:propsType) => {
                     <div className="flex flex-col md:flex-row gap-2 md:gap-6">
                         <div className='mb-0 md:mb-3 w-full'>
                             <FormSelectField
-                                name="division"
+                                name="bloodGroup"
                                 className="w-full"
-                                label="Select Division"
-                                options={divisionOptions}
+                                label="Select Blood Group"
+                                options={bloodGroupOptions}
                                 required
                             />
                         </div>
@@ -101,29 +107,38 @@ const BloodDonner = ({heading=true}:propsType) => {
                             />
                         </div>
                     </div>
-                    <div className="flex flex-col md:flex-row gap-2 md:gap-6">
-                        <div className='mb-0 md:mb-3 w-full'>
+                    <div className="flex flex-col md:flex-row gap-0 md:gap-6 ">
+                        <div className='mb-0 md:mb-3 w-full' onClick={async () => setDivisionOptions(await locationApi.getDivision())}>
                             <FormSelectField
-                                name="bloodGroup"
+                                name="division"
                                 className="w-full"
-                                label="Select Blood Group"
-                                options={bloodGroupOptions}
+                                label="Select Division"
+                                options={divisionOptions}
                                 required
                             />
+                        </div>
+                        <div className='mb-0 md:mb-3 w-full'>
+                            <DistrictField />
+                        </div>
+                    </div>
+
+                    <div className="flex flex-col md:flex-row gap-0 md:gap-6 ">
+                        <div className='mb-0 md:mb-3 w-full'>
+                            <AreaField />
                         </div>
                         <div className='mb-0 md:mb-3 w-full'>
                             <FormInput
                                 name="address"
                                 type="text"
-                                className=" w-full"
-                                label="Address"
+                                className="w-full"
+                                label="Road/Village"
                                 placeholder="Enter your address without division"
                                 required
                             />
                         </div>
                     </div>
+
                     <label htmlFor="createUser" ><button className="button-transition primary-red-button py-2 px-2.5 w-full mt-4"> Submit</button></label>
-                
                 </Form>
             </div>
         </div>

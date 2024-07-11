@@ -15,7 +15,7 @@ import BloodDonner from "../../../DonateNow/BloodDonner";
 
 
 const AllUsersMain = () => {
-    const columns = ['SL', 'Image', 'User Id', 'Name', 'Phone', "Role", 'BG', 'Gender', 'Division', 'Banned', 'action'];
+    const columns = ['SL', 'Image', 'User Id', 'Name', 'Phone', "Role", 'BG', 'Gender', 'Division', 'Banned', 'Action'];
 
     const [userBanned, { }] = useUserBannedMutation()
     const [userDelete, { }] = useUserDeleteMutation()

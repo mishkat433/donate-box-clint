@@ -1,4 +1,5 @@
 import Image from "next/image";
+import UnderDevelopment from "../../components/ReusableComponent/UnderDevelopement";
 // import dashboardImage from "../../public/assets/"
 
 const page = () => {
@@ -6,8 +7,7 @@ const page = () => {
         <main className="font-mulish p-2">
 
             <section className="">
-            {/* <Image src={dashboardImage} alt=""/> */}
-            under developement
+           <UnderDevelopment/>
             </section>
         </main>
     );
