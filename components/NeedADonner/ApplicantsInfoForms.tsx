@@ -29,8 +29,6 @@ const ApplicantsInfoForms = () => {
                     </div>
                 </div>
             </div>
-
-
         </div>
     );
 };

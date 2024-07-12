@@ -3,27 +3,60 @@ import { IBanner, IMeta } from "../../types";
 import { tagTypes } from "../tag-types";
 import { baseApi } from "./baseApi";
 
-const DONNER_URL = "/needDonner";
+const REQUEST_URL = "/needDonner";
 
 export const donnerApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
         //get all request
-        // donner: build.query({
-        //     query: (arg: Record<string, any>) => {
-        //         return {
-        //             url: DONNER_URL,
-        //             method: "GET",
-        //             params: arg,
-        //         };
-        //     },
-        //     transformResponse: (response, meta: IMeta, message) => { return { meta, donner: response, message } },
-        //     providesTags: [tagTypes.donner],
-        // }),
+        allRequests: build.query({
+            query: (arg: Record<string, any>) => {
+                return {
+                    url: REQUEST_URL,
+                    method: "GET",
+                    params: arg,
+                };
+            },
+            providesTags: [tagTypes.bloodRequest],
+        }),
+
+        // get single request
+        getPendingRequests: build.query({
+            query: (arg: Record<string, any>) => {
+                return {
+                    url: `${REQUEST_URL}/pending-request`,
+                    method: "GET",
+                    params: arg,
+                };
+            },
+            providesTags: [tagTypes.bloodRequest],
+        }),
+
+        myRequests: build.query({
+            query: (arg: Record<string, any>) => {
+                return {
+                    url: `${REQUEST_URL}/my-request`,
+                    method: "GET",
+                    params: arg,
+                };
+            },
+            transformResponse: (response, meta: IMeta, message) => { return { meta, myRequest: response, message } },
+            providesTags: [tagTypes.bloodRequest],
+        }),
+
         //  create donner
         requestForDonner: build.mutation({
             query: (data) => ({
-                url: `${DONNER_URL}/create-request`,
+                url: `${REQUEST_URL}/create-request`,
                 method: "POST",
+                data,
+            }),
+            invalidatesTags: [tagTypes.bloodRequest],
+        }),
+
+        assignDonner: build.mutation({
+            query: (data) => ({
+                url: `${REQUEST_URL}/decide-request/${data?.id}`,
+                method: "PATCH",
                 data,
             }),
             invalidatesTags: [tagTypes.bloodRequest],
@@ -32,4 +65,10 @@ export const donnerApi = baseApi.injectEndpoints({
     }),
 });
 
-export const { useRequestForDonnerMutation } = donnerApi;
+export const {
+    useAllRequestsQuery,
+    useRequestForDonnerMutation,
+    useGetPendingRequestsQuery,
+    useAssignDonnerMutation,
+
+} = donnerApi;

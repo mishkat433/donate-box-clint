@@ -1,4 +1,3 @@
-import { axiosBaseQuery } from "../../../helpers/axios/axiosBaseQuery";
 import { instance as axiosInstance } from "../../../helpers/axios/axiosInstance";
 
 // type division = {
@@ -18,7 +17,7 @@ const getDivision = async () => {
             headers: { "Content-Type": "application/json" },
         });
 
-        return await allDivisionName?.data?.data?.map((division) => (
+        return await allDivisionName?.data?.data?.map((division: any) => (
             {
                 label: division?.division,
                 value: division?.division

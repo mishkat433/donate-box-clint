@@ -41,6 +41,10 @@ export const bloodRequestFor = [
         value: "Sister",
     },
     {
+        label: "Son",
+        value: "Son",
+    },
+    {
         label: "Other",
         value: "Other",
     }
@@ -54,6 +58,7 @@ export enum BLOOD_REQUEST_FOR {
     Mother = "Mother",
     Brother = "Brother",
     Sister = "Sister",
+    Son = "Son",
     Other = "Other",
 }
 

@@ -17,8 +17,8 @@ type FormValues = {
 };
 
 const AddBannerForm = () => {
-const userInfo:any =getUserInfo()
-const [addBanner]=useAddBannerMutation()
+    const userInfo: any = getUserInfo()
+    const [addBanner] = useAddBannerMutation()
 
 
     const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
@@ -60,12 +60,12 @@ const [addBanner]=useAddBannerMutation()
                     </div>
                 </div>
                 <div className='mb-0 md:mb-3 w-full'>
-                        <FormTextArea
-                            name="description"
-                            label="Description"
-                            placeholder="Write something"
-                        />
-                    </div>
+                    <FormTextArea
+                        name="description"
+                        label="Description"
+                        placeholder="Write something"
+                    />
+                </div>
                 <div className="flex flex-col md:flex-row gap-2 md:gap-6">
                 </div>
 

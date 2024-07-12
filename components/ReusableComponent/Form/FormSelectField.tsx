@@ -24,7 +24,6 @@ const FormSelectField = ({ name, value, placeholder = "select", required, option
   const { control, formState: { errors }, } = useFormContext();
 
   const errorMessage = getErrorMessageByPropertyName(errors, name);
-
   return (
     <>
       {label ?
@@ -38,7 +37,7 @@ const FormSelectField = ({ name, value, placeholder = "select", required, option
         name={name}
         render={({ field: { value, onChange } }) => (
           <select className={`select select-bordered w-full ${errorMessage && "errorBehavior"}`} onChange={handleChange ? handleChange : onChange}>
-            {defaultValue && <option defaultValue={defaultValue}>{defaultValue}</option>}
+            {defaultValue && <option defaultValue={defaultValue}>{defaultValue} (default)</option>}
             <option>SELECT</option>
             {name === 'division' && options?.length === 0 && <option>Loading...</option>}
             {options?.map((opt, i) => <option value={opt.value} key={i}>{opt.label}</option>)}

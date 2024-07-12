@@ -3,10 +3,10 @@ import * as yup from "yup";
 import { BLOOD_GROUP_NAME } from "../constants/bloodGroup";
 import { GENDER } from "../constants/gender";
 import { BLOOD_REQUEST_FOR, PATIENT_TYPE } from "../constants/requestDonner";
+import { REQUEST_HANDLER_STATUS, REQUEST_HANDLER_STATUS2 } from "../types";
 
 export const needDonnerSchema = yup.object().shape({
     requestFor: yup.mixed<BLOOD_REQUEST_FOR>().oneOf(Object.values(BLOOD_REQUEST_FOR)).required('Which requesting for blood is required'),
-
 
     patientName: yup.string().required("Patient Name is required"),
     patientAge: yup.string().required("patient Age is required"),
@@ -46,3 +46,27 @@ export const needDonnerSchema = yup.object().shape({
 
     emergencyPhone: yup.string().optional(),
 });
+
+
+export const assignDonnerSchema = yup.object().shape({
+    status: yup.mixed<REQUEST_HANDLER_STATUS2>().oneOf(Object.values(REQUEST_HANDLER_STATUS2)).required('status is required'),
+
+    // adminId: yup.string().when('status', {
+    //     is: (value: REQUEST_HANDLER_STATUS2) => value === REQUEST_HANDLER_STATUS2.ACCEPT,
+    //     then: (schema) => schema.required("adminId is required"),
+    // }),
+
+    donnerId: yup.string().when('status', {
+        is: (value: REQUEST_HANDLER_STATUS2) => value === REQUEST_HANDLER_STATUS2.ACCEPT,
+        then: (schema) => schema.required("donnerId is required"),
+    }),
+
+    rejectReason: yup.string().when('status', {
+        is: (value: REQUEST_HANDLER_STATUS2) => value === REQUEST_HANDLER_STATUS2.REJECT,
+        then: (schema) => schema.required("Reject reason is required"),
+    }),
+
+    // rejectReason: yup.string().required("district is required"),
+
+})
+

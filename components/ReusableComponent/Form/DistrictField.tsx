@@ -9,7 +9,8 @@ type FormValues = {
     division: string
 }
 
-const DistrictField = () => {
+const DistrictField = ({ required = true }) => {
+
     const [districtOptions, setDistrictOptions] = useState<any[]>([]);
 
     const { control } = useFormContext<FormValues>();
@@ -32,7 +33,7 @@ const DistrictField = () => {
             className="w-full"
             label="Select District"
             options={districtOptions}
-            required
+            required={required}
         />
     );
 };

@@ -30,7 +30,7 @@ const AreaField = () => {
         <FormSelectField
             name="area"
             className="w-full"
-            label="Select Your Area"
+            label="Select Area"
             options={areaOptions}
         />
     );

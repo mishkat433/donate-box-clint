@@ -1,8 +1,5 @@
-import { JwtPayload } from "jwt-decode";
 import { USER_ROLE } from "../constants/role";
 import { BLOOD_GROUP_NAME } from "../constants/bloodGroup";
-import { GENDER } from "../constants/gender";
-import { ROUTER_TYPE } from "next/dist/build/utils";
 import { DIVISION_NAME } from "../constants/division";
 
 export interface IMeta {
@@ -60,7 +57,7 @@ export interface IUser {
 export interface IAdmin {
   _id: string;
   id: string;
-  userId:string;
+  userId: string;
   adminId: string;
   fullName: string;
   gender: string;
@@ -108,4 +105,16 @@ export interface IBanner {
   updatedAt: string;
   __v: number;
   _id: string;
+}
+
+
+export enum REQUEST_HANDLER_STATUS {
+  ACCEPT = "ACCEPT",
+  PENDING = "PENDING",
+  REJECT = "REJECT"
+}
+
+export enum REQUEST_HANDLER_STATUS2 {
+  ACCEPT = "ACCEPT",
+  REJECT = "REJECT"
 }

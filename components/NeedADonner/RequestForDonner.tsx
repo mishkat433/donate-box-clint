@@ -16,8 +16,6 @@ import { useEffect, useState } from "react";
 import ApplicantsInfoForms from "./ApplicantsInfoForms";
 import { BLOOD_REQUEST_FOR } from "../../constants/requestDonner";
 import { useRouter } from "next/navigation";
-import { getUserInfo } from "../../services/auth.service";
-import { useLoginUserDataQuery } from "../../redux/api/authApi";
 
 
 type FormValues = {

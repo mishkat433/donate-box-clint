@@ -23,4 +23,5 @@ export const manageBannerChild = [
 
 export const manageRequestChild = [
     { label: "All Request", link: "all-Request" },
+    { label: "Pending Requests", link: "pending-request" },
 ]
