@@ -58,7 +58,9 @@ export const assignDonnerSchema = yup.object().shape({
 
     donnerId: yup.string().when('status', {
         is: (value: REQUEST_HANDLER_STATUS2) => value === REQUEST_HANDLER_STATUS2.ACCEPT,
-        then: (schema) => schema.required("donnerId is required"),
+        then: (schema) => schema
+            .required('select a donner')
+            .test('is-not-select', '"SELECT" is not accept', (value) => value !== 'SELECT'),
     }),
 
     rejectReason: yup.string().when('status', {

@@ -3,13 +3,13 @@
 
 import { useState } from "react";
 
-type Colum = {
-    header: string;
-    orgName: string
-}
+// type Colum = {
+//     header: string;
+//     orgName: string
+// }
 
 type TableProps = {
-    columns: Colum[];
+    columns: string[];
     data: any[];
     tableRow: (item: any, index: number) => React.ReactNode;
     actions?: {
@@ -37,7 +37,7 @@ const ReusableTable = ({ columns, data, tableRow, actions = [], emptyMessage = "
                     <thead>
                         <tr className="bg-primary-red text-white-text rounded-md text-center">
                             {columns.map((column, index) => (
-                                <th key={index}>{column?.header}</th>
+                                <th key={index}>{column}</th>
                             ))}
                             {actions.length > 0 && <th>Actions</th>}
                         </tr>

@@ -67,7 +67,7 @@ const DonateOrGet = () => {
                                     <div className="col-span-1 flex justify-center items-center">
                                         <strong className="text-xl font-mono uppercase bg-primary-red md:bg-transparent w-full text-center text-white-text md:text-primary-text">{el?.division}</strong>
                                     </div>
-                                    <div className={`md:col-span-2 lg:col-span-4 grid grid-cols-1 lg:grid-cols-3 gap-3 `}>
+                                    <div className={`md:col-span-2 lg:col-span-4 grid grid-cols-1 lg:grid-cols-3 gap-4 `}>
                                         {el?.donner?.map((dr: any, i: number) => (!dr?.isBanned && <DonateGetCard key={i} donner={dr} />))}
                                     </div>
                                 </div>

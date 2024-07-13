@@ -27,7 +27,7 @@ const PendingRequests = () => {
     const [limit, setLimit] = useState<number>(10);
     const [sortBy, setSortBy] = useState<string>("");
     const [sortOrder, setSortOrder] = useState<string>("asc");
-    // const [district, setDistrict] = useState<string>(adminData?.data[0]?.district);
+    const [district, setDistrict] = useState<string | null>(null);
     const [area, setArea] = useState<string>();
     const [searchTerm, setSearchTerm] = useState<string>("");
 
@@ -35,7 +35,7 @@ const PendingRequests = () => {
     query["page"] = page;
     query["sortBy"] = sortBy;
     query["sortOrder"] = sortOrder;
-    query["division"] = loginAdminInfo?.role !== 'SUPER_ADMIN' && adminData?.data[0]?.division;
+    query["division"] = loginAdminInfo?.role !== 'SUPER_ADMIN' ? adminData?.data[0]?.division : district;
     // query["district"] = district;
     query["area"] = area;
 
@@ -50,15 +50,7 @@ const PendingRequests = () => {
 
 
     // table related Data start
-    const columns = [
-        { header: 'SL', orgName: 'SL' },
-        { header: 'Applicants Name', orgName: 'applicantName' },
-        { header: 'Applicants Phone', orgName: 'applicantPhone' },
-        { header: 'Patient BG', orgName: 'patientBG' },
-        { header: 'patientAge', orgName: 'patientAge' },
-        { header: 'patientType', orgName: 'patientType' },
-        { header: 'District', orgName: 'district' },
-        { header: 'Date Of Need Blood', orgName: 'dateOfNeedBlood' },
+    const columns = ['SL', 'Applicants Name', 'Applicants Phone', 'Patient BG', 'patientAge', 'patientType', 'District', 'Date Of Need Blood',
     ];
 
     const tableRow = (item, index) => (
@@ -96,7 +88,7 @@ const PendingRequests = () => {
                 <Dropdown options={sortOrderOptions} onSelect={setSortOrder} placeholder="Sort Order :" defaultValue={sortOrder} hoverHeight={"group-hover:h-[74px]"} /> */}
             </div>
 
-            <div className="shadow-md rounded-md">
+            <div className="shadow-md rounded-md overflow-x-auto ">
                 <ReusableTable
                     columns={columns}
                     data={data?.data?.data}

@@ -1,3 +1,4 @@
+import axios from "axios";
 import { instance as axiosInstance } from "../../../helpers/axios/axiosInstance";
 
 // type division = {
@@ -11,7 +12,7 @@ const defaultLocationUrl = "https://bdapis.com/api/v1.2";
 
 const getDivision = async () => {
     try {
-        const allDivisionName = await axiosInstance({
+        const allDivisionName = await axios({
             url: `${defaultLocationUrl}/divisions`,
             method: "get",
             headers: { "Content-Type": "application/json" },
@@ -36,7 +37,7 @@ let allDistrictName: any
 
 const getDistrict = async (division: string) => {
     try {
-        allDistrictName = await axiosInstance({
+        allDistrictName = await axios({
             url: `${defaultLocationUrl}/division/${division}`,
             method: "get",
             headers: { "Content-Type": "application/json" },

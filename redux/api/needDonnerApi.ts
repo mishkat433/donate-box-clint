@@ -39,7 +39,6 @@ export const donnerApi = baseApi.injectEndpoints({
                     params: arg,
                 };
             },
-            transformResponse: (response, meta: IMeta, message) => { return { meta, myRequest: response, message } },
             providesTags: [tagTypes.bloodRequest],
         }),
 
@@ -70,5 +69,6 @@ export const {
     useRequestForDonnerMutation,
     useGetPendingRequestsQuery,
     useAssignDonnerMutation,
+    useMyRequestsQuery,
 
 } = donnerApi;

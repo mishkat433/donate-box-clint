@@ -8,14 +8,14 @@ import Dropdown from "../../ReusableComponent/Dropdown/Dropdown";
 import { dataLimitOptions, sortByOptions, sortOrderOptions } from "../../../lib/Options";
 import SearchBar from "../../ReusableComponent/Searchbar";
 import CommonTable from "../../ReusableComponent/Table/CommonTable";
-import { useAdminBannedMutation, useGetAllAdminsQuery,useDeleteAdminMutation } from "../../../redux/api/adminApi";
+import { useAdminBannedMutation, useGetAllAdminsQuery, useDeleteAdminMutation } from "../../../redux/api/adminApi";
 import Swal from "sweetalert2";
 
 const AllAdmins = () => {
     const columns = ['SL', 'Admin Id', 'Name', 'Phone', "Role", 'Division', 'Banned', 'Action'];
 
-    const [adminBanned,{}]=useAdminBannedMutation()
-    const [deleteAdmin,{}]=useDeleteAdminMutation()
+    const [adminBanned, { }] = useAdminBannedMutation()
+    const [deleteAdmin, { }] = useDeleteAdminMutation()
 
     const query: Record<string, any> = {};
 
@@ -124,7 +124,7 @@ const AllAdmins = () => {
                 <Dropdown options={sortOrderOptions} onSelect={setSortOrder} placeholder="Sort Order :" defaultValue={sortOrder} hoverHeight={"group-hover:h-[74px]"} />
             </div>
 
-            <div className="shadow-md rounded-md">
+            <div className="shadow-md rounded-md overflow-auto ">
                 <CommonTable columns={columns} data={filteringAdmin} slCount={{ limit, page }} bannedHandler={bannedHandle} deleteHandler={deleteHandler} />
             </div>
             <div className="flex justify-between gap-3 mt-2">
