@@ -7,29 +7,22 @@ import { RiCloseFill, RiMenu2Fill } from "react-icons/ri";
 import profile from "../../../../public/assets/profile.png";
 import Logo from "../../../ReusableComponent/Logo";
 import { useEffect, useState } from "react";
-import { getUserInfo, isLoggedIn, removeUserInfo } from "../../../../services/auth.service";
+import { getUserId, getUserInfo, isLoggedIn, removeUserInfo } from "../../../../services/auth.service";
 import { authKey } from "../../../../constants/storageKey";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useLogOutMutation, useLoginUserDataQuery } from "../../../../redux/api/authApi";
 
 
 const Navbar = () => {
-  // const [logInUserData, setLogInUserData] = useState({})
+  const currentPath = usePathname();
+
   const [logOut] = useLogOutMutation()
-  const userInfo: any = getUserInfo()
   const router = useRouter()
-  const loginCheck = isLoggedIn()
 
-  let id: string
+  const userInfo: any = getUserInfo()
+  const { data, isLoading, isError }: any = useLoginUserDataQuery(getUserId(userInfo))
 
-
-  if (userInfo?.userId) {
-    id = userInfo.userId
-  } else {
-    id = userInfo.adminId
-  }
-  const { data, isLoading, isError }: any = useLoginUserDataQuery(id)
 
   const logOutHandle = async () => {
     await logOut({ data: "blank" })
@@ -43,11 +36,11 @@ const Navbar = () => {
 
   const menuItems =
     <>
-      <li className="nav-link-style  ">  <Link href={"/"} className="hover-underline-animation">Home</Link></li>
-      <li className="nav-link-style ">  <Link href={"/cases"} className="hover-underline-animation">Cases</Link></li>
-      <li className="nav-link-style ">  <Link href={"/about"} className=" hover-underline-animation">About</Link></li>
-      <li className="nav-link-style ">  <Link href={"/contact"} className=" hover-underline-animation">Contact</Link></li>
-      <li className="nav-link-style ">  <Link href={"/request/myRequests"} className=" hover-underline-animation">My Requests</Link></li>
+      <li className="nav-link-style  ">  <Link href={"/"} className={` ${currentPath === "/" ? 'text-primary-red' : 'hover-underline-animation'}`}>Home</Link></li>
+      <li className="nav-link-style ">  <Link href={"/cases"} className={` ${currentPath === "/cases" ? 'text-primary-red' : 'hover-underline-animation'}`}>Cases</Link></li>
+      <li className="nav-link-style ">  <Link href={"/about"} className={` ${currentPath === "/about" ? 'text-primary-red' : 'hover-underline-animation'}`}>About</Link></li>
+      <li className="nav-link-style ">  <Link href={"/contact"} className={` ${currentPath === "/contact" ? 'text-primary-red' : 'hover-underline-animation'}`}>Contact</Link></li>
+      <li className="nav-link-style ">  <Link href={"/request/myRequests"} className={` ${currentPath === "/request/myRequests" ? 'text-primary-red' : 'hover-underline-animation'}`}>My Requests</Link></li>
       {/* <li className="nav-link-style "> <button className="button-transition primary-red-button py-1 px-2.5">Need Blood</button> </li> */}
       <li className="nav-link-style"> <Link href="/request" className="button-transition primary-red-button py-1 px-2.5 w-full">Need A Donner</Link> </li>
       <li className="nav-link-style"> <Link href="/donate" className="button-transition primary-red-button py-1 px-2.5 w-full">Donate Now</Link> </li>
@@ -60,7 +53,7 @@ const Navbar = () => {
               <Image src={profile} width={80} height={80} alt="profile" />
             </div>
           </div>
-          <div className={`flex flex-col absolute gap-[2px] z-20  -right-3 bg-primary-red text-center rounded-md md:w-14 lg:w-40 px-1 duration-300 overflow-hidden h-0  group-hover:h-[165px] `}>
+          <div className={`flex flex-col absolute gap-[2px] z-20 -right-1 left-0 md:-left-20 md:-right-20 bg-primary-red text-center rounded-md md:w-14 lg:w-40 px-1 duration-300 overflow-hidden h-0  group-hover:h-[165px] `}>
             <div className="p-[1px] text-white-text duration-300  py-1">
               <p className="text-xs mt-1">({data?.data[0]?.role})</p>
               <strong className="">{data?.data[0]?.fullName}</strong>
@@ -75,7 +68,6 @@ const Navbar = () => {
         </li>
         :
         <li className="nav-link-style"> <Link href={"/login"} className=" button-transition primary-red-button py-1 px-2.5 w-full ">Login/ Register</Link> </li>
-
       }
     </>
 

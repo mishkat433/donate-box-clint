@@ -8,7 +8,7 @@ interface ViewUserProps {
 const ViewUser = ({ userData }: ViewUserProps) => {
     const headings = [
         { label: "Name", key: "fullName" },
-        { label: "Id", key: `${userData?.userId?"userId": "adminId"}` },
+        { label: "Id", key: `${userData?.userId ? "userId" : "adminId"}` },
         { label: "Role", key: "role" },
         { label: "Phone Number", key: "phoneNumber" },
         { label: "Blood Group", key: "bloodGroup" },
@@ -23,7 +23,7 @@ const ViewUser = ({ userData }: ViewUserProps) => {
     ];
 
     return (
-        <div className="border-1 border-border-color my-2 p-2 rounded-md">
+        <div className="border-1 border-border-color my-2 p-2 rounded-md animate-fade animate-once">
             <table className="table-auto w-full text-sm">
                 <tbody>
                     {headings.map((heading) => (

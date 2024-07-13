@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useDebounced } from "../../../redux/hooks";
 import DotLoading from "../../ReusableComponent/DotLoading";
-import { RiAddFill, RiUserSmileFill } from "react-icons/ri";
+import { RiAddFill, RiAdminLine } from "react-icons/ri";
 import Dropdown from "../../ReusableComponent/Dropdown/Dropdown";
 import { dataLimitOptions, sortByOptions, sortOrderOptions } from "../../../lib/Options";
 import SearchBar from "../../ReusableComponent/Searchbar";
@@ -109,11 +109,11 @@ const AllAdmins = () => {
 
 
     return (
-        <div className="rounded-md">
+        <div className="rounded-md animate-fade animate-once">
             <div className="p-3 flex justify-between items-center gap-4 mb-2">
                 <div className="flex gap-2 items-center text-xl font-bold text-primary-text">
-                    <RiUserSmileFill className="text-primary-red" />
-                    <h3>All Users</h3>
+                    <RiAdminLine className="text-primary-red" />
+                    <h3>All Admins</h3>
                 </div>
                 <button className="p-1.5 primary-red-button flex items-center gap-1"><RiAddFill /> Create New</button>
             </div>

@@ -111,7 +111,7 @@ const AllUsersMain = () => {
     const pageCount = Array.from({ length: Math.ceil(data.donner.meta.total / data.donner.meta.limit) }, (_, i) => ({ value: i + 1, label: i + 1 }));
 
     return (
-        <div className="">
+        <div className="animate-fade animate-once">
             <div className=" flex justify-between items-center gap-4 mb-4">
                 <div className="flex gap-2 items-center text-xl font-bold text-primary-text">
                     <RiUserSmileFill className="text-primary-red" />
@@ -129,7 +129,7 @@ const AllUsersMain = () => {
                 <Dropdown options={sortOrderOptions} onSelect={setSortOrder} placeholder="Sort Order :" defaultValue={sortOrder} hoverHeight={"group-hover:h-[74px]"} />
             </div>
 
-            <div className="shadow-md rounded-md">
+            <div className="shadow-md rounded-md overflow-x-auto">
                 <CommonTable columns={columns} data={data?.donner?.data} slCount={{ limit, page }} bannedHandler={bannedHandle} deleteHandler={deleteHandler} />
             </div>
             <div className="flex justify-between gap-3 mt-2">

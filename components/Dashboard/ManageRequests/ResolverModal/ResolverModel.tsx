@@ -66,7 +66,7 @@ const ResolverModel = ({ reqData }: any) => {
     return (
         <>
             {nextHandle ?
-                <div className='my-3 rounded-md mx-auto shadow-md border-1 border-border-color p-2'>
+                <div className='my-3 rounded-md mx-auto shadow-md border-1 border-border-color p-2 animate-fade-right animate-once '>
                     <Form submitHandler={onSubmit} resolver={yupResolver(assignDonnerSchema)} >
                         <ResolverModalForm />
                         <div className='flex w-full gap-3'>

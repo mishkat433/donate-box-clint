@@ -8,7 +8,7 @@ const AddUser = () => {
 
 
     return (
-        <div className="">
+        <div className="animate-fade animate-once">
             <div className=" flex justify-between items-center gap-4 mb-4">
                 <div className="flex gap-2 items-center text-xl font-bold text-primary-text">
                     <RiUserSmileFill className="text-primary-red" />
@@ -18,7 +18,7 @@ const AddUser = () => {
             </div>
 
             <div className="w-full">
-              <BloodDonner heading={false} />
+                <BloodDonner heading={false} />
             </div>
         </div>
     );

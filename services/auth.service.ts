@@ -37,3 +37,17 @@ export const getNewAccessToken = async () => {
     withCredentials: true,
   });
 };
+
+
+interface UserInfo {
+  userId?: string;
+  adminId?: string;
+}
+
+
+export const getUserId = (userInfo: UserInfo): string => {
+  return userInfo.userId ?? userInfo.adminId ?? '';
+};
+
+
+

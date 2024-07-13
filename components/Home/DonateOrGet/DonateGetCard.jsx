@@ -24,7 +24,7 @@ const DonateGetCard = ({ donner }) => {
     return (
         <div className="card text-primary-text border-1 border-white-text relative  rounded-full shadow-inner hoverEffect overflow-hidden">
             <div className=" flex items-center gap-3">
-                <h2 className="text-[2.15rem] font-bold h-24 flex justify-center items-center w-[6.3rem] rounded-full bg-primary-red p-2 text-white-text overflow-hidden">{donner?.bloodGroup}</h2>
+                <h2 title="Blood Group" className="text-[2.15rem] cursor-default font-bold h-24 flex justify-center items-center w-[6.3rem] rounded-full bg-primary-red p-2 text-white-text overflow-hidden">{donner?.bloodGroup}</h2>
 
                 <div className="text-center">
                     <strong className="text-xl">{donner?.fullName}</strong>

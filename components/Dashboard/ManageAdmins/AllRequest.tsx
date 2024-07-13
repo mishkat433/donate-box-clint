@@ -1,6 +1,6 @@
 "use client"
 
-import { RiAddFill, RiUserSmileFill } from "react-icons/ri";
+import { RiAddFill, RiGitClosePullRequestFill } from "react-icons/ri";
 import { useDeleteAdminMutation, useGetAllAdminsQuery, useRequestHandlerMutation } from "../../../redux/api/adminApi";
 import DotLoading from "../../ReusableComponent/DotLoading";
 import SearchBar from "../../ReusableComponent/Searchbar";
@@ -14,10 +14,10 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 
 const AllRequest = () => {
-const [requestHandler]=useRequestHandlerMutation()
-const [deleteAdmin,{}]=useDeleteAdminMutation()
+    const [requestHandler] = useRequestHandlerMutation()
+    const [deleteAdmin, { }] = useDeleteAdminMutation()
 
-    const columns = ['SL', 'Admin Id', 'Name', 'Phone', "Role", 'Division', 'Status',"Action"];
+    const columns = ['SL', 'Admin Id', 'Name', 'Phone', "Role", 'Division', 'Status', "Action"];
 
     const query: Record<string, any> = {};
 
@@ -41,10 +41,10 @@ const [deleteAdmin,{}]=useDeleteAdminMutation()
         query["searchTerm"] = debouncedTerm;
     }
 
-    const requestHandle = async (status: string, adminId:string) => {
+    const requestHandle = async (status: string, adminId: string) => {
         try {
-        const reqData={status,adminId}
-            const res:any = await requestHandler(reqData)
+            const reqData = { status, adminId }
+            const res: any = await requestHandler(reqData)
             if (res?.success) {
                 toast.success(`Admin request ${res?.data?.data?.status}`)
             }
@@ -83,7 +83,7 @@ const [deleteAdmin,{}]=useDeleteAdminMutation()
     }
 
     const { data, isLoading, isError, error }: any = useGetAllAdminsQuery({ ...query })
-const filteringAdminPending= data?.admins?.data?.filter((admin:IAdmin)=> admin?.status!=="ACCEPT")
+    const filteringAdminPending = data?.admins?.data?.filter((admin: IAdmin) => admin?.status !== "ACCEPT")
 
     if (isLoading) {
         return <DotLoading />
@@ -93,37 +93,37 @@ const filteringAdminPending= data?.admins?.data?.filter((admin:IAdmin)=> admin?.
 
 
     return (
-        <div className="rounded-md">
-        <div className="p-3 flex justify-between items-center gap-4 mb-2">
-            <div className="flex gap-2 items-center text-xl font-bold text-primary-text">
-                <RiUserSmileFill className="text-primary-red" />
-                <h3>Admin Requests</h3>
+        <div className="rounded-md animate-fade animate-once">
+            <div className="p-3 flex justify-between items-center gap-4 mb-2">
+                <div className="flex gap-2 items-center text-xl font-bold text-primary-text">
+                    <RiGitClosePullRequestFill className="text-primary-red" />
+                    <h3>Admin Requests</h3>
+                </div>
+                <button className="p-1.5 primary-red-button flex items-center gap-1"><RiAddFill /> Create New</button>
             </div>
-            <button className="p-1.5 primary-red-button flex items-center gap-1"><RiAddFill /> Create New</button>
-        </div>
 
-        <div className=" p-2 flex justify-between items-center gap-2 rounded-md bg-primary-red text-white-text shadow-md mb-5">
-            <div className="w-3/5 text-primary-text"><SearchBar searchInput={setSearchTerm} /></div>
-            <Dropdown options={sortByOptions} onSelect={setSortBy} placeholder="Sort By :" defaultValue={sortBy} hoverHeight={"group-hover:h-[111px]"} />
-            <Dropdown options={sortOrderOptions} onSelect={setSortOrder} placeholder="Sort Order :" defaultValue={sortOrder} hoverHeight={"group-hover:h-[74px]"} />
-        </div>
-
-        <div className="shadow-md rounded-md">
-        <CommonTable columns={columns} data={filteringAdminPending} slCount={{ limit, page }} requestHandle={requestHandle} deleteHandler={deleteHandler}  />
-        </div>
-        <div className="flex justify-between gap-3 mt-2">
-            <div className="bg-primary-red rounded-md text-white-text">
-                <Dropdown options={dataLimitOptions} onSelect={setLimit} placeholder={`Limit : ${limit}`} defaultValue={limit} />
+            <div className=" p-2 flex justify-between items-center gap-2 rounded-md bg-primary-red text-white-text shadow-md mb-5">
+                <div className="w-3/5 text-primary-text"><SearchBar searchInput={setSearchTerm} /></div>
+                <Dropdown options={sortByOptions} onSelect={setSortBy} placeholder="Sort By :" defaultValue={sortBy} hoverHeight={"group-hover:h-[111px]"} />
+                <Dropdown options={sortOrderOptions} onSelect={setSortOrder} placeholder="Sort Order :" defaultValue={sortOrder} hoverHeight={"group-hover:h-[74px]"} />
             </div>
-            {/* <div className="join ">
+
+            <div className="shadow-md rounded-md">
+                <CommonTable columns={columns} data={filteringAdminPending} slCount={{ limit, page }} requestHandle={requestHandle} deleteHandler={deleteHandler} />
+            </div>
+            <div className="flex justify-between gap-3 mt-2">
+                <div className="bg-primary-red rounded-md text-white-text">
+                    <Dropdown options={dataLimitOptions} onSelect={setLimit} placeholder={`Limit : ${limit}`} defaultValue={limit} />
+                </div>
+                {/* <div className="join ">
                 <button onClick={() => setPage(page - 1)} className={`join-item btn hover:bg-primary-red text-white-text bg-primary-red  `} disabled={data?.admins?.meta?.prevPage === null ? true : false}>«</button>
                 <div className="join-item btn bg-primary-red text-white-text hover:bg-primary-red px-0">
                     <Dropdown options={pageCount} onSelect={setPage} placeholder={`Page : ${page}`} defaultValue={page} hoverHeight={"group-hover:h-[81px]"} />
                 </div>
                 <button onClick={() => setPage(page + 1)} className={`join-item btn hover:bg-primary-red text-white-text bg-primary-red  `} disabled={data?.admins?.meta?.nextPages === null ? true : false}>»</button>
             </div> */}
+            </div>
         </div>
-    </div>
     );
 };
 

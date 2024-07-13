@@ -33,7 +33,7 @@ const Statistics = () => {
 
     return (
         <section className='bg-statics-bg bg-left md:bg-top  bg-cover bg-fixed font-mulish p-default' >
-            <div className='grid grid-cols-1 md:grid-cols-4 gap-x-4 items-center text-white-text px-5 mx-auto container md:py-0 lg:min-h-[70vh] ' >
+            <div className='grid grid-cols-1 py-2  md:grid-cols-4 gap-y-3 md:gap-y-0 gap-x-4 items-center text-white-text px-5 mx-auto container md:py-0 lg:min-h-[70vh] ' >
                 <div className='statistics-card  group '>
                     <p className='text-5xl group-hover:text-primary-red duration-300 group-hover:-scale-x-100'><BiSolidDonateBlood /></p>
                     <Counter endValue={data?.data?.totalBloodDonation} havePrefix={false} />

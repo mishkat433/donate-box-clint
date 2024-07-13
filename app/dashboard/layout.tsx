@@ -10,7 +10,7 @@ import DashboardHeader from '../../components/Dashboard/DashboardHeader/Dashboar
 
 
 export default function DashboardLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
-    const [sideView, setSideView] = useState(true)
+    const [sideView, setSideView] = useState(false)
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const userLoggedIn = isLoggedIn();
     const router = useRouter();
@@ -35,9 +35,9 @@ export default function DashboardLayout({ children, }: Readonly<{ children: Reac
                         <Sidebar sideView={sideView} setSideView={setSideView} />
                     </div>
                 </div>
-                <div className={`p-2   ${sideView ? "md:w-4/5" : "w-full"}`}>
+                <div className={`p-2   ${sideView ? "md:w-4/5" : "w-screen md:w-full"}`}>
                     <div className={` sticky top-0 left-0 z-10 bg-white-text  border-1 border-border-color`}>
-                        <DashboardHeader /> 
+                        <DashboardHeader />
                     </div>
                     {children}
                 </div>

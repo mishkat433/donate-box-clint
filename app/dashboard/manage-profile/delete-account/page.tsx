@@ -1,8 +1,10 @@
+import UnderDevelopment from "../../../../components/ReusableComponent/UnderDevelopement";
 
 const page = () => {
     return (
         <div>
-            <p>Under development,(if you want to emergency delete your account please contact us)</p>
+            <p>if you want to emergency delete your account please contact us</p>
+            <UnderDevelopment />
         </div>
     );
 };

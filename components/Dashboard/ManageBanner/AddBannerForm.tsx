@@ -9,6 +9,7 @@ import FormTextArea from "../../ReusableComponent/Form/FormTextArea";
 import toast from "react-hot-toast";
 import { getUserInfo } from "../../../services/auth.service";
 import { useAddBannerMutation } from "../../../redux/api/bannerApi";
+import { useRef } from "react";
 
 type FormValues = {
     showing: boolean;
@@ -19,7 +20,7 @@ type FormValues = {
 const AddBannerForm = () => {
     const userInfo: any = getUserInfo()
     const [addBanner] = useAddBannerMutation()
-
+    const addBannerRef = useRef(null);
 
     const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
         try {
@@ -27,6 +28,7 @@ const AddBannerForm = () => {
             const res = await addBanner({ ...data }).unwrap();
             if (res?.success) {
                 toast.success(res?.message)
+                addBannerRef.current.click();
             }
         }
         catch (err: any) {
@@ -69,8 +71,11 @@ const AddBannerForm = () => {
                 <div className="flex flex-col md:flex-row gap-2 md:gap-6">
                 </div>
 
-                <label htmlFor="createBanner" ><button className="button-transition primary-red-button py-2 px-2.5 w-full mt-4"> Submit</button></label>
-
+                {/* <label htmlFor="createBanner" ><button className="button-transition primary-red-button py-2 px-2.5 w-full mt-4"> Submit</button></label> */}
+                <div className='w-full'>
+                    <button className="button-transition primary-red-button w-full py-2 px-2.5 ">Add Banner</button>
+                    <label ref={addBannerRef} htmlFor="createBanner" className="w-full"></label>
+                </div>
             </Form>
         </div>
     );

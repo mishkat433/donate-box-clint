@@ -52,7 +52,7 @@ const ViewRequest = ({ nextHandle = null, requestData }) => {
     ];
 
     return (
-        <div className='my-2'>
+        <div className='my-2 animate-fade-left animate-once'>
             <h4 className='font-bold pb-1 text-center text-primary-red'>View Request Details </h4>
             <div className='rounded-md mx-auto shadow-md border-1 border-border-color p-2 '>
                 <h4 className='font-bold text-sm text-view'>Patient Information : </h4>

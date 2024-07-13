@@ -19,7 +19,7 @@ const AdminItems = () => {
                             <RiUserSettingsLine className="dashboard-icon-style " />
                             <ItemsHead header="Manage Users" />
                         </span>
-                        <ul className={` w-full bg-border-color withoutPadding text-primary-text max-h-[150px] overflow-y-auto overflow-x-hidden rounded-b-md duration-300 h-0 group-hover:h-[100px] `}>
+                        <ul className={` w-full bg-border-color withoutPadding text-primary-text max-h-[150px] overflow-y-auto overflow-x-hidden rounded-b-md duration-300 h-0 group-hover:h-[68px] `}>
                             {manageUserChild?.map((option) => (
                                 <li key={option.label} className={` py-1 px-3 cursor-pointer mt-1 duration-200 hover:bg-primary-red hover:text-white-text ${slicePath?.includes(option?.link) && 'bg-primary-red text-white-text'} `} >
                                     <Link href={`/dashboard/manage-user/${option?.link}`} className={`py-1`}>

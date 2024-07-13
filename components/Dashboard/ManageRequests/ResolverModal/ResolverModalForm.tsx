@@ -54,7 +54,7 @@ const ResolverModalForm = () => {
     }));
 
     return (
-        <div className=''>
+        <div className='animate-fade animate-once'>
             <div className=" ">
                 <div className="flex flex-col md:flex-row gap-2 md:gap-6 ">
                     <div className='mb-0 md:mb-3 w-full'>

@@ -5,29 +5,23 @@ import Modal from "../../../ReusableComponent/Modal";
 import Image from "next/image";
 import profileImage from "../../../../public/assets/profile.png"
 import { useLoginUserDataQuery } from "../../../../redux/api/authApi";
-import { getUserInfo, isLoggedIn } from "../../../../services/auth.service";
+import { getUserId, getUserInfo, isLoggedIn } from "../../../../services/auth.service";
 import DotLoading from "../../../ReusableComponent/DotLoading";
 
 const MyProfileMain = () => {
-    const userInfo: any = getUserInfo()
     const loginCheck = isLoggedIn()
 
     let id: string
 
-
-    if (userInfo?.userId) {
-        id = userInfo.userId
-    } else {
-        id = userInfo.adminId
-    }
-    const { data, isLoading, isError }: any = useLoginUserDataQuery(id)
+    const userInfo: any = getUserInfo()
+    const { data, isLoading, isError }: any = useLoginUserDataQuery(getUserId(userInfo))
 
     if (isLoading) {
         return <DotLoading />
     }
 
     return (
-        <div>
+        <div className="animate-fade animate-once">
             <div className="p-3 flex justify-between items-center gap-4 mb-2">
                 <div className="flex gap-2 items-center text-xl font-bold text-primary-text">
                     <RiUserSmileFill className="text-primary-red" />

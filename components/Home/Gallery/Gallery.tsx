@@ -28,9 +28,9 @@ const Gallery = () => {
     };
 
     return (
-        <section className="py-10 bg-color-b bg-no-repeat bg-cover ">
+        <section className="py-5 bg-color-b bg-no-repeat bg-cover ">
             <div className="">
-                <div className="my-10">
+                <div className="my-5 md:my-10">
                     <h1 className="text-center text-xl md:text2xl lg:text-4xl font-oswald text-primary-red font-bold ">Gallery</h1>
                 </div>
                 <div className="gallery">

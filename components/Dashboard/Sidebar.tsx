@@ -47,7 +47,7 @@ const Sidebar = ({ sideView, setSideView }: any) => {
     const role = data?.data[0]?.role || "USER"
 
     return (
-        <nav className={`main-menu  ${sideView ? 'w-[285px]' : 'w-[60px] hover:w-[285px]'} p-2 hover:overflow-hidden `}>
+        <nav className={`main-menu  ${sideView ? 'w-[250px] md:w-[285px]' : 'w-[60px] hover:w-[285px]'} p-2 hover:overflow-hidden `}>
             <div className="h-full ">
                 <div className=" mb-2  relative overflow-hidden shadow-sm">
                     <ul className="flex py-2 px-2.5">
@@ -57,7 +57,7 @@ const Sidebar = ({ sideView, setSideView }: any) => {
                                 <h2 className="nav-text-logo text-lg font-bold">DONATE <span className="text-primary-red">BOX</span> </h2>
                             </Link>
                         </li>
-                        <li className="relative right-1 top-1">
+                        <li className="relative right-10 md:right-1 top-1">
                             {sideView ?
                                 <RiArrowRightCircleFill onClick={() => setSideView(false)} className="dashboard-icon-style text-primary-red" />
                                 :

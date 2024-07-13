@@ -55,7 +55,7 @@ const AllBanners = () => {
                     const res: any = await showControl(data)
                     if (res?.data?.success) {
                         Swal.fire({
-                            title: "Banned!",
+                            title: "Visibility!",
                             text: `${data?.showing ? "Now this banner is show in home page." : "Now this banner is not show in home page"}`,
                             icon: "success",
                             timer: 2000
@@ -104,7 +104,7 @@ const AllBanners = () => {
     }
 
     return (
-        <div className="rounded-md">
+        <div className="rounded-md animate-fade animate-once">
             <div className="p-3 flex justify-between items-center gap-4 mb-2">
                 <div className="flex gap-2 items-center text-xl font-bold text-primary-text">
                     <RiSwapBoxLine className="" />

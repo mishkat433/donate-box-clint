@@ -6,7 +6,7 @@ import Dropdown from '../../ReusableComponent/Dropdown/Dropdown';
 import { requestSortByOptions } from '../../../lib/RequestOptions';
 import { dataLimitOptions, sortOrderOptions } from '../../../lib/Options';
 import { useDebounced } from '../../../redux/hooks';
-import { useAllRequestsQuery, useMyRequestsQuery } from '../../../redux/api/needDonnerApi';
+import { useMyRequestsQuery } from '../../../redux/api/needDonnerApi';
 import Modal from '../../ReusableComponent/Modal';
 import ReusableTable from '../../ReusableComponent/Table/ReusableTable';
 import { format } from 'date-fns';
@@ -35,7 +35,6 @@ const MyRequests = () => {
     }
 
     const { data, isLoading } = useMyRequestsQuery({ ...query })
-    console.log(data)
     const pageCount = Array.from({ length: Math.ceil(data?.data?.meta?.total / data?.data?.meta?.limit) }, (_, i) => ({ value: i + 1, label: i + 1 }));
 
     const columns = [

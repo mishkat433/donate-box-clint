@@ -74,7 +74,7 @@ const RequestForDonner = () => {
     };
 
     return (
-        <div className="container mx-auto my-4 px-1">
+        <div className="container mx-auto my-4 px-1 animate-fade-down animate-once">
             <DonateHeader content={"REQUEST FOR A BLOOD DONNER"} />
             <div className="my-6 p-3 md:p-4  rounded-md  border-1 border-border-color">
                 <Form submitHandler={onSubmit} resolver={yupResolver(needDonnerSchema)} >
