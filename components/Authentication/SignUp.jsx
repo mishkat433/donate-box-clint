@@ -29,7 +29,6 @@ const SignUp = () => {
                     if (res.data.success) {
                         setLoginLoading(false)
                         setTokenCode(res.data)
-                        console.log(res.data)
                         toast.success("Please check your email")
                         router.push('/authentication/verifyCode')
                     }
