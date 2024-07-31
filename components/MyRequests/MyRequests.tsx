@@ -1,17 +1,17 @@
 "use client"
 
 import React, { useState } from 'react';
-import SearchBar from '../../ReusableComponent/Searchbar';
-import Dropdown from '../../ReusableComponent/Dropdown/Dropdown';
-import { requestSortByOptions } from '../../../lib/RequestOptions';
-import { dataLimitOptions, sortOrderOptions } from '../../../lib/Options';
-import { useDebounced } from '../../../redux/hooks';
-import { useMyRequestsQuery } from '../../../redux/api/needDonnerApi';
-import Modal from '../../ReusableComponent/Modal';
-import ReusableTable from '../../ReusableComponent/Table/ReusableTable';
 import { format } from 'date-fns';
 import { RiEyeLine } from 'react-icons/ri';
-import ViewRequest from '../../Dashboard/ManageRequests/ResolverModal/ViewRequest';
+import { useDebounced } from '../../redux/hooks';
+import { useMyRequestsQuery } from '../../redux/api/needDonnerApi';
+import Dropdown from '../ReusableComponent/Dropdown/Dropdown';
+import { requestSortByOptions } from '../../lib/RequestOptions';
+import SearchBar from '../ReusableComponent/Searchbar';
+import { dataLimitOptions, sortOrderOptions } from '../../lib/Options';
+import ReusableTable from '../ReusableComponent/Table/ReusableTable';
+import Modal from '../ReusableComponent/Modal';
+import ViewRequest from '../Dashboard/ManageRequests/ResolverModal/ViewRequest';
 
 const MyRequests = () => {
     const [modalData, setModalData] = useState<any>(null);
@@ -48,7 +48,7 @@ const MyRequests = () => {
         'Date Of Need Blood',
     ];
 
-    const tableRow = (item, index) => (
+    const tableRow = (item, index: number) => (
         <>
             <td className={``}>{(page - 1) * limit + index + 1} </td>
             <td>{item.applicantName}</td>
@@ -68,19 +68,19 @@ const MyRequests = () => {
 
     return (
         <div className='container mx-auto mt-2'>
+            <h4 className='text-center font-bold text-xl py-4 '>My Requests</h4>
             <div className=" p-2 flex justify-between items-center gap-2 rounded-md bg-primary-red text-white-text shadow-md mb-3">
-                <div className="w-3/5 text-primary-text"><SearchBar placeholderText={"Enter your phone phone number"} searchInput={setSearchTerm} /></div>
+                <div className="w-3/5 text-primary-text"><SearchBar placeholderText={"Enter your phone number..."} searchInput={setSearchTerm} /></div>
                 <Dropdown options={requestSortByOptions} onSelect={setSortBy} placeholder="Sort By :" defaultValue={sortBy} hoverHeight={"group-hover:h-[111px]"} />
                 <Dropdown options={sortOrderOptions} onSelect={setSortOrder} placeholder="Sort Order :" defaultValue={sortOrder} hoverHeight={"group-hover:h-[74px]"} />
             </div>
-            <h4 className='text-center font-bold text-xl py-2'>My Requests</h4>
-            <div className="shadow-md rounded-md overflow-auto ">
+            <div className="shadow-md rounded-md overflow-auto">
                 <ReusableTable
                     columns={columns}
                     data={data?.data?.data}
                     tableRow={tableRow}
                     actions={actions}
-                    emptyMessage={data?.myRequest?.data?.data.length === 0 ? "Data not found." : "Phone number not found"}
+                    emptyMessage={data?.myRequest?.data?.data.length === 0 ? "Data not found." : "Enter correct phone number to search."}
                 />
 
             </div>
@@ -89,11 +89,11 @@ const MyRequests = () => {
                     <Dropdown options={dataLimitOptions} onSelect={setLimit} placeholder={`Limit : ${limit}`} defaultValue={limit} />
                 </div>
                 <div className="join ">
-                    <button onClick={() => setPage(page - 1)} className={`join-item btn hover:bg-primary-red text-white-text bg-primary-red  `} disabled={data?.data?.meta?.prevPage === null ? true : false}>«</button>
+                    <button onClick={() => setPage(page - 1)} className={`join-item btn hover:bg-primary-red text-white-text bg-primary-red  `} disabled={!data?.data?.meta?.prevPage ? true : false}>«</button>
                     <div className="join-item btn bg-primary-red text-white-text hover:bg-primary-red px-0">
                         <Dropdown options={pageCount} onSelect={setPage} placeholder={`Page : ${page}`} defaultValue={page} hoverHeight={"group-hover:h-[81px]"} />
                     </div>
-                    <button onClick={() => setPage(page + 1)} className={`join-item btn hover:bg-primary-red text-white-text bg-primary-red  `} disabled={data?.data?.meta?.nextPages === null ? true : false}>»</button>
+                    <button onClick={() => setPage(page + 1)} className={`join-item btn hover:bg-primary-red text-white-text bg-primary-red  `} disabled={!data?.data?.meta?.nextPages ? true : false}>»</button>
                 </div>
             </div>
             <Modal id="acceptedRequestDetails" title="View Details" width="max-w-[40rem]">

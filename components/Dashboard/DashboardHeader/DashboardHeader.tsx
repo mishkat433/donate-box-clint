@@ -19,7 +19,7 @@ const DashboardHeader = () => {
     <div className="p-2 shadow-md w-full rounded-md">
       <div className=" flex justify-between items-center gap-2 px-4">
         <div className="text-lg flex items-center">
-          <Link href="/dashboard"> <RiHome3Line /> </Link>
+          <Link href="/dashboard" className="hover:text-primary-red duration-200"> <RiHome3Line /> </Link>
           {routeSlice?.map((route: string, i: number) => (
             <p key={i} className="capitalize flex items-center text-sm cursor-pointer" >
               <RiArrowDropRightLine className="text-lg" />

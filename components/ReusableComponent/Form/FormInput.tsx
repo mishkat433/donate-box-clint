@@ -60,6 +60,7 @@ const FormInput = ({ name, type, value, id, placeholder, validation, className, 
                 placeholder={placeholder}
                 {...field}
                 value={value ? value : field.value}
+
               />
             )
         }
