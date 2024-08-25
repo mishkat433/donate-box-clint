@@ -10,7 +10,7 @@ import DashboardHeader from '../../components/Dashboard/DashboardHeader/Dashboar
 
 
 export default function DashboardLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
-    const [sideView, setSideView] = useState(false)
+    const [sideView, setSideView] = useState(true)
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const userLoggedIn = isLoggedIn();
     const router = useRouter();
@@ -28,21 +28,18 @@ export default function DashboardLayout({ children, }: Readonly<{ children: Reac
     }
 
     return (
-        <div>
-            <div className='flex'>
-                <div className={` ${sideView ? "w-auto md:w-1/5" : "w-auto"}`}>
-                    <div className={` sticky top-0 w-full`}>
-                        <Sidebar sideView={sideView} setSideView={setSideView} />
-                    </div>
-                </div>
-                <div className={`p-2   ${sideView ? "md:w-4/5" : "w-screen md:w-full"}`}>
-                    <div className={` sticky top-0 left-0 z-10 bg-white-text  border-1 border-border-color`}>
-                        <DashboardHeader />
-                    </div>
-                    {children}
+        <div className="flex">
+            <div className={`transition-all duration-300 ${sideView ? 'md:w-1/5 w-[280px]' : 'w-[55px] layoutGroup hover:w-[280px]'}`}>
+                <div className="sticky top-0 w-full">
+                    <Sidebar sideView={sideView} setSideView={setSideView} />
                 </div>
             </div>
-            {/* <Footer /> */}
+            <div className={`p-2 transition-all duration-300 ${sideView ? 'md:w-4/5 w-full' : 'w-full layoutGroup-hover:w-[calc(100%-280px)]'}`}>
+                <div className="bg-white-text border-1 border-border-color">
+                    <DashboardHeader />
+                </div>
+                {children}
+            </div>
         </div>
     )
 }

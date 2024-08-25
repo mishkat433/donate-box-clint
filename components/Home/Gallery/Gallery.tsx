@@ -3,6 +3,7 @@
 import { useCallback, useState } from "react";
 import "./Gallery.css"
 import ImageViewer from 'react-simple-image-viewer';
+import HomeSectionHead from "../../ReusableComponent/HomeSectionHead";
 
 const Gallery = () => {
     const [currentImage, setCurrentImage] = useState(0);
@@ -30,9 +31,7 @@ const Gallery = () => {
     return (
         <section className="py-5 bg-color-b bg-no-repeat bg-cover ">
             <div className="">
-                <div className="my-5 md:my-10">
-                    <h1 className="text-center text-xl md:text2xl lg:text-4xl font-oswald text-primary-red font-bold ">Gallery</h1>
-                </div>
+                <HomeSectionHead name='Gallery' />
                 <div className="gallery">
                     {[...Array(7)].map((_, i) => (
                         <div
@@ -47,7 +46,7 @@ const Gallery = () => {
                     ))}
                 </div>
             </div>
-            <div>
+            <div >
                 {isViewerOpen && (
                     <ImageViewer
                         src={images}

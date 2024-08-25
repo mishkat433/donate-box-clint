@@ -7,23 +7,14 @@ import DotLoading from "../../ReusableComponent/DotLoading";
 import { useBannersQuery } from "../../../redux/api/bannerApi";
 import Slider from "react-slick";
 import Image from "next/image";
+import { heroSliderSettings } from "../../../utils/slickSliderSetting";
 
 
 const HeroSlider = () => {
 
     const { data, isLoading, isError }: any = useBannersQuery({ undefined });
 
-    const settings = {
-        dots: false,
-        infinite: true,
-        speed: 1500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 5000,
-        cssEase: "ease-out",
-        fade: true,
-    };
+
 
 
     if (isLoading) {
@@ -36,7 +27,7 @@ const HeroSlider = () => {
 
     return (
         <div className="slider-container SliderArrow ">
-            <Slider {...settings}>
+            <Slider {...heroSliderSettings}>
                 {data?.data?.map((slide: any, i: number) => (
                     slide.showing && (
                         <div key={i}>
