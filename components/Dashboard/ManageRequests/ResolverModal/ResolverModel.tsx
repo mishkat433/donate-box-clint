@@ -68,7 +68,7 @@ const ResolverModel = ({ reqData }: any) => {
             {nextHandle ?
                 <div className='my-3 rounded-md mx-auto shadow-md border-1 border-border-color p-2 animate-fade-right animate-once '>
                     <Form submitHandler={onSubmit} resolver={yupResolver(assignDonnerSchema)} >
-                        <ResolverModalForm />
+                        <ResolverModalForm reqData={reqData} />
                         <div className='flex w-full gap-3'>
                             <button onClick={() => setNextHandle(false)} type='button' className="button-transition primary-red-button py-2 px-2.5 w-full flex justify-center items-center gap-2"><RiArrowLeftCircleLine className='text-lg' /> Previous</button>
                             <div className='w-full'>

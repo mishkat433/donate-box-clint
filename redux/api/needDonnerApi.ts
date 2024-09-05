@@ -60,7 +60,16 @@ export const donnerApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: [tagTypes.bloodRequest],
         }),
-
+        myActivity: build.query({
+            query: (id) => {
+                return {
+                    url: `${REQUEST_URL}/my-activity/${id}`,
+                    method: "GET",
+                    // params: arg,
+                };
+            },
+            // providesTags: [tagTypes.bloodRequest],
+        }),
     }),
 });
 
@@ -70,5 +79,6 @@ export const {
     useGetPendingRequestsQuery,
     useAssignDonnerMutation,
     useMyRequestsQuery,
+    useMyActivityQuery
 
 } = donnerApi;

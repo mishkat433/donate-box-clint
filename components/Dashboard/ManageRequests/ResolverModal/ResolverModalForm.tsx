@@ -23,7 +23,7 @@ type FormValues = {
     area: string;
 };
 
-const ResolverModalForm = () => {
+const ResolverModalForm = ({ reqData }: any) => {
     const [divisionOptions, setDivisionOptions] = useState<any[]>([]);
 
     const loginAdminInfo: any = getUserInfo()
@@ -48,10 +48,17 @@ const ResolverModalForm = () => {
 
     const { data, isLoading }: any = useAllUsersQuery({ ...query })
 
-    const formattedData = data?.donner?.data?.map(item => ({
-        label: ` ${item.fullName}(${item.userId}) ${item.bloodGroup} ${item.phoneNumber} ${item.division},${item.district}`,
-        value: item.userId
-    }));
+
+    // const formattedData = data?.donner?.data?.map(item => ({
+    //     label: ` ${item.fullName}(${item.userId}) ${item.bloodGroup} ${item.phoneNumber} ${item.division},${item.district}`,
+    //     value: item.userId
+    // }));
+    const formattedData = data?.donner?.data
+        ?.filter((itemFilter: any) => itemFilter?.bloodGroup === reqData?.patientBG)
+        ?.map((item: any) => ({
+            label: ` ${item.fullName}(${item.userId}) ${item.bloodGroup} ${item.phoneNumber} ${item.division},${item.district}`,
+            value: item.userId
+        }));
 
     return (
         <div className='animate-fade animate-once'>
@@ -103,13 +110,15 @@ const ResolverModalForm = () => {
                                 </div> */}
                                 <div className="flex flex-col md:flex-row gap-2 md:gap-6 ">
                                     <div className='mb-0 md:mb-3 w-full'>
-                                        <FormSelectField
-                                            name="donnerId"
-                                            className="w-full"
-                                            label="Select Donner"
-                                            options={formattedData}
-                                            required
-                                        />
+                                        {formattedData.length > 0 ?
+                                            <FormSelectField
+                                                name="donnerId"
+                                                className="w-full"
+                                                label="Select Donner"
+                                                options={formattedData}
+                                                required
+                                            /> :
+                                            <p className='text-sm text-primary-red'>No Donner Found for this ({reqData?.patientBG}) Blood Group.</p>}
                                     </div>
                                 </div>
                             </div>
