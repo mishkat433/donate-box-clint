@@ -73,6 +73,7 @@ export const loginDataApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: [tagTypes.allUser],
         }),
+
     }),
 });
 
