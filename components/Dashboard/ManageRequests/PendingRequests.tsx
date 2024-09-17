@@ -79,7 +79,7 @@ const PendingRequests = () => {
                     <RiPassPendingLine className="text-primary-red" />
                     <h3>Pending Blood Requests</h3>
                 </div>
-                <Link href="/dashboard/manage-requests/all-requests" className="p-1.5 primary-red-button flex items-center gap-1"><RiPassPendingLine />All Requests</Link>
+                <Link href="/dashboard/manage-requests/all-Request" className="p-1.5 primary-red-button flex items-center gap-1"><RiPassPendingLine />All Requests</Link>
             </div>
 
             <div className=" p-2 flex justify-between items-center gap-2 rounded-md bg-primary-red text-white-text shadow-md mb-5">
