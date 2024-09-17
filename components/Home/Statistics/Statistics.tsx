@@ -44,13 +44,13 @@ const Statistics = () => {
                     <Counter havePrefix={true} endValue={data?.data?.totalAmountDonation} />
                     <h4 className='font-semibold text-xl'>Total Amount Donation</h4>
                 </div>
-                <div className='statistics-card group'>
+                {/* <div className='statistics-card group'>
                     <p className='text-5xl group-hover:text-primary-red duration-300 group-hover:-scale-x-100'><RiHandHeartFill /></p>
                     <Counter havePrefix={false} endValue={100} />
                     <h4 className='font-semibold text-xl'>Total Helping</h4>
-                </div>
+                </div> */}
                 <div className='statistics-card group'>
-                    <p className='text-5xl group-hover:text-primary-red duration-300 group-hover:-scale-x-100'><MdWavingHand /></p>
+                    <p className='text-5xl group-hover:text-primary-red duration-300 group-hover:-scale-x-100'><ImManWoman /></p>
                     <Counter havePrefix={false} endValue={data?.data?.totalDonner} />
                     <h4 className='font-semibold text-xl'>Total Donner</h4>
                 </div>
@@ -59,11 +59,11 @@ const Statistics = () => {
                     <Counter havePrefix={false} endValue={data?.data?.totalTodaysRequest} />
                     <h4 className='font-semibold text-xl'>Todays Blood Request</h4>
                 </div>
-                <div className='statistics-card group'>
+                {/* <div className='statistics-card group'>
                     <p className='text-5xl group-hover:text-primary-red duration-300 group-hover:-scale-x-100'><ImManWoman /></p>
                     <Counter havePrefix={false} endValue={100} />
                     <h4 className='font-semibold text-xl'>Total Volunteers</h4>
-                </div>
+                </div> */}
             </div>
         </section>
     );

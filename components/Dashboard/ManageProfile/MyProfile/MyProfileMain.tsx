@@ -11,7 +11,6 @@ import DotLoading from "../../../ReusableComponent/DotLoading";
 const MyProfileMain = () => {
     const loginCheck = isLoggedIn()
 
-    let id: string
 
     const userInfo: any = getUserInfo()
     const { data, isLoading, isError }: any = useLoginUserDataQuery(getUserId(userInfo))
@@ -38,7 +37,7 @@ const MyProfileMain = () => {
                     <div className="w-full p-2 shadow-sm border-1 border-border-color rounded-md">
                         <h4 className=" font-semibold mb-1">Personal Info</h4>
                         <div className="text-sm">
-                            <p><span className="font-semibold">Id : </span> {id}</p>
+                            <p><span className="font-semibold">Id : </span> {getUserId(userInfo)}</p>
                             <p><span className="font-semibold">Role : </span> {data?.data[0]?.role}</p>
                             <p><span className="font-semibold">Name : </span> {data?.data[0]?.fullName}</p>
                             <p><span className="font-semibold">Phone Number : </span> {data?.data[0]?.phoneNumber}</p>
@@ -51,7 +50,7 @@ const MyProfileMain = () => {
                     <div className="w-full p-2 shadow-sm border-1 border-border-color rounded-md">
                         <h4 className=" font-semibold">Additional Info</h4>
                         <div className="text-sm">
-                            <p><span className="font-semibold">Id : </span> {id}</p>
+                            <p><span className="font-semibold">Id : </span> {getUserId(userInfo)}</p>
                         </div>
                     </div>
                 </div>
