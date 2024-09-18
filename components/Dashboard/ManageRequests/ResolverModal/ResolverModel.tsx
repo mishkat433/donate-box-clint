@@ -22,11 +22,9 @@ type FormValues = {
 const ResolverModel = ({ reqData }: any) => {
     const [nextHandle, setNextHandle] = useState(false)
     const [assignDonner] = useAssignDonnerMutation()
-    const [requestFor, setRequestFor] = useState()
     const userInfo: any = getUserInfo()
 
     const sendRequestButtonRef = useRef(null);
-
     const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
         try {
             delete data.district
@@ -50,6 +48,7 @@ const ResolverModel = ({ reqData }: any) => {
                 toast.success(res?.message)
                 if (res?.success) {
                     sendRequestButtonRef.current.click();
+                    setNextHandle(false)
                 }
             }
         }
@@ -61,7 +60,6 @@ const ResolverModel = ({ reqData }: any) => {
             console.log(err);
         }
     };
-
 
     return (
         <>

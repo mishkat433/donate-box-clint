@@ -2,22 +2,24 @@
 
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { RiEyeLine, RiGuideFill, RiPassPendingLine } from 'react-icons/ri';
+import { RiDeleteBinLine, RiEyeLine, RiGuideFill, RiPassPendingLine } from 'react-icons/ri';
 import ReusableTable from '../../ReusableComponent/Table/ReusableTable';
 import SearchBar from '../../ReusableComponent/Searchbar';
 import { format } from 'date-fns';
 import { useDebounced } from '../../../redux/hooks';
-import { useAllRequestsQuery } from '../../../redux/api/needDonnerApi';
+import { useAllRequestsQuery, useDeleteRequestMutation } from '../../../redux/api/needDonnerApi';
 import Dropdown from '../../ReusableComponent/Dropdown/Dropdown';
 import { dataLimitOptions, sortOrderOptions } from '../../../lib/Options';
 import Modal from '../../ReusableComponent/Modal';
 import ViewRequest from './ResolverModal/ViewRequest';
 import { requestSortByOptions } from '../../../lib/RequestOptions';
 import { formatTime } from '../../../services/auth.service';
+import Swal from 'sweetalert2';
 
 const AllRequests = () => {
     const [modalData, setModalData] = useState<any>(null);
     const query: Record<string, any> = {};
+    const [deleteRequest] = useDeleteRequestMutation()
 
     const [page, setPage] = useState<number>(1);
     const [limit, setLimit] = useState<number>(10);
@@ -53,6 +55,36 @@ const AllRequests = () => {
     ];
 
 
+    const deleteUserRequest = ({ _id }) => {
+        try {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "Do you want to Delete this Request?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, Delete It!"
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    const res: any = await deleteRequest(_id).unwrap()
+                    if (res?.data?.success) {
+                        Swal.fire({
+                            title: "Delete!",
+                            text: `${res?.data?.message}`,
+                            icon: "success",
+                            timer: 1500
+                        });
+                    }
+                }
+            });
+        }
+        catch (err: any) {
+            console.log(err);
+        }
+    }
+
+
 
     const tableRow = (item, index) => (
         <>
@@ -71,6 +103,7 @@ const AllRequests = () => {
 
     const actions = [
         { label: "View", icon: <RiEyeLine className="dashboard-icon-style text-view cursor-pointer" title="View" />, onClick: setModalData, showMOdal: { name: "acceptedRequestDetails", status: true } },
+        { label: "delete", icon: <RiDeleteBinLine className="dashboard-icon-style text-primary-red cursor-pointer" title="delete" />, onClick: deleteUserRequest },
     ];
     // table related Data end
 

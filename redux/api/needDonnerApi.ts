@@ -68,7 +68,14 @@ export const donnerApi = baseApi.injectEndpoints({
                     // params: arg,
                 };
             },
-            // providesTags: [tagTypes.bloodRequest],
+            providesTags: [tagTypes.bloodRequest],
+        }),
+        deleteRequest: build.mutation({
+            query: (id) => ({
+                url: `${REQUEST_URL}/delete-request/${id}`,
+                method: "DELETE"
+            }),
+            invalidatesTags: [tagTypes.bloodRequest],
         }),
     }),
 });
@@ -79,6 +86,7 @@ export const {
     useGetPendingRequestsQuery,
     useAssignDonnerMutation,
     useMyRequestsQuery,
-    useMyActivityQuery
+    useMyActivityQuery,
+    useDeleteRequestMutation
 
 } = donnerApi;
