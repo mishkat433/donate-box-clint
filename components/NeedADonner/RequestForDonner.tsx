@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import ApplicantsInfoForms from "./ApplicantsInfoForms";
 import { BLOOD_REQUEST_FOR } from "../../constants/requestDonner";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 
 type FormValues = {
@@ -33,19 +34,15 @@ type FormValues = {
     medicalAddress: string;
     dateOfNeedBlood: string;
     timeOfNeedBlood?: string;
-
     requestFor: BLOOD_REQUEST_FOR;
-
     applicantName: string;
     applicantPhone: string;
-
     emergencyPhone: string;
-
 };
 
 const RequestForDonner = () => {
-
-    const [requestForDonner] = useRequestForDonnerMutation()
+    const [disabler, setDisabler] = useState<boolean>(false)
+    const [requestForDonner, { isLoading }] = useRequestForDonnerMutation()
     const [requestFor, setRequestFor] = useState()
 
     const router = useRouter()
@@ -56,10 +53,10 @@ const RequestForDonner = () => {
                 data.applicantName = data.patientName
                 data.applicantPhone = data.patientPhone
             }
-
             data.patientAge = Number(data.patientAge)
             const res = await requestForDonner({ ...data }).unwrap();
             if (res?.success) {
+                setDisabler(true)
                 toast.success(res?.message)
                 // router.push("/request/myRequests")
             }
@@ -81,7 +78,17 @@ const RequestForDonner = () => {
                     <PatientInfoForms setRequestFor={setRequestFor} />
                     <MedicalInfoForms />
                     {requestFor !== BLOOD_REQUEST_FOR.Me && <ApplicantsInfoForms />}
-                    <label htmlFor="createUser" className="flex justify-end"><button className="button-transition primary-red-button py-2 px-2.5 w-2/5 mt-4"> Send Request</button></label>
+                    {isLoading ?
+                        <label className="flex justify-end" ><button disabled={disabler} className=" bg-primary-red text-white-text rounded-md py-2 px-2.5 w-2/5 mt-4">Loading...</button></label>
+                        :
+                        <div>
+                            {disabler ?
+                                <label className="flex justify-end" ><Link href={'/request/myRequests'} className=" button-transition primary-red-button py-2 px-2.5 w-2/5 mt-4">My Requests </Link></label>
+                                :
+                                <label className="flex justify-end" ><button className="button-transition primary-red-button py-2 px-2.5 w-2/5 mt-4"> Submit</button></label>
+                            }
+                        </div>
+                    }
                 </Form>
             </div>
         </div>

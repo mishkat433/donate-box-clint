@@ -48,13 +48,8 @@ const ResolverModalForm = ({ reqData }: any) => {
 
     const { data, isLoading }: any = useAllUsersQuery({ ...query })
 
-
-    // const formattedData = data?.donner?.data?.map(item => ({
-    //     label: ` ${item.fullName}(${item.userId}) ${item.bloodGroup} ${item.phoneNumber} ${item.division},${item.district}`,
-    //     value: item.userId
-    // }));
     const formattedData = data?.donner?.data
-        ?.filter((itemFilter: any) => itemFilter?.bloodGroup === reqData?.patientBG)
+        ?.filter((itemFilter: any) => (itemFilter?.bloodGroup === reqData?.patientBG))
         ?.map((item: any) => ({
             label: ` ${item.fullName}(${item.userId}) ${item.bloodGroup} ${item.phoneNumber} ${item.division},${item.district}`,
             value: item.userId

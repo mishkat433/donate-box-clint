@@ -50,4 +50,12 @@ export const getUserId = (userInfo: UserInfo): string => {
 };
 
 
+export const formatTime = (time: string) => {
+  const [hour, minute] = time.split(':').map(Number);
+  const period = hour >= 12 ? 'PM' : 'AM';
+  const hour12 = hour % 12 || 12;
+  return `${hour12}:${minute < 10 ? '0' + minute : minute} ${period}`;
+
+}
+
 

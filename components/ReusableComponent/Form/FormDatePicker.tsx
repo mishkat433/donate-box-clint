@@ -1,45 +1,53 @@
-// import { Controller, useFormContext } from "react-hook-form";
-// import dayjs, { Dayjs } from "dayjs";
+import { format, FormatDateOptions } from "date-fns";
+import { Controller, useFormContext } from "react-hook-form";
+import { getErrorMessageByPropertyName } from "../../../utils/schema-validator";
 
-// type UMDatePikerProps = {
-//   onChange?: (valOne: Dayjs | null, valTwo: string) => void;
-//   name: string;
-//   label?: string;
-//   value?: Dayjs;
-//   size?: "large" | "small";
-// };
+type DBDatePikerProps = {
+    onChange?: any;
+    name: string;
+    label?: string;
+    value?: FormatDateOptions;
+    className: any;
+    required?: boolean;
+};
 
-// const FormDatePicker = ({
-//   name,
-//   label,
-//   onChange,
-//   size = "large",
-// }: UMDatePikerProps) => {
-//   const { control, setValue } = useFormContext();
+const FormDatePicker = ({ name, label, onChange, className = "", required = false }: DBDatePikerProps) => {
+    const { control, setValue, formState: { errors } } = useFormContext();
+    const errorMessage = getErrorMessageByPropertyName(errors, name);
 
-//   const handleOnChange: DatePickerProps["onChange"] = (date, dateString) => {
-//     onChange ? onChange(date, dateString) : null;
-//     setValue(name, date);
-//   };
+    const handleOnChange = (date: string) => {
+        onChange ? onChange(date) : null;
+        setValue(name, date);
+    };
 
-//   return (
-//     <div>
-//       {label ? label : null}
-//       <br />
-//       <Controller
-//         name={name}
-//         control={control}
-//         render={({ field }) => (
-//           <DatePicker
-//             defaultValue={dayjs(field.value) || Date.now()}
-//             size={size}
-//             onChange={handleOnChange}
-//             style={{ width: "100%" }}
-//           />
-//         )}
-//       />
-//     </div>
-//   );
-// };
+    return (
+        <div>
+            {label ?
+                <label className="label">
+                    <span className="label-text">{label}{required ? (<span className="text-error-color">* </span>) : null}</span>
+                </label>
+                : null
+            }
+            <Controller
+                name={name}
+                control={control}
+                render={({ field }) => (
+                    <input
+                        type="date"
+                        className={`input input-bordered ${errorMessage && "errorBehavior"} ${className}`}
+                        // defaultValue={format((field.value || new Date()), 'ddd-MMM-yyyy')}
+                        value={field.value}
+                        onChange={(e) => handleOnChange(e.target.value)}
 
-// export default FormDatePicker;
+                    />
+                )}
+            />
+            <small className="text-error-color text-xs">{errorMessage}</small>
+        </div>
+    );
+};
+
+export default FormDatePicker;
+
+
+

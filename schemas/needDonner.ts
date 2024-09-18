@@ -28,6 +28,7 @@ export const needDonnerSchema = yup.object().shape({
         ),
 
     medicalName: yup.string().required("medical name is required"),
+    dateOfNeedBlood: yup.string().required("Need Blood Date is required"),
     division: yup.string().required("division is required"),
     district: yup.string().required("district is required"),
     area: yup.string().optional(),

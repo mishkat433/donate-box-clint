@@ -5,6 +5,8 @@ import { divisionOptions } from '../../constants/global';
 import { locationApi } from '../../redux/api/getLocation/getLocation';
 import AreaField from '../ReusableComponent/Form/AreaField';
 import DistrictField from '../ReusableComponent/Form/DistrictField';
+import FormDatePicker from '../ReusableComponent/Form/FormDatePicker';
+import FormTimePicker from '../ReusableComponent/Form/FormTimePicker';
 
 const MedicalInfoForms = () => {
     const [divisionOptions, setDivisionOptions] = useState<any[]>([]);
@@ -24,23 +26,18 @@ const MedicalInfoForms = () => {
                         />
                     </div>
                     <div className='mb-0 md:mb-3 w-full'>
-                        <FormInput
+                        <FormDatePicker
                             name="dateOfNeedBlood"
-                            type="text"
-                            className=" w-full"
                             label="Need Blood Date"
-                            placeholder="Enter medical name"
+                            className=" w-full"
                             required
                         />
                     </div>
                     <div className='mb-0 md:mb-3 w-full'>
-                        <FormInput
+                        <FormTimePicker
                             name="timeOfNeedBlood"
-                            type="text"
-                            className=" w-full"
                             label="Need Blood time"
-                            placeholder="Enter medical name"
-
+                            className=" w-full"
                         />
                     </div>
                 </div>

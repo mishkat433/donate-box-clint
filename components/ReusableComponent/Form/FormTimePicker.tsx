@@ -1,33 +1,48 @@
 
-// import React from "react";
-// import { Controller, useFormContext } from "react-hook-form";
-// import dayjs from "dayjs";
+import React from "react";
+import { Controller, useFormContext } from "react-hook-form";
+import { getErrorMessageByPropertyName } from "../../../utils/schema-validator";
 
-// type FormTimePickerProps = {
-//   name: string;
-//   label?: string;
-//   index?: number;
-// };
-// export default function FormTimePicker({ name, label }: FormTimePickerProps) {
-//   const { control, setValue } = useFormContext();
-//   return (
-//     <>
-//       {label ? label : null}
-//       <Controller
-//         name={name}
-//         control={control}
-//         render={({ field }) => (
-//           <TimePicker
-//             size="large"
-//             defaultValue={dayjs(field.value ? field.value : "00:00", "HH:mm")}
-//             format={"HH:mm"}
-//             onChange={(el, value) => {
-//               setValue(name, value);
-//             }}
-//             style={{ width: "100%" }}
-//           />
-//         )}
-//       />
-//     </>
-//   );
-// }
+type FormTimePickerProps = {
+    onChange?: any;
+    name: string;
+    label?: string;
+    index?: number;
+    required?: boolean;
+    className?: string;
+};
+export default function FormTimePicker({ name, label, required = false, className = "", onChange }: FormTimePickerProps) {
+    const { control, setValue, formState: { errors } } = useFormContext();
+    const errorMessage = getErrorMessageByPropertyName(errors, name);
+
+
+    const handleOnChange = (time: string) => {
+        onChange ? onChange(time) : null;
+        setValue(name, time);
+    };
+
+    return (
+        <>
+            {label ?
+                <label className="label">
+                    <span className="label-text">{label}{required ? (<span className="text-error-color">* </span>) : null}</span>
+                </label>
+                : null
+            }
+            <Controller
+                name={name}
+                control={control}
+                render={({ field }) => (
+                    <input
+                        type="time"
+                        name={name}
+                        className={`input input-bordered ${errorMessage && "errorBehavior"} ${className}`}
+                        value={field.value}
+                        onChange={(e) => handleOnChange(e.target.value)}
+                    />
+                )}
+            />
+            <small className="text-error-color text-xs">{errorMessage}</small>
+        </>
+    );
+}
