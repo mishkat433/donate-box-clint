@@ -13,6 +13,7 @@ import { dataLimitOptions, sortOrderOptions } from '../../../lib/Options';
 import Modal from '../../ReusableComponent/Modal';
 import ViewRequest from './ResolverModal/ViewRequest';
 import { requestSortByOptions } from '../../../lib/RequestOptions';
+import { formatTime } from '../../../services/auth.service';
 
 const AllRequests = () => {
     const [modalData, setModalData] = useState<any>(null);
@@ -48,7 +49,7 @@ const AllRequests = () => {
         'patientType',
         'District',
         'Status',
-        'Date Of Need Blood',
+        'Date & time Of Need Blood',
     ];
 
 
@@ -63,7 +64,8 @@ const AllRequests = () => {
             <td>{item.patientType}</td>
             <td>{item.district}</td>
             <td className={`${item.status === "REJECT" ? "text-primary-red" : "text-edit"}`}>{item.status}</td>
-            <td>{format(new Date(item.dateOfNeedBlood), 'dd-MMM-yyyy')}</td>
+            <td>{format(new Date(item.dateOfNeedBlood), 'dd-MMM-yyyy')} &nbsp;
+                {item.timeOfNeedBlood && formatTime(item.timeOfNeedBlood)} </td>
         </>
     );
 

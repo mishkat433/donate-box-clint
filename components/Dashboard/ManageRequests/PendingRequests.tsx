@@ -7,12 +7,12 @@ import { useDebounced } from '../../../redux/hooks';
 import ReusableTable from '../../ReusableComponent/Table/ReusableTable';
 import { useGetPendingRequestsQuery } from '../../../redux/api/needDonnerApi';
 import Link from 'next/link';
-import { format } from 'date-fns';
+import { format, setHours, setMinutes } from 'date-fns';
 import Dropdown from '../../ReusableComponent/Dropdown/Dropdown';
 import { dataLimitOptions } from '../../../lib/Options';
 import Modal from '../../ReusableComponent/Modal';
 import ResolverModel from './ResolverModal/ResolverModel';
-import { getUserInfo } from '../../../services/auth.service';
+import { formatTime, getUserInfo } from '../../../services/auth.service';
 import { useLoginUserDataQuery } from '../../../redux/api/authApi';
 
 const PendingRequests = () => {
@@ -50,11 +50,11 @@ const PendingRequests = () => {
 
 
     // table related Data start
-    const columns = ['SL', 'Applicants Name', 'Applicants Phone', 'Patient BG', 'patientAge', 'patientType', 'District', 'Date Of Need Blood',
-    ];
+    const columns = ['SL', 'Applicants Name', 'Applicants Phone', 'Patient BG', 'patientAge', 'patientType', 'District', 'Date & time Of Need Blood',];
 
-    const tableRow = (item, index) => (
+    const tableRow = (item: any, index: number) => (
         <>
+
             <td className={``}>{(page - 1) * limit + index + 1} </td>
             <td>{item.applicantName}</td>
             <td>{item.applicantPhone}</td>
@@ -62,9 +62,15 @@ const PendingRequests = () => {
             <td>{item.patientAge}</td>
             <td>{item.patientType}</td>
             <td>{item.district}</td>
-            <td>{format(new Date(item.dateOfNeedBlood), 'dd-MMM-yyyy')}</td>
+            <td>{format(new Date(item.dateOfNeedBlood), 'dd-MMM-yyyy')} &nbsp;
+                {item.timeOfNeedBlood && formatTime(item.timeOfNeedBlood)} </td>
         </>
-    );
+    )
+
+    const now = new Date();
+    const fixedTime = setMinutes(setHours(now, 16), 0);
+
+    const formattedTime = format(fixedTime, 'HH:mm');
 
     const actions = [
         { label: "Resolved", icon: <RiClipboardFill className='text-lg text-primary-red' title='Resolved request' />, onClick: setModalData, showMOdal: { name: "requestResolver", status: true } },
