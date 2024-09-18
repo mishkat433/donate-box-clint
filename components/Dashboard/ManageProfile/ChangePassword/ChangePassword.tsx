@@ -5,10 +5,11 @@ import Form from "../../../ReusableComponent/Form/Form";
 import FormInput from "../../../ReusableComponent/Form/FormInput";
 import { SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
-import { RiAddFill, RiUserSmileFill } from "react-icons/ri";
+import { RiUserSmileFill } from "react-icons/ri";
 import { getUserInfo } from "../../../../services/auth.service";
 import { useChangePasswordMutation } from "../../../../redux/api/userApi";
 import { updatePasswordSchema } from "../../../../schemas/user";
+import { useState } from "react";
 
 
 type FormValues = {
@@ -18,8 +19,7 @@ type FormValues = {
 
 
 const ChangePassword = () => {
-
-    const [changePassword] = useChangePasswordMutation()
+    const [changePassword, { error }] = useChangePasswordMutation()
     const userInfo: any = getUserInfo()
 
     const onPasswordChange: SubmitHandler<FormValues> = async (data: any) => {
@@ -29,11 +29,12 @@ const ChangePassword = () => {
             const res = await changePassword({ ...data }).unwrap();
             if (res.success) {
                 toast.success(res.message)
+
             }
         }
         catch (err) {
-            toast.error(err.message)
-            console.log(err);
+            // toast.error(err.message)
+            // console.log(err);
         }
     };
 
@@ -84,6 +85,7 @@ const ChangePassword = () => {
                                     required
                                 />
                             </div>
+                            {!(error as { success: boolean })?.success && <small className="text-error-color text-xs">{(error as { message: string })?.message}</small>}
 
                             <button className="button-transition primary-red-button py-2 px-2.5 w-full mt-4">Submit</button>
                         </Form>

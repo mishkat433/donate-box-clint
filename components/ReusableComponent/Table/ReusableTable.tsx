@@ -50,7 +50,7 @@ const ReusableTable = ({ columns, data, tableRow, actions = [], emptyMessage = "
                                     <td className="flex justify-center items-center gap-1">
                                         {actions.map((action, actionIndex) => {
                                             return (
-                                                action.showMOdal.status ?
+                                                action?.showMOdal?.status ?
                                                     <label htmlFor={action.showMOdal.name} key={actionIndex} onClick={() => handleActionClick(action, item)} className=" cursor-pointer ">
                                                         {action.icon && (action.icon)}
                                                         {!action.icon && action.label}
