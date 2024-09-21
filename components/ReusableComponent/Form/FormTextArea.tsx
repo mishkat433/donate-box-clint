@@ -7,9 +7,10 @@ type TextAreaProps = {
   value?: string;
   placeholder?: string;
   required?: boolean;
+  className?: string;
 };
 
-const FormTextArea = ({ name, label, value, placeholder, required = false }: TextAreaProps) => {
+const FormTextArea = ({ name, label, value, placeholder, required = false, className = '' }: TextAreaProps) => {
   const { control, formState: { errors }, } = useFormContext();
   const errorMessage = getErrorMessageByPropertyName(errors, name);
 
@@ -30,13 +31,12 @@ const FormTextArea = ({ name, label, value, placeholder, required = false }: Tex
             placeholder={placeholder}
             {...field}
             value={value ? value : field.value}
-            className="textarea textarea-bordered textarea-sm w-full text-[15px]" >
+            className={`textarea textarea-bordered textarea-sm w-full text-[15px] ${className}`} >
           </textarea>
 
         }
       />
-
-      <small className="text-error-color text-xs">{errorMessage}</small>
+      <small className="text-error-color text-xs ">{errorMessage}</small>
 
     </>
   );
