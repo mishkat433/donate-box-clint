@@ -13,8 +13,9 @@ import { dataLimitOptions, sortOrderOptions } from '../../../lib/Options';
 import Modal from '../../ReusableComponent/Modal';
 import ViewRequest from './ResolverModal/ViewRequest';
 import { requestSortByOptions } from '../../../lib/RequestOptions';
-import { formatTime } from '../../../services/auth.service';
+import { formatTime, getUserInfo } from '../../../services/auth.service';
 import Swal from 'sweetalert2';
+import { USER_ROLE } from '../../../constants/role';
 
 const AllRequests = () => {
     const [modalData, setModalData] = useState<any>(null);
@@ -101,11 +102,16 @@ const AllRequests = () => {
         </>
     );
 
-    const actions = [
-        { label: "View", icon: <RiEyeLine className="dashboard-icon-style text-view cursor-pointer" title="View" />, onClick: setModalData, showMOdal: { name: "acceptedRequestDetails", status: true } },
-        { label: "delete", icon: <RiDeleteBinLine className="dashboard-icon-style text-primary-red cursor-pointer" title="delete" />, onClick: deleteUserRequest },
-    ];
-    // table related Data end
+    const actions = [];
+
+    if ((getUserInfo() as { role: USER_ROLE })?.role === "SUPER_ADMIN") {
+        actions.push({ label: "View", icon: <RiEyeLine className="dashboard-icon-style text-view cursor-pointer" title="View" />, onClick: setModalData, showMOdal: { name: "acceptedRequestDetails", status: true } },
+            { label: "delete", icon: <RiDeleteBinLine className="dashboard-icon-style text-primary-red cursor-pointer" title="delete" />, onClick: deleteUserRequest },)
+    }
+    else {
+        actions.push({ label: "View", icon: <RiEyeLine className="dashboard-icon-style text-view cursor-pointer" title="View" />, onClick: setModalData, showMOdal: { name: "acceptedRequestDetails", status: true } })
+    }
+
 
     return (
         <div className='animate-fade animate-once'>
