@@ -66,3 +66,43 @@ body {
 .dashboard-icon-style {
   @apply table-cell w-5 h-5 text-center top-3 text-lg
 }
+
+
+/* .animate-custom {
+  animation-name: example;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes example {
+  from {
+    rotate: 60deg;
+  }
+
+  to {
+    rotate: -60deg;
+  }
+} */
+
+.animate-custom {
+  animation-name: example;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+  /* Smooth in and out */
+}
+
+@keyframes example {
+  0% {
+    transform: rotate(50deg);
+  }
+
+  50% {
+    transform: rotate(-50deg);
+  }
+
+  100% {
+    transform: rotate(50deg);
+  }
+}
