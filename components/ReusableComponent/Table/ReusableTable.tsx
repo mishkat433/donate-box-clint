@@ -72,7 +72,6 @@ const ReusableTable = ({ columns, data, tableRow, actions = [], emptyMessage = "
                 <p className="text-center text-primary-red py-2">{emptyMessage}</p>
             )}
 
-            {/* Modal or other components can be placed here */}
         </div>
     );
 };

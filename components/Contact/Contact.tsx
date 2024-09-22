@@ -14,9 +14,9 @@ import { useAddMessageMutation } from "../../redux/api/contactApi";
 type FormValues = {
     name: string;
     email: string;
-    phoneNumber: string
-    subject: string
-    message: string
+    phoneNumber: string;
+    subject: string;
+    message: string;
 };
 
 const Contact = () => {

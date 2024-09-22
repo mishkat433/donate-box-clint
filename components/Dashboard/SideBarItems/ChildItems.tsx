@@ -25,3 +25,8 @@ export const manageRequestChild = [
     { label: "All Request", link: "all-Request" },
     { label: "Pending Requests", link: "pending-request" },
 ]
+
+export const manageContactChild = [
+    { label: "Support History", link: "support-history" },
+    { label: "Pending Messages", link: "pending-messages" },
+]

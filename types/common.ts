@@ -85,7 +85,6 @@ export interface UserInfoType {
 
 
 export interface IBanner {
-
   admin_Data: {
     address: string
     adminId: string
@@ -107,6 +106,33 @@ export interface IBanner {
   _id: string;
 }
 
+export interface IContact {
+  name: string;
+  email: string;
+  phoneNumber: string;
+  subject: string;
+  message: string;
+  resolverId: string;
+  status: string;
+  resolverMessage: string;
+  _id: string;
+  __v: number;
+  createdAt: string;
+  updatedAt: string
+  resolver_Data: {
+    address: string;
+    adminId: string;
+    area: string;
+    bloodGroup: BLOOD_GROUP_NAME;
+    division: string;
+    district: string;
+    fullName: string;
+    role: string;
+    phoneNumber: string;
+    __v: number;
+    _id: string
+  };
+}
 
 export enum REQUEST_HANDLER_STATUS {
   ACCEPT = "ACCEPT",

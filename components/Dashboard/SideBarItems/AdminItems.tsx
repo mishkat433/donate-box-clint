@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { RiHandSanitizerFill, RiSlideshow3Line, RiUserSettingsLine } from "react-icons/ri";
+import { RiHeadphoneLine, RiHeartPulseLine, RiSlideshow3Line, RiUserSettingsLine } from "react-icons/ri";
 import CommonItems from "./CommonItems";
-import { manageUserChild, manageBannerChild, manageRequestChild } from "./ChildItems";
+import { manageUserChild, manageBannerChild, manageRequestChild, manageContactChild } from "./ChildItems";
 import ItemsHead from "./ItemsHead";
 import { usePathname } from "next/navigation";
 
@@ -51,13 +51,31 @@ const AdminItems = () => {
                 <li className="duration-200 text-secondary-text rounded-md group relative w-auto ">
                     <div className={`duration-200 text-secondary-text relative rounded-md mb-1 hover:bg-primary-red hover:text-white-text ${path?.includes('manage-requests') && "bg-primary-red text-white-text"} `}>
                         <span className={`flex items-center cursor-pointer rounded-t-md py-2 px-3`}>
-                            <RiHandSanitizerFill className="dashboard-icon-style" />
+                            <RiHeartPulseLine className="dashboard-icon-style" />
                             <ItemsHead header="Manage Requests" />
                         </span>
                         <ul className={` w-full bg-border-color withoutPadding text-primary-text max-h-[150px] overflow-y-auto overflow-x-hidden rounded-b-md duration-300 h-0 group-hover:h-[67px] `}>
                             {manageRequestChild?.map((option) => (
                                 <li key={option.label} className={` py-1 px-3 cursor-pointer mt-1 duration-200 hover:bg-primary-red hover:text-white-text ${slicePath?.includes(option?.link) && 'bg-primary-red text-white-text'} `} >
                                     <Link href={`/dashboard/manage-requests/${option?.link}`} className="py-1">
+                                        <span className="nav-text">{option?.label}</span>
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </li>
+
+                <li className="duration-200 text-secondary-text rounded-md group relative w-auto ">
+                    <div className={`duration-200 text-secondary-text relative rounded-md mb-1 hover:bg-primary-red hover:text-white-text ${path?.includes('contact-Support') && "bg-primary-red text-white-text"} `}>
+                        <span className={`flex items-center cursor-pointer rounded-t-md py-2 px-3`}>
+                            <RiHeadphoneLine className="dashboard-icon-style" />
+                            <ItemsHead header="Contact Supports" />
+                        </span>
+                        <ul className={` w-full bg-border-color withoutPadding text-primary-text max-h-[150px] overflow-y-auto overflow-x-hidden rounded-b-md duration-300 h-0 group-hover:h-[67px] `}>
+                            {manageContactChild?.map((option) => (
+                                <li key={option.label} className={` py-1 px-3 cursor-pointer mt-1 duration-200 hover:bg-primary-red hover:text-white-text ${slicePath?.includes(option?.link) && 'bg-primary-red text-white-text'} `} >
+                                    <Link href={`/dashboard/manage-support/${option?.link}`} className="py-1">
                                         <span className="nav-text">{option?.label}</span>
                                     </Link>
                                 </li>
