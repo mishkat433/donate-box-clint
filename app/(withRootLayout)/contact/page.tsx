@@ -3,7 +3,6 @@
 import { RiChatForwardFill, RiMailAddFill, RiPhoneFill } from "react-icons/ri";
 import Contact from "../../../components/Contact/Contact";
 
-
 const page = () => {
     return (
         <div className="container mx-auto ">

@@ -24,11 +24,10 @@ const Form = ({ children, submitHandler, defaultValues, resolver, }: FormProps) 
 
   const onSubmit = (data: any) => {
     submitHandler(data);
-    // reset();
+    reset({});
   };
 
-  useEffect(() => reset(),
-    [defaultValues, reset, methods]);
+  useEffect(() => reset({}), [defaultValues, reset, methods]);
 
   // const watchedFields = watch();
 

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { RiHeadphoneLine, RiHeartPulseLine, RiSlideshow3Line, RiUserSettingsLine } from "react-icons/ri";
 import CommonItems from "./CommonItems";
-import { manageUserChild, manageBannerChild, manageRequestChild, manageContactChild } from "./ChildItems";
+import { manageUserChild, manageBannerChild, manageRequestChild, manageContactChild, manageNewsChild } from "./ChildItems";
 import ItemsHead from "./ItemsHead";
 import { usePathname } from "next/navigation";
 
@@ -34,12 +34,30 @@ const AdminItems = () => {
                     <div className={`duration-200 text-secondary-text relative rounded-md mb-1 hover:bg-primary-red hover:text-white-text ${path?.includes('manage-banner') && "bg-primary-red text-white-text"} `}>
                         <span className={`flex items-center cursor-pointer rounded-t-md py-2 px-3`}>
                             <RiSlideshow3Line className="dashboard-icon-style" />
-                            <ItemsHead header="Banners" />
+                            <ItemsHead header="Manage Banners" />
                         </span>
                         <ul className={` w-full bg-border-color withoutPadding text-primary-text max-h-[150px] overflow-y-auto overflow-x-hidden rounded-b-md duration-300 h-0 group-hover:h-[67px] `}>
                             {manageBannerChild?.map((option) => (
                                 <li key={option.label} className={` py-1 px-3 cursor-pointer mt-1 duration-200 hover:bg-primary-red hover:text-white-text ${slicePath?.includes(option?.link) && 'bg-primary-red text-white-text'} `} >
                                     <Link href={`/dashboard/manage-banner/${option?.link}`} className="py-1">
+                                        <span className="nav-text">{option?.label}</span>
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </li>
+
+                <li className="duration-200 text-secondary-text rounded-md group relative w-auto ">
+                    <div className={`duration-200 text-secondary-text relative rounded-md mb-1 hover:bg-primary-red hover:text-white-text ${path?.includes('manage-news') && "bg-primary-red text-white-text"} `}>
+                        <span className={`flex items-center cursor-pointer rounded-t-md py-2 px-3`}>
+                            <RiSlideshow3Line className="dashboard-icon-style" />
+                            <ItemsHead header="Manage News" />
+                        </span>
+                        <ul className={` w-full bg-border-color withoutPadding text-primary-text max-h-[150px] overflow-y-auto overflow-x-hidden rounded-b-md duration-300 h-0 group-hover:h-[67px] `}>
+                            {manageNewsChild?.map((option) => (
+                                <li key={option.label} className={` py-1 px-3 cursor-pointer mt-1 duration-200 hover:bg-primary-red hover:text-white-text ${slicePath?.includes(option?.link) && 'bg-primary-red text-white-text'} `} >
+                                    <Link href={`/dashboard/manage-news/${option?.link}`} className="py-1">
                                         <span className="nav-text">{option?.label}</span>
                                     </Link>
                                 </li>

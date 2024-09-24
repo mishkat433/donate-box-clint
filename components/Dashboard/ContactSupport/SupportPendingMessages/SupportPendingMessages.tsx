@@ -84,7 +84,7 @@ const SupportPendingMessages = () => {
             <td>{item?.name}</td>
             <td>{item?.email}</td>
             <td>{item?.phoneNumber}</td>
-            <td>{item?.subject.slice(0, 50)}...</td>
+            <td>{item?.subject.slice(0, 20)}...</td>
             <td>{format(new Date(item.createdAt), "dd-MMM-yyyy HH:mm'")}</td>
             <td className="">{item?.resolverId ? item?.resolverId : "N/A"}</td>
             <td className={` ${item?.status === "PENDING" ? 'text-primary-red' : 'text-view'} `}>{item.status}</td>

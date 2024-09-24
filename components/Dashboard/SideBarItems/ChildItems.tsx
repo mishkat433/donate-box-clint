@@ -21,6 +21,11 @@ export const manageBannerChild = [
     { label: "Add Banner", link: "add-banner" },
 ]
 
+export const manageNewsChild = [
+    { label: "All News", link: "all-news" },
+    { label: "Add News", link: "add-news" },
+]
+
 export const manageRequestChild = [
     { label: "All Request", link: "all-Request" },
     { label: "Pending Requests", link: "pending-request" },

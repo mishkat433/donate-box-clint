@@ -3,8 +3,9 @@ import { Suspense } from "react";
 import Providers from '../lib/Providers';
 import DotLoading from './../components/ReusableComponent/DotLoading';
 import "../components/Authentication/Authentication.css";
+import { Metadata } from 'next';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Donate Box',
   description: 'Your donation can save a life',
 }
