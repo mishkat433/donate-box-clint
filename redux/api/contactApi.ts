@@ -26,6 +26,7 @@ export const contactApi = baseApi.injectEndpoints({
                 method: "POST",
                 data,
             }),
+            invalidatesTags: [tagTypes.contact],
         }),
 
         // update contact messages

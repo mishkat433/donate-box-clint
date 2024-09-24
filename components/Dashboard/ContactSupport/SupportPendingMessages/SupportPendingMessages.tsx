@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAllContactMessageQuery, useContactMessageDeleteMutation } from "../../../../redux/api/contactApi";
 import { useDebounced } from "../../../../redux/hooks";
 import Swal from "sweetalert2";
-import { RiClockwise2Line, RiDeleteBinLine, RiEyeLine, RiPassPendingLine } from "react-icons/ri";
+import { RiClockwise2Line, RiDeleteBinLine, RiEditBoxLine, RiEyeLine, RiLoopRightLine, RiPassPendingLine } from "react-icons/ri";
 import Link from "next/link";
 import SearchBar from "../../../ReusableComponent/Searchbar";
 import ReusableTable from "../../../ReusableComponent/Table/ReusableTable";
@@ -13,8 +13,9 @@ import { IContact } from "../../../../types";
 import Dropdown from "../../../ReusableComponent/Dropdown/Dropdown";
 import { contactHistorySortByOption } from "../../../../lib/ContactHistoryOptions";
 import { dataLimitOptions, sortOrderOptions } from "../../../../lib/Options";
-import { getUserInfo } from "../../../../services/auth.service";
+import SolvedContactIssus from "../SolvedContactIssus";
 import { USER_ROLE } from "../../../../constants/role";
+import { getUserInfo } from "../../../../services/auth.service";
 
 
 const SupportPendingMessages = () => {
@@ -31,7 +32,7 @@ const SupportPendingMessages = () => {
     query["limit"] = limit;
     query["page"] = page;
     query["sortBy"] = sortBy;
-    // query["status"] = "";
+    query["status"] = ["ON_DISCUSSION", 'PENDING'];
     query["sortOrder"] = sortOrder;
 
     const debouncedTerm = useDebounced({ searchQuery: searchTerm, delay: 600 });
@@ -39,21 +40,6 @@ const SupportPendingMessages = () => {
     if (!!debouncedTerm) {
         query["searchTerm"] = debouncedTerm;
     }
-
-    const { data, isLoading } = useAllContactMessageQuery({ ...query })
-    const pageCount = Array.from({ length: Math.ceil(data?.meta?.total / data?.meta?.limit) }, (_, i) => ({ value: i + 1, label: i + 1 }));
-
-
-    // table related Data start
-    const columns = [
-        'SL',
-        'Name',
-        'Email',
-        'Phone',
-        'Subject',
-        'Date & time',
-        'Status',
-    ];
 
 
     const deleteUserRequest = ({ _id }): void => {
@@ -85,6 +71,12 @@ const SupportPendingMessages = () => {
     };
 
 
+    const { data, isLoading, refetch } = useAllContactMessageQuery({ ...query }, { refetchOnMountOrArgChange: true })
+
+    const pageCount = Array.from({ length: Math.ceil(data?.meta?.total / data?.meta?.limit) }, (_, i) => ({ value: i + 1, label: i + 1 }));
+
+
+    const columns = ['SL', 'Name', 'Email', 'Phone', 'Subject', 'Date & time', 'Negotiator Id', 'Status'];
 
     const tableRow = (item: IContact, index: number) => (
         <>
@@ -94,12 +86,15 @@ const SupportPendingMessages = () => {
             <td>{item?.phoneNumber}</td>
             <td>{item?.subject.slice(0, 50)}...</td>
             <td>{format(new Date(item.createdAt), "dd-MMM-yyyy HH:mm'")}</td>
-            <td className="text-edit">{item.status}</td>
+            <td className="">{item?.resolverId ? item?.resolverId : "N/A"}</td>
+            <td className={` ${item?.status === "PENDING" ? 'text-primary-red' : 'text-view'} `}>{item.status}</td>
         </>
     );
 
-
-    const actions: any = [{ label: "View", icon: <RiEyeLine className="dashboard-icon-style text-view cursor-pointer" title="View" />, onClick: setModalData, showMOdal: { name: "contactDetails", status: true } }];
+    const actions: any = [
+        { label: "View", icon: <RiEyeLine className="dashboard-icon-style text-view cursor-pointer" title="View" />, onClick: setModalData, showMOdal: { name: "contactDetails", status: true } },
+        { label: "Edit", icon: <RiEditBoxLine className="dashboard-icon-style text-edit cursor-pointer" title="edit" />, onClick: setModalData, showMOdal: { name: "solvedIssue", status: true } },
+    ];
 
     if ((getUserInfo() as { role: USER_ROLE })?.role === "SUPER_ADMIN") {
         actions.push({
@@ -108,6 +103,7 @@ const SupportPendingMessages = () => {
             onClick: deleteUserRequest,
         });
     }
+
     return (
         <div className='animate-fade animate-once'>
             <div className="p-3 flex justify-between items-center gap-4 mb-2">
@@ -115,9 +111,10 @@ const SupportPendingMessages = () => {
                     <RiClockwise2Line className="text-primary-red" />
                     <h3>Support History</h3>
                 </div>
-                <Link href="/dashboard/manage-requests/pending-request" className="p-1.5 primary-red-button flex items-center gap-1"><RiPassPendingLine />Pending Messages</Link>
+                <Link href="/dashboard/manage-support/support-history" className="p-1.5 primary-red-button flex items-center gap-1"><RiPassPendingLine />Support History</Link>
             </div>
             <div className=" p-2 flex justify-between items-center gap-2 rounded-md bg-primary-red text-white-text shadow-md mb-5">
+                <p title="reload"><RiLoopRightLine onClick={async () => await refetch()} className={`text-xl ${isLoading && "animate-spin"}`} /></p>
                 <div className="w-3/5 text-primary-text"><SearchBar placeholderText={"Search..."} searchInput={setSearchTerm} /></div>
                 <Dropdown options={contactHistorySortByOption} onSelect={setSortBy} placeholder="Sort By :" defaultValue={sortBy} hoverHeight={"group-hover:h-[111px]"} />
                 <Dropdown options={sortOrderOptions} onSelect={setSortOrder} placeholder="Sort Order :" defaultValue={sortOrder} hoverHeight={"group-hover:h-[74px]"} />
@@ -131,7 +128,6 @@ const SupportPendingMessages = () => {
                     actions={actions}
                     emptyMessage="Data not found."
                 />
-
             </div>
             <div className="flex justify-between gap-3 mt-2">
                 <div className="bg-primary-red rounded-md text-white-text">
@@ -148,6 +144,10 @@ const SupportPendingMessages = () => {
 
             <Modal id="contactDetails" title="View Contact Details" width="max-w-[40rem]" >
                 <ViewContactDetails contactData={modalData} />
+            </Modal>
+
+            <Modal id="solvedIssue" title="Solved Issues" width="max-w-[40rem]" >
+                <SolvedContactIssus contactData={modalData} />
             </Modal>
         </div >
     );

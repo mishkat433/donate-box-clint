@@ -37,10 +37,10 @@ const FormSelectField = ({ name, value, placeholder = "select", required, option
         name={name}
         render={({ field: { value, onChange } }) => (
           <select className={`select select-bordered w-full ${errorMessage && "errorBehavior"}`} onChange={handleChange ? handleChange : onChange}>
-            {defaultValue && <option defaultValue={defaultValue}>{defaultValue} (default)</option>}
+            {/* {defaultValue && <option defaultValue={defaultValue}>{defaultValue} (default)</option>} */}
             <option value={null}>SELECT</option>
             {name === 'division' && options?.length === 0 && <option>Loading...</option>}
-            {options?.map((opt, i) => <option value={opt.value} key={i}>{opt.label}</option>)}
+            {options?.map((opt, i) => <option value={opt.value} key={i}>{opt.label === defaultValue ? opt.label + " (Selected)" : opt.label}</option>)}
           </select>
         )}
       />

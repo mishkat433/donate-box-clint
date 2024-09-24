@@ -67,7 +67,7 @@ const AdminItems = () => {
                 </li>
 
                 <li className="duration-200 text-secondary-text rounded-md group relative w-auto ">
-                    <div className={`duration-200 text-secondary-text relative rounded-md mb-1 hover:bg-primary-red hover:text-white-text ${path?.includes('contact-Support') && "bg-primary-red text-white-text"} `}>
+                    <div className={`duration-200 text-secondary-text relative rounded-md mb-1 hover:bg-primary-red hover:text-white-text ${path?.includes('manage-support') && "bg-primary-red text-white-text"} `}>
                         <span className={`flex items-center cursor-pointer rounded-t-md py-2 px-3`}>
                             <RiHeadphoneLine className="dashboard-icon-style" />
                             <ItemsHead header="Contact Supports" />

@@ -139,11 +139,16 @@ export const daysOptions = days.map((day: string) => {
   };
 });
 
-export const semesterRegistrationStatus = ["UPCOMING", "ONGOING", "ENDED"];
 
 export enum PaymentStatus {
   PENDING = "PENDING",
   PAID = "PAID",
   PARTIAL_PAID = "PARTIAL_PAID",
   FULL_PAID = "FULL_PAID",
+}
+
+export enum CONTACT_STATUS {
+  PENDING = "PENDING",
+  SOLVED = "SOLVED",
+  ON_DISCUSSION = "ON_DISCUSSION",
 }

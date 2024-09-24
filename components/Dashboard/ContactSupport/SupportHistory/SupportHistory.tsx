@@ -42,6 +42,7 @@ const SupportHistory = () => {
     }
 
     const { data, isLoading } = useAllContactMessageQuery({ ...query })
+
     const pageCount = Array.from({ length: Math.ceil(data?.meta?.total / data?.meta?.limit) }, (_, i) => ({ value: i + 1, label: i + 1 }));
 
 
@@ -53,6 +54,7 @@ const SupportHistory = () => {
         'Phone',
         'Subject',
         'Date & time',
+        'Admin ID',
         'Status',
     ];
 
@@ -95,6 +97,7 @@ const SupportHistory = () => {
             <td>{item?.phoneNumber}</td>
             <td>{item?.subject.slice(0, 50)}...</td>
             <td>{format(new Date(item.createdAt), "dd-MMM-yyyy HH:mm'")}</td>
+            <td className="">{item?.resolverId ? item?.resolverId : "N/A"}</td>
             <td className="text-edit">{item.status}</td>
         </>
     );
@@ -117,7 +120,7 @@ const SupportHistory = () => {
                     <RiClockwise2Line className="text-primary-red" />
                     <h3>Support History</h3>
                 </div>
-                <Link href="/dashboard/manage-requests/pending-request" className="p-1.5 primary-red-button flex items-center gap-1"><RiPassPendingLine />Pending Messages</Link>
+                <Link href="/dashboard/manage-support/pending-messages" className="p-1.5 primary-red-button flex items-center gap-1"><RiPassPendingLine />Pending Messages</Link>
             </div>
             <div className=" p-2 flex justify-between items-center gap-2 rounded-md bg-primary-red text-white-text shadow-md mb-5">
                 <div className="w-3/5 text-primary-text"><SearchBar placeholderText={"Search..."} searchInput={setSearchTerm} /></div>
