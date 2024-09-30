@@ -7,6 +7,7 @@ export enum tagTypes {
   allAdmins = "allAdmins",
   bloodRequest = "bloodRequest",
   contact = "contact",
+  fundDonner = "fundDonner",
 
 }
 
@@ -19,4 +20,5 @@ export const tagTypesList = [
   tagTypes.allAdmins,
   tagTypes.bloodRequest,
   tagTypes.contact,
+  tagTypes.fundDonner,
 ];

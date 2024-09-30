@@ -22,7 +22,7 @@ const HeroSlider = () => {
     }
 
     if (isError) {
-        return <p className="text-xl text-center text-primary-red ">Something went wrong</p>
+        return <p className="text-xl text-center text-primary-red ">The server is not running now</p>
     }
 
     return (

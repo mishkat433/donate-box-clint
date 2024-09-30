@@ -138,7 +138,8 @@ const BloodDonner = ({ heading = true }: propsType) => {
                         </div>
                     </div>
 
-                    <label htmlFor="createUser" ><button className="button-transition primary-red-button py-2 px-2.5 w-full mt-4"> Submit</button></label>
+                    <label htmlFor="createUser" ><button className="button-transition primary-red-button py-2 px-2.5 w-full mt-4">Submit</button></label>
+
                 </Form>
             </div>
         </div>

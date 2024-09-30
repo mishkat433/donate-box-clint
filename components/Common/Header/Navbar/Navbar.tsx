@@ -43,7 +43,7 @@ const Navbar = () => {
       <li className="nav-link-style ">  <Link href={"/request/myRequests"} className={` ${currentPath === "/request/myRequests" ? 'text-primary-red' : 'hover-underline-animation'}`}>My Requests</Link></li>
       {/* <li className="nav-link-style "> <button className="button-transition primary-red-button py-1 px-2.5">Need Blood</button> </li> */}
       <li className="nav-link-style"> <Link href="/request" className={`${currentPath === '/request' ? 'bg-primary-red py-1.5 px-2.5 text-white-text rounded-md' : 'button-transition primary-red-button py-1 px-2.5 w-full'} `}>Need A Donner</Link> </li>
-      <li className="nav-link-style"> <Link href="/donate" className={`${currentPath === '/donate' ? 'bg-primary-red py-1.5 px-2.5 text-white-text rounded-md' : 'button-transition primary-red-button py-1 px-2.5 w-full'} `}>Donate Now</Link> </li>
+      <li className="nav-link-style"> <Link href="/donate" className={`${currentPath === '/donate' ? 'bg-primary-red py-1.5 px-2.5 text-white-text rounded-md' : 'button-transition primary-red-button py-1 px-2.5 w-full'} `}>Be A Donner</Link> </li>
       {isLoggedIn() && data?.data[0]?.role ?
         <li className=" text-sm relative ml-2 group ">
           <div className="avatar">

@@ -1,5 +1,4 @@
 import * as yup from "yup";
-import { DIVISION_NAME } from "../constants/division";
 import { GENDER } from "../constants/gender";
 import { BLOOD_GROUP_NAME } from "../constants/bloodGroup";
 
@@ -17,3 +16,13 @@ export const beDonnerSchema = yup.object().shape({
     address: yup.string().required("Enter your full address"),
 
 });
+
+
+export const fundDonnerSchema = yup.object().shape({
+    userId: yup.string().optional(),
+    name: yup.string().required("Name is required"),
+    emailOrPhone: yup.string().required("Email or phone is required"),
+    donateAmount: yup.number().required("Amount is required").min(10, "Donation amount must be at least 10"),
+    // donateInfo: yup.string().optional(),
+    // publicShow: yup.boolean().required("required")
+})
